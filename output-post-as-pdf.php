@@ -18,12 +18,14 @@ class Output_post_as_pdf {
 		// カスタムフィールド設定
 		include_once("create-output-field.php");
 		// assets設定
-		if ($pagenow === "post.php") add_action('admin_enqueue_scripts', array($this, "init_plugin_assets"));
+		if ($pagenow === "post.php") add_action('admin_enqueue_scripts', array($this, "init_admin_assets"));
 	}
 
-	public function init_plugin_assets() {
-		wp_enqueue_script("script", plugins_url("assets/src/js/Field.js", __FILE__));
+	public function init_admin_assets() {
+		wp_enqueue_script("script", plugins_url("assets/dist/js/Field.js", __FILE__));
+		wp_enqueue_style("style", plugins_url("assets/dist/css/style.css", __FILE__));
 	}
+
 }
 
 $output_post_as_pdf = new Output_post_as_pdf;

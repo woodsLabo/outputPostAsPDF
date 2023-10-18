@@ -1,1 +1,23 @@
+.field {
+  &_title {
+    font-size: 1.2rem;
+    font-weight: bold;
+  }
 
+  &_wrap {
+    width: 90%;
+
+    input[type="text"] {
+      width: 100%;
+    }
+
+    textarea {
+      height: 10rem;
+      width: 100%;
+    }
+  }
+
+  &_image {
+    margin-bottom: 1rem;
+  }
+}

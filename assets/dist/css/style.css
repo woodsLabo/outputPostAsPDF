@@ -1,6 +1,20 @@
 /*!*********************************************************************************************************************!*\
   !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./assets/src/scss/style.scss ***!
   \*********************************************************************************************************************/
-.hoge {
-  display: none;
+.field_title {
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+.field_wrap {
+  width: 90%;
+}
+.field_wrap input[type=text] {
+  width: 100%;
+}
+.field_wrap textarea {
+  height: 10rem;
+  width: 100%;
+}
+.field_image {
+  margin-bottom: 1rem;
 }
