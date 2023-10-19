@@ -6,6 +6,7 @@ module.exports = {
   entry: {
     "field": path.resolve(__dirname, "./assets/src/js/Field.js"),
     "style": path.resolve(__dirname, "./assets/src/scss/style.scss"),
+    "post": path.resolve(__dirname, "./assets/src/scss/post.scss"),
   },
   output: {
     path: path.resolve(__dirname, "./assets/dist/"),
