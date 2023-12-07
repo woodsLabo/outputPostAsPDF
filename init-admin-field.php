@@ -1,4 +1,5 @@
 <?php
+// 投稿画面に入力用フィールドの枠設置
 	function init_admin_field() {
 		add_meta_box(
 			'custom_field',
