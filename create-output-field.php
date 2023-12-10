@@ -19,6 +19,8 @@ function save_custom_fields($post) {
 			"select_radio" => sanitize_text_field($_POST["select_radio"]),
 			"input_main_catch" => sanitize_text_field($_POST["input_main_catch"]),
 			"input_sub_catch" => sanitize_text_field($_POST["input_sub_catch"]),
+			"input_notice_text" => sanitize_text_field($_POST["input_notice_text"]),
+			"bg_media" => sanitize_text_field($_POST["bg_media"]),
 			"input_datetime" => sanitize_text_field($_POST["input_datetime"]),
 			"input_list_title" => sanitize_text_field($_POST["input_list_title"]),
 			"input_message" => sanitize_text_field($_POST["input_message"]),

@@ -8,6 +8,8 @@ class Admin_field {
 		$this->select_radio = get_post_meta($this->post->ID, "select_radio", true);
 		$this->input_main_catch = get_post_meta($this->post->ID, "input_main_catch", true);
 		$this->input_sub_catch = get_post_meta($this->post->ID, "input_sub_catch", true);
+		$this->input_notice_text = get_post_meta($this->post->ID, "input_notice_text", true);
+		$this->bg_media = get_post_meta($this->post->ID, "bg_media", true);
 		$this->input_datetime = get_post_meta($this->post->ID, "input_datetime", true);
 		$this->input_list_title = get_post_meta($this->post->ID, "input_list_title", true);
 		$this->input_message = get_post_meta($this->post->ID, "input_message", true);
@@ -18,12 +20,6 @@ class Admin_field {
 		$this->input_profile_title = get_post_meta($this->post->ID, "input_profile_title", true);
 		$this->input_profile_name = get_post_meta($this->post->ID, "input_profile_name", true);
 		$this->input_profile = get_post_meta($this->post->ID, "input_profile", true);
-
-		$this->input_address = get_post_meta($this->post->ID, "input_address", true);
-		$this->sns_qr_media = get_post_meta($this->post->ID, "sns_qr_media", true);
-		$this->hp_qr_media = get_post_meta($this->post->ID, "hp_qr_media", true);
-		$this->training_media = get_post_meta($this->post->ID, "training_media", true);
-		$this->input_price = get_post_meta($this->post->ID, "input_price", true);
 
 		$this->input_contact_company = get_post_meta($this->post->ID, "input_contact_company", true);
 		$this->input_contact_tel = get_post_meta($this->post->ID, "input_contact_tel", true);

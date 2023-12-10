@@ -14,6 +14,17 @@
 	<textarea class="input_main_catch has_tinymce" name="input_main_catch"><?= $admin_field->input_main_catch; ?></textarea>
 	<p class=field_title>サブキャッチコピー</p>
 	<input type="text" class="input_sub_catch" name="input_sub_catch" value="<?= $admin_field->input_sub_catch; ?>">
+	<p class=field_title>注目テキスト</p>
+	<input type="text" class="input_notice_text" name="input_notice_text" value="<?= $admin_field->input_notice_text; ?>">
+	<p class=field_title>背景画像</p>
+	<div class="field_image_wrap js-imageWrap">
+	    <img src="<?= $admin_field->bg_media; ?>" alt="" class="js-settingImage field_image">
+		<input type="hidden" name="bg_media" class="js-hiddenImageUrl" value="<?= $admin_field->bg_media; ?>">
+		<div class="field_button_wrap">
+			<input type="button" name="media" class="js-mediaSelect" value="画像選択" >
+			<input type="button" name="media-delete" class="js-mediaDelete" value="削除" />
+		</div>
+	</div>
 
 	<p class="field_title">開催日時</p>
 	<input type="datetime-local" name="input_datetime" value="<?= $admin_field->input_datetime; ?>">
