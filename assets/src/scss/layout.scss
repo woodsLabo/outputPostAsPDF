@@ -1,0 +1,285 @@
+html, body, div, span, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+abbr, address, cite, code,
+del, dfn, em, img, ins, kbd, q, samp,
+small, strong, sub, sup, var,
+b, i,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section, summary,
+time, mark, audio, video {
+  background: transparent;
+  border: 0;
+  margin: 0;
+  outline: 0;
+  padding: 0;
+  vertical-align: baseline;
+}
+
+table {
+  border-collapse: collapse;
+}
+
+html {
+  font-family: ipam;
+  font-size: 67.5%;
+}
+
+img {
+  width: 100%;
+}
+
+.header {
+  background: #003c78;
+  color: #fff;
+  font-size: 30px;
+  padding: 1rem 0;
+  text-align: center;
+}
+
+
+.content {
+  &Top {
+    position: relative;
+  }
+}
+
+.main {
+  &Image {
+  }
+}
+
+.title {
+  &Wrap {
+    color: #fff;
+    left: 0;
+    padding: 50px 0;
+    position: absolute;
+    top: 0;
+    z-index: 2;
+  }
+
+  &_sub {
+    background: #003c78;
+    display: inline-block;
+    font-size: 30px;
+    padding: 0.8rem;
+  }
+
+  &_main {
+    font-size: 70px;
+    line-height: 1;
+    padding: 10px;
+  }
+
+  &_notice {
+    background: #f00;
+    border-radius: 50%;
+    color: #fff;
+    display: table-cell;
+    font-size: 3rem;
+    line-height: 3rem;
+    text-align: center;
+    vertical-align: middle;
+
+    &Wrap {
+      bottom: 1rem;
+      display: table;
+      height: 15rem;
+      position: absolute;
+      right: 1rem;
+      width: 15rem;
+      z-index: 2;
+    }
+  }
+}
+
+.detail {
+  &Wrap {
+    background: #fff;
+    padding: 10px 0;
+  }
+
+  &Table {
+    font-size: 20px;
+    margin: 0 auto;
+    width: 80%;
+
+    tr {
+      padding-bottom: 10px;
+    }
+
+    th {
+      color: #fff;
+      padding: 0 10px 15px 0 ;
+      text-align: center;
+      width: 10%;
+
+      span {
+        background: #003c78;
+        border-radius: 30px;
+        padding: 5px;
+      }
+    }
+
+    td {
+      border: 0;
+      color: #000;
+
+      &.long {
+        width: 60%;
+      }
+
+      &.short {
+        width: 20%;
+      }
+    }
+  }
+}
+
+.list {
+  &Wrap {
+    margin: 0 auto;
+    width: 98%;
+  }
+
+  &Title {
+    background: #003c78;
+    color: #fff;
+    font-size: 20px;
+    padding: 5px 0;
+    text-align: center;
+  }
+
+  &Table {
+    border: 0;
+    margin-top: 0.5rem;
+    width: 100%;
+
+    div {
+      font-size: 0;
+      margin-bottom: 0.5rem;
+    }
+
+    p {
+      background: #016fb9;
+      border: 0;
+      box-sizing: border-box;
+      clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0% calc(100% - 10px));
+      color: #fff;
+      display: inline-block;
+      font-size: 1.4rem;
+      padding: 10px 5px;
+      width: 49.7%;
+
+      &::before {
+        background: #000;
+        content: "";
+        display: inline-block;
+        height: 1.5rem;
+        margin-right: 5px;
+        vertical-align: middle;
+        width: 1.5rem;
+      }
+
+      &:first-of-type {
+        margin-right: 0.5rem;
+      }
+    }
+  }
+}
+
+.message {
+  padding-bottom: 0.5rem;
+}
+
+.application {
+  background: #00f;
+  font-size: 0;
+  padding: 0.5rem 2rem;
+
+  &TextWrap {
+    color: #fff;
+    display: inline-block;
+    font-size: 1.4rem;
+    text-align: center;
+    vertical-align: middle;
+    width: 90%;
+  }
+
+  &Arrow {
+    color: #fff;
+    display: inline-block;
+    font-size: 1.4rem;
+    height: 2rem;
+    vertical-align: middle;
+    width: 3%;
+  }
+
+  &ImgWrap {
+    display: inline-block;
+    vertical-align: middle;
+    width: 7%;
+  }
+}
+
+.profile {
+  &Wrap {
+    background: #808080;
+    padding: 1rem;
+  }
+
+  &Img {
+    width: 15%;
+  }
+
+  &Detail {
+    padding: 1rem;
+    vertical-align: top;
+    width: 85%;
+
+    &Head {
+      border-bottom: 1px solid #003c78;
+      color: #003c78;
+      font-size: 1.5rem;
+      line-height: 1;
+      padding-bottom: 0.5rem;
+    }
+  }
+
+  &Name {
+    font-size: 2.5rem;
+  }
+
+  &Text {
+    padding: 0.5rem 0;
+  }
+}
+
+.contact {
+  background: #00f;
+  color: #fff;
+  padding: 1rem;
+
+  &Wrap {
+    width: 100%;
+  }
+
+  &Title {
+    width: 7%;
+  }
+
+  &Company {
+    width: 18%;
+  }
+
+  &Tel {
+    width: 35%;
+  }
+
+  &Email {
+    width: 40%;
+  }
+}

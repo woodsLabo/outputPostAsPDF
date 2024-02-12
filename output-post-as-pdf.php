@@ -31,7 +31,8 @@ class Output_post_as_pdf {
 	}
 
 	public function init_post_assets() {
-		wp_enqueue_style("style", plugins_url("assets/dist/css/post.css", __FILE__));
+		// wp_enqueue_style("style", plugins_url("assets/dist/css/post.css", __FILE__));
+		wp_enqueue_style("layout", plugins_url("assets/dist/css/layout.css", __FILE__));
 	}
 }
 
