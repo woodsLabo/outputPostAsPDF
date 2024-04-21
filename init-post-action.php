@@ -38,9 +38,10 @@ if (!is_admin() && !is_login_page()) {
 		$options = $dompdf->getOptions();
 		$options->set(array('isRemoteEnabled' => false));
 		$dompdf->setOptions($options);
-		$dompdf->setPaper('A4', 'landscape');
+		$dompdf->setPaper('A4');
 		$dompdf->render();
 		$dompdf->stream("smaple.pdf", array("Attachment" => 0));
+		// $dompdf->stream("smaple.pdf");
 		// $pdf = new TCPDF("P", "mm", "A4",true, "UTF-8",false,false);
 		// $pdf->SetMargins(0, 0, 0);
 		// $pdf->setPrintHeader(false);
@@ -65,22 +66,21 @@ function init_post_action($content) {
 	$notice_text = createMetaItem("input_notice_text");
 	$main_media = createMetaItem("main_media");
 	$datetime = createMetaItem("input_datetime");
-	$detail_item_title_01 = createMetaItem("input_detail_item_title_01");
-	$detail_item_title_02 = createMetaItem("input_detail_item_title_02");
-	$detail_item_title_03 = createMetaItem("input_detail_item_title_03");
-	$detail_item_title_04 = createMetaItem("input_detail_item_title_04");
-	$detail_item_title_01 = $detail_item_title_01 ? $detail_item_title_01 : "";
-	$detail_item_title_02 = $detail_item_title_02 ? $detail_item_title_02 : "";
-	$detail_item_title_03 = $detail_item_title_03 ? $detail_item_title_03 : "";
-	$detail_item_title_04 = $detail_item_title_04 ? $detail_item_title_04 : "";
-	$detail_item_text_01 = createMetaItem("input_detail_item_text_01");
-	$detail_item_text_02 = createMetaItem("input_detail_item_text_02");
-	$detail_item_text_03 = createMetaItem("input_detail_item_text_03");
-	$detail_item_text_04 = createMetaItem("input_detail_item_text_04");
-	$detail_item_text_01 = $detail_item_text_01 ? $detail_item_text_01 : "";
-	$detail_item_text_02 = $detail_item_text_02 ? $detail_item_text_02 : "";
-	$detail_item_text_03 = $detail_item_text_03 ? $detail_item_text_03 : "";
-	$detail_item_text_04 = $detail_item_text_04 ? $detail_item_text_04 : "";
+	$detail_item_date = createMetaItem("input_detail_item_date");
+	$detail_item_start_time = createMetaItem("input_detail_item_start_time");
+	$detail_item_end_time = createMetaItem("input_detail_item_end_time");
+	$detail_item_capacity = createMetaItem("input_detail_item_capacity");
+	$detail_item_place = createMetaItem("input_detail_item_place");
+	$detail_item_price = createMetaItem("input_detail_item_price");
+	$detail_item_date = $detail_item_date ? $detail_item_date : "";
+	$detail_item_start_time = $detail_item_start_time ? $detail_item_start_time : "";
+	$detail_item_end_time = $detail_item_end_time ? $detail_item_end_time : "";
+	$detail_item_capacity = $detail_item_capacity ? $detail_item_capacity : "";
+	$detail_item_place = $detail_item_place ? $detail_item_place : "";
+	$detail_item_price = $detail_item_price ? number_format($detail_item_price) : "";
+	$str_time = date("n月j日", strtotime($detail_item_date));
+	$date = date('w', strtotime($detail_item_date));
+	$week = ["日", "月", "火", "水", "木", "金", "土"];
 	$list_title = createMetaItem("input_list_title");
 	$list_01 = createMetaItem("input_list_01");
 	$list_02 = createMetaItem("input_list_02");
@@ -88,12 +88,20 @@ function init_post_action($content) {
 	$list_04 = createMetaItem("input_list_04");
 	$list_05 = createMetaItem("input_list_05");
 	$list_06 = createMetaItem("input_list_06");
+	$list_07 = createMetaItem("input_list_07");
+	$list_08 = createMetaItem("input_list_08");
+	$list_09 = createMetaItem("input_list_09");
+	$list_10 = createMetaItem("input_list_10");
 	$list_01 = $list_01 ? $list_01 : "";
 	$list_02 = $list_02 ? $list_02 : "";
 	$list_03 = $list_03 ? $list_03 : "";
 	$list_04 = $list_04 ? $list_04 : "";
 	$list_05 = $list_05 ? $list_05 : "";
 	$list_06 = $list_06 ? $list_06 : "";
+	$list_07 = $list_07 ? $list_07 : "";
+	$list_08 = $list_08 ? $list_08 : "";
+	$list_09 = $list_09 ? $list_09 : "";
+	$list_10 = $list_10 ? $list_10 : "";
 	$message = createMetaItem("input_message");
 	$seminar_text = createMetaItem("input_seminar_text");
 	$seminar_url = createMetaItem("input_seminar_url");
@@ -171,6 +179,9 @@ function init_post_action($content) {
 			//         <dd>$contact_mail</dd>
 			//     </dl>
 			// </footer>
+		//
+		//
+		//
 
 		$el = <<<EOM
 		  <body>
@@ -184,22 +195,22 @@ function init_post_action($content) {
 				<div class="title_main">$main_catch</div>
 			</div>
 			<div class="title_noticeWrap">
-				<p class="title_notice">$notice_text</p>
+				<div class="title_notice">$notice_text</div>
 			</div>
 		</div>
 		<div class="detailWrap">
 			<table class="detailTable">
 				<tr>
-					<th><span>$detail_item_title_01</span></th>
-					<td class="long">$detail_item_text_01</td>
-					<th><span>$detail_item_title_02</span></th>
-					<td class="short">$detail_item_text_02</td>
+					<th><span>開催日時</span></th>
+					<td class="long">$str_time({$week[$date]}){$detail_item_start_time}~{$detail_item_end_time}</td>
+					<th><span>定員</span></th>
+					<td class="short">{$detail_item_capacity}名</td>
 				</tr>
 				<tr>
-					<th><span>$detail_item_title_03</span></th>
-					<td class="long">$detail_item_text_03</td>
-					<th><span>$detail_item_title_04</span></th>
-					<td class="short">$detail_item_text_04</td>
+					<th><span>場所</span></th>
+					<td class="long">$detail_item_place</td>
+					<th><span>料金</span></th>
+					<td class="short">{$detail_item_price}円</td>
 				</tr>
 			</table>
 		</div>
@@ -207,16 +218,24 @@ function init_post_action($content) {
 			<p class="listTitle">$list_title</p>
 			<div class="listTable">
 				<div>
-					<p>$list_01</p>
-					<p>$list_02</p>
+					<p><span></span>$list_01</p>
+					<p><span></span>$list_02</p>
 				</div>
 				<div>
-					<p>$list_03</p>
-					<p>$list_04</p>
+					<p><span></span>$list_03</p>
+					<p><span></span>$list_04</p>
 				</div>
 				<div>
-					<p>$list_05</p>
-					<p>$list_06</p>
+					<p><span></span>$list_05</p>
+					<p><span></span>$list_06</p>
+				</div>
+				<div>
+					<p><span></span>$list_07</p>
+					<p><span></span>$list_08</p>
+				</div>
+				<div>
+					<p><span></span>$list_09</p>
+					<p><span></span>$list_10</p>
 				</div>
 			</div>
 			<div class="message">$message</div>
@@ -261,14 +280,12 @@ function init_post_action($content) {
 					<input type="hidden" name="main_catch" value="$main_catch">
 					<input type="hidden" name="notice_text" value="$notice_text">
 					<input type="hidden" name="main_media" value="$main_media">
-					<input type="hidden" name="detail_item_title_01" value="$detail_item_title_01">
-					<input type="hidden" name="detail_item_title_02" value="$detail_item_title_02">
-					<input type="hidden" name="detail_item_title_03" value="$detail_item_title_03">
-					<input type="hidden" name="detail_item_title_04" value="$detail_item_title_04">
-					<input type="hidden" name="detail_item_text_01" value="$detail_item_text_01">
-					<input type="hidden" name="detail_item_text_02" value="$detail_item_text_02">
-					<input type="hidden" name="detail_item_text_03" value="$detail_item_text_03">
-					<input type="hidden" name="detail_item_text_04" value="$detail_item_text_04">
+					<input type="hidden" name="detail_item_date" value="$detail_item_date">
+					<input type="hidden" name="detail_item_start_time" value="$detail_item_start_time">
+					<input type="hidden" name="detail_item_end_time" value="$detail_item_end_time">
+					<input type="hidden" name="detail_item_capacity" value="$detail_item_capacity">
+					<input type="hidden" name="detail_item_place" value="$detail_item_place">
+					<input type="hidden" name="detail_item_price" value="$detail_item_price">
 					<input type="hidden" name="list_title" value="$list_title">
 					<input type="hidden" name="list_01" value="$list_01">
 					<input type="hidden" name="list_02" value="$list_02">
@@ -276,6 +293,10 @@ function init_post_action($content) {
 					<input type="hidden" name="list_04" value="$list_04">
 					<input type="hidden" name="list_05" value="$list_05">
 					<input type="hidden" name="list_06" value="$list_06">
+					<input type="hidden" name="list_07" value="$list_07">
+					<input type="hidden" name="list_08" value="$list_08">
+					<input type="hidden" name="list_09" value="$list_09">
+					<input type="hidden" name="list_10" value="$list_10">
 					<input type="hidden" name="message" value="$message">
 					<input type="hidden" name="seminar_text" value="$seminar_text">
 					<input type="hidden" name="seminar_url" value="$seminar_url">

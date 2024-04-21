@@ -1,7 +1,5 @@
 <?php
-	$title_value = [$admin_field->input_detail_item_title_01, $admin_field->input_detail_item_title_02, $admin_field->input_detail_item_title_03, $admin_field->input_detail_item_title_04];
-	$text_value = [$admin_field->input_detail_item_text_01, $admin_field->input_detail_item_text_02, $admin_field->input_detail_item_text_03, $admin_field->input_detail_item_text_04];
-	$list = [$admin_field->input_list_01, $admin_field->input_list_02, $admin_field->input_list_03, $admin_field->input_list_04, $admin_field->input_list_05, $admin_field->input_list_06];
+	$list = [$admin_field->input_list_01, $admin_field->input_list_02, $admin_field->input_list_03, $admin_field->input_list_04, $admin_field->input_list_05, $admin_field->input_list_06, $admin_field->input_list_07, $admin_field->input_list_08, $admin_field->input_list_09, $admin_field->input_list_10];
 ?>
 <p class="field_title">PDF出力</p>
 <label for="output_pdf_true">する</label>
@@ -17,7 +15,7 @@
 	<p class=field_title>メインキャッチコピー</p>
 	<textarea class="input_main_catch has_tinymce" name="input_main_catch"><?= $admin_field->input_main_catch; ?></textarea>
 	<p class=field_title>注目テキスト</p>
-	<input type="text" class="input_notice_text" name="input_notice_text" value="<?= $admin_field->input_notice_text; ?>">
+	<textarea class="input_notice_text has_tinymce" name="input_notice_text"><?= $admin_field->input_notice_text; ?></textarea>
 	<p class=field_title>メイン画像</p>
 	<div class="field_image_wrap js-imageWrap">
 	    <img src="<?= $admin_field->main_media; ?>" alt="" class="js-settingImage field_image">
@@ -28,20 +26,26 @@
 		</div>
 	</div>
 
-	<?php for($i = 0; $i < 4; $i++) : ?>
-		<?php $sumDetailIndex = $i + 1; ?>
-		<p class="field_title">項目タイトル<?= $sumDetailIndex ?></p>
-		<input type="text" name='<?= "input_detail_item_title_0{$sumDetailIndex}" ?>' class="output_pdf_field_mid" value="<?= $title_value[$i]; ?>">
-		<p class="field_title">項目テキスト<?= $sumDetailIndex ?></p>
-		<input type="text" name='<?= "input_detail_item_text_0{$sumDetailIndex}" ?>' value="<?= $text_value[$i]; ?>">
-	<?php endfor; ?>
+	<p class="field_title">開催日</p>
+	<input type="date" name="input_detail_item_date" class="output_pdf_field_mid" value="<?= $admin_field->input_detail_item_date; ?>">
+	<p class="field_title">開催開始時間</p>
+	<input type="time" name="input_detail_item_start_time" class="output_pdf_field_mid" value="<?= $admin_field->input_detail_item_start_time; ?>">
+	<p class="field_title">開催終了時間</p>
+	<input type="time" name="input_detail_item_end_time" class="output_pdf_field_mid" value="<?= $admin_field->input_detail_item_end_time; ?>">
+	<p class="field_title">定員</p>
+	<input type="number" name="input_detail_item_capacity" class="output_pdf_field_mid" value="<?= $admin_field->input_detail_item_capacity; ?>">
+	<p class="field_title">場所</p>
+	<input type="text" name="input_detail_item_place" class="output_pdf_field_mid" value="<?= $admin_field->input_detail_item_place; ?>">
+	<p class="field_title">料金</p>
+	<input type="number" name="input_detail_item_price" class="output_pdf_field_mid" value="<?= $admin_field->input_detail_item_price; ?>">
 
 	<p class="field_title">リスト見出し</p>
 	<input type="text" name="input_list_title" value="<?= $admin_field->input_list_title; ?>">
-	<?php for($j = 0; $j < 6; $j++) : ?>
+	<?php for($j = 0; $j < count($list); $j++) : ?>
 		<?php $sumListIndex = $j + 1; ?>
 		<p class="field_title">リスト<?= $sumListIndex ?></p>
-		<input type="text" name='<?= "input_list_0{$sumListIndex}" ?>' value="<?= $list[$j]; ?>">
+		<?php $name = $sumListIndex !== 10 ? "input_list_0{$sumListIndex}" : "input_list_{$sumListIndex}" ?>
+		<input type="text" name='<?= $name ?>' value="<?= $list[$j]; ?>">
 	<?php endfor; ?>
 
 	<p class="field_title">メッセージ</p>

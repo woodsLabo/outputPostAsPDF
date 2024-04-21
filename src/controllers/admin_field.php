@@ -25,20 +25,23 @@ class Admin_field {
 		$this->input_contact_tel = get_post_meta($this->post->ID, "input_contact_tel", true);
 		$this->input_contact_mail = get_post_meta($this->post->ID, "input_contact_mail", true);
 
-		$this->input_detail_item_title_01 = get_post_meta($this->post->ID, "input_detail_item_title_01", true);
-		$this->input_detail_item_title_02 = get_post_meta($this->post->ID, "input_detail_item_title_02", true);
-		$this->input_detail_item_title_03 = get_post_meta($this->post->ID, "input_detail_item_title_03", true);
-		$this->input_detail_item_title_04 = get_post_meta($this->post->ID, "input_detail_item_title_04", true);
-		$this->input_detail_item_text_01 = get_post_meta($this->post->ID, "input_detail_item_text_01", true);
-		$this->input_detail_item_text_02 = get_post_meta($this->post->ID, "input_detail_item_text_02", true);
-		$this->input_detail_item_text_03 = get_post_meta($this->post->ID, "input_detail_item_text_03", true);
-		$this->input_detail_item_text_04 = get_post_meta($this->post->ID, "input_detail_item_text_04", true);
+		$this->input_detail_item_date = get_post_meta($this->post->ID, "input_detail_item_date", true);
+		$this->input_detail_item_start_time = get_post_meta($this->post->ID, "input_detail_item_start_time", true);
+		$this->input_detail_item_end_time = get_post_meta($this->post->ID, "input_detail_item_end_time", true);
+		$this->input_detail_item_capacity = get_post_meta($this->post->ID, "input_detail_item_capacity", true);
+		$this->input_detail_item_place = get_post_meta($this->post->ID, "input_detail_item_place", true);
+		$this->input_detail_item_price = get_post_meta($this->post->ID, "input_detail_item_price", true);
+
 		$this->input_list_01 = get_post_meta($this->post->ID, "input_list_01", true);
 		$this->input_list_02 = get_post_meta($this->post->ID, "input_list_02", true);
 		$this->input_list_03 = get_post_meta($this->post->ID, "input_list_03", true);
 		$this->input_list_04 = get_post_meta($this->post->ID, "input_list_04", true);
 		$this->input_list_05 = get_post_meta($this->post->ID, "input_list_05", true);
 		$this->input_list_06 = get_post_meta($this->post->ID, "input_list_06", true);
+		$this->input_list_07 = get_post_meta($this->post->ID, "input_list_07", true);
+		$this->input_list_08 = get_post_meta($this->post->ID, "input_list_08", true);
+		$this->input_list_09 = get_post_meta($this->post->ID, "input_list_09", true);
+		$this->input_list_10 = get_post_meta($this->post->ID, "input_list_10", true);
 	}
 }
 ?>

@@ -6,24 +6,32 @@
 	$main_catch = $_POST["main_catch"] ?? null;
 	$notice_text = $_POST["notice_text"] ?? null;
 	// $main_media = base64_encode(file_get_contents($_POST["main_media"])) ?? null;
-	$main_media = $_POST["main_media"] ?? null;
+	// $main_media = $_POST["main_media"] ?? null;
 	// $main_media = base64_encode(file_get_contents("icon.png")) ?? null;
-	// $main_media = base64_encode(file_get_contents("main_image.png")) ?? null;
-	$detail_item_title_01 = $_POST["detail_item_title_01"] ?? null;
-	$detail_item_title_02 = $_POST["detail_item_title_02"] ?? null;
-	$detail_item_title_03 = $_POST["detail_item_title_03"] ?? null;
-	$detail_item_title_04 = $_POST["detail_item_title_04"] ?? null;
-	$detail_item_text_01 = $_POST["detail_item_text_01"] ?? null;
-	$detail_item_text_02 = $_POST["detail_item_text_02"] ?? null;
-	$detail_item_text_03 = $_POST["detail_item_text_03"] ?? null;
-	$detail_item_text_04 = $_POST["detail_item_text_04"] ?? null;
+	$main_media = base64_encode(file_get_contents("main_image.png")) ?? null;
+	// $datetime = $_POST["detail_item_date"];
+	$detail_item_date = $_POST["detail_item_date"] ?? null;
+	$detail_item_start_time =  $_POST["detail_item_start_time"] ?? null;
+	$detail_item_end_time = $_POST["detail_item_end_time"] ?? null;
+	$detail_item_capacity = $_POST["detail_item_capacity"] ?? null;
+	$detail_item_place = $_POST["detail_item_place"] ?? null;
+	$detail_item_price = $_POST["detail_item_price"] ?? null;
+	$str_time = date("n月j日", strtotime($detail_item_date));
+	$date = date('w', strtotime($detail_item_date));
+	$week = ["日", "月", "火", "水", "木", "金", "土"];
 	$list_title = $_POST["list_title"] ?? null;
-	$list_01 = $_POST["list_01"] ?? null;
-	$list_02 = $_POST["list_02"] ?? null;
-	$list_03 = $_POST["list_03"] ?? null;
-	$list_04 = $_POST["list_04"] ?? null;
-	$list_05 = $_POST["list_05"] ?? null;
-	$list_06 = $_POST["list_06"] ?? null;
+
+	$list_01 = "<p><span></span>{$_POST['list_01']}</p>" ?? null;
+	$list_02 = "<p><span></span>{$_POST['list_02']}</p>" ?? null;
+	$list_03 = "<p><span></span>{$_POST['list_03']}</p>" ?? null;
+	$list_04 = "<p><span></span>{$_POST['list_04']}</p>" ?? null;
+	$list_05 = "<p><span></span>{$_POST['list_05']}</p>" ?? null;
+	$list_06 = "<p><span></span>{$_POST['list_06']}</p>" ?? null;
+	$list_07 = "<p><span></span>{$_POST['list_07']}</p>" ?? null;
+	$list_08 = "<p><span></span>{$_POST['list_08']}</p>" ?? null;
+	$list_09 = "<p><span></span>{$_POST['list_09']}</p>" ?? null;
+	$list_10 = "<p><span></span>{$_POST['list_10']}</p>" ?? null;
+
 	$message = $_POST["message"] ?? null;
 	$seminar_text = $_POST["seminar_text"] ?? null;
 	$seminar_url = $_POST["seminar_url"] ?? null;
@@ -37,6 +45,7 @@
 	$contact_mail = $_POST["contact_mail"] ?? null;
 	endif;
 		// <img src="data:image/png;base64,$main_media">
+		// <img src="$main_media">
 
 $html = <<< EOM
 
@@ -52,29 +61,29 @@ $html = <<< EOM
 <div class="header">$title</div>
 <div class="contentTop">
 	<div class="mainImage">
-		<img src="$main_media">
+		<img src="data:image/png;base64,$main_media">
 	</div>
 	<div class="titleWrap">
 		<p class="title_sub">$sub_catch</p>
 		<div class="title_main">$main_catch</div>
 	</div>
 	<div class="title_noticeWrap">
-		<p class="title_notice">$notice_text</p>
+		<div class="title_notice">$notice_text</div>
 	</div>
 </div>
 <div class="detailWrap">
 	<table class="detailTable">
 		<tr>
-			<th><span>$detail_item_title_01</span></th>
-			<td class="long">$detail_item_text_01</td>
-			<th><span>$detail_item_title_02</span></th>
-			<td class="short">$detail_item_text_02</td>
+			<th><span>開催日時</span></th>
+			<td class="long">$str_time({$week[$date]}){$detail_item_start_time}~{$detail_item_end_time}</td>
+			<th><span>定員</span></th>
+			<td class="short">{$detail_item_capacity}名</td>
 		</tr>
 		<tr>
-			<th><span>$detail_item_title_03</span></th>
-			<td class="long">$detail_item_text_03</td>
-			<th><span>$detail_item_title_04</span></th>
-			<td class="short">$detail_item_text_04</td>
+			<th><span>場所</span></th>
+			<td class="long">$detail_item_place</td>
+			<th><span>料金</span></th>
+			<td class="short">{$detail_item_price}円</td>
 		</tr>
 	</table>
 </div>
@@ -82,16 +91,24 @@ $html = <<< EOM
 	<p class="listTitle">$list_title</p>
 	<div class="listTable">
 		<div>
-			<p>$list_01</p>
-			<p>$list_02</p>
+			$list_01
+			$list_02
 		</div>
 		<div>
-			<p>$list_03</p>
-			<p>$list_04</p>
+			$list_03
+			$list_04
 		</div>
 		<div>
-			<p>$list_05</p>
-			<p>$list_06</p>
+			$list_05
+			$list_06
+		</div>
+		<div>
+			$list_07
+			$list_08
+		</div>
+		<div>
+			<p><span></span>$list_09</p>
+			<p><span></span>$list_10</p>
 		</div>
 	</div>
 </div>
@@ -104,28 +121,28 @@ $html = <<< EOM
 	<div class="applicationImgWrap"><img src="$seminar_qr" alt=""></div>
 </div>
 <div class="profileWrap">
-	<table>
+	<table style="table-layout: fixed">
 		<tr>
-			<th class="profileImg"><img src="$profile_img" alt=""></th>
+			<th class="profileImg"><img src="data:image/png;base64,$main_media"></th>
 			<td class="profileDetail">
 				<div class="profileDetailHead">
 					<span class="profileTitle">$profile_title</span>
 					<span class="profileName">$profile_name</span>
 				</div>
-				<p class="profileText">$profile_text</p>
+				<div class="profileText">$profile_text</div>
 			</td>
 		</tr>
 	</table>
 </div>
-<div class="footer">
-	<dl>
-		<dt>お問い合わせ</dt>
-		<dd>$contact_company</dd>
-		<dt>TEL</dt>
-		<dd>$contact_tel</dd>
-		<dt>メールアドレス</dt>
-		<dd>$contact_mail</dd>
-	</dl>
+<div class="contact">
+	<table class="contactWrap">
+		<tr>
+			<th class="contactTitle">お問い合わせ</th>
+			<td class="contactCompany">$contact_company</td>
+			<td class="contactTel">TEL:$contact_tel</td>
+			<td class="contactEmail">メールアドレス:$contact_mail</td>
+		</tr>
+	</table>
 </div>
 
 		  </body>

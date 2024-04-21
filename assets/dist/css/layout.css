@@ -34,15 +34,20 @@ img {
   width: 100%;
 }
 
+main {
+  width: 900px !important;
+}
+
 .header {
   background: #003c78;
   color: #fff;
-  font-size: 30px;
-  padding: 1rem 0;
+  font-size: 17px;
+  padding: 10px 0;
   text-align: center;
 }
 
 .contentTop {
+  height: 400px;
   position: relative;
 }
 
@@ -57,31 +62,32 @@ img {
 .title_sub {
   background: #003c78;
   display: inline-block;
-  font-size: 30px;
-  padding: 0.8rem;
+  font-size: 17px;
+  padding: 8px;
 }
 .title_main {
-  font-size: 70px;
-  line-height: 1;
+  font-size: 40px;
+  line-height: 1.4;
   padding: 10px;
+  text-shadow: 2px 3px 8px rgba(0, 0, 0, 0.8);
 }
 .title_notice {
   background: #f00;
   border-radius: 50%;
   color: #fff;
   display: table-cell;
-  font-size: 3rem;
-  line-height: 3rem;
+  font-size: 30px;
+  line-height: 30px;
   text-align: center;
   vertical-align: middle;
 }
 .title_noticeWrap {
-  bottom: 1rem;
+  bottom: 10px;
   display: table;
-  height: 15rem;
+  height: 150px;
   position: absolute;
-  right: 1rem;
-  width: 15rem;
+  right: 10px;
+  width: 150px;
   z-index: 2;
 }
 
@@ -92,31 +98,47 @@ img {
 .detailTable {
   font-size: 20px;
   margin: 0 auto;
-  width: 80%;
+  width: 87%;
 }
 .detailTable tr {
-  padding-bottom: 10px;
+  padding-bottom: 12px;
 }
 .detailTable th {
   color: #fff;
-  padding: 0 10px 15px 0;
+  font-size: 18px;
+  padding-right: 10px;
   text-align: center;
   width: 10%;
 }
 .detailTable th span {
   background: #003c78;
   border-radius: 30px;
-  padding: 5px;
+  display: block;
 }
 .detailTable td {
   border: 0;
   color: #000;
+  display: inline-block;
+  font-size: 30px;
+  font-weight: bold;
+  vertical-align: middle;
 }
 .detailTable td.long {
-  width: 60%;
+  width: 95%;
 }
-.detailTable td.short {
-  width: 20%;
+.detailWeek {
+  background: #000;
+  color: #fff;
+  font-size: 20px;
+  margin: 0 10px 0 5px;
+  padding: 2px;
+}
+.detailTime {
+  font-size: 25px;
+}
+.detailUnit {
+  font-size: 18px;
+  margin-left: 5px;
 }
 
 .listWrap {
@@ -126,65 +148,72 @@ img {
 .listTitle {
   background: #003c78;
   color: #fff;
-  font-size: 20px;
+  font-size: 25px;
+  font-weight: bold;
+  margin-bottom: 15px;
   padding: 5px 0;
   text-align: center;
 }
 .listTable {
   border: 0;
-  margin-top: 0.5rem;
   width: 100%;
 }
 .listTable div {
   font-size: 0;
-  margin-bottom: 0.5rem;
+  margin-bottom: 10px;
 }
 .listTable p {
   background: #016fb9;
   border: 0;
   box-sizing: border-box;
-  clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0% calc(100% - 10px));
   color: #fff;
   display: inline-block;
-  font-size: 1.4rem;
+  font-size: 15px;
   padding: 10px 5px;
-  width: 49.7%;
+  width: 49.5%;
 }
 .listTable p::before {
   background: #000;
   content: "";
   display: inline-block;
-  height: 1.5rem;
+  height: 15px;
   margin-right: 5px;
   vertical-align: middle;
-  width: 1.5rem;
+  width: 15px;
 }
 .listTable p:first-of-type {
-  margin-right: 0.5rem;
+  margin-right: 1%;
 }
 
 .message {
-  padding-bottom: 0.5rem;
+  font-size: 15px;
+  padding-bottom: 5px;
 }
 
 .application {
   background: #00f;
   font-size: 0;
-  padding: 0.5rem 2rem;
+  padding: 10px 20px;
+}
+.applicationText {
+  font-size: 22px;
 }
 .applicationTextWrap {
   color: #fff;
   display: inline-block;
-  font-size: 1.4rem;
+  font-size: 14px;
   text-align: center;
   vertical-align: middle;
   width: 90%;
 }
+.applicationUrl {
+  font-size: 20px;
+}
 .applicationArrow {
   color: #fff;
   display: inline-block;
-  font-size: 1.4rem;
-  height: 2rem;
+  font-size: 14px;
+  height: 20px;
   vertical-align: middle;
   width: 3%;
 }
@@ -196,47 +225,64 @@ img {
 
 .profileWrap {
   background: #808080;
-  padding: 1rem;
+  padding: 10px;
 }
 .profileImg {
   width: 15%;
 }
 .profileDetail {
-  padding: 1rem;
+  padding: 10px;
   vertical-align: top;
   width: 85%;
 }
 .profileDetailHead {
   border-bottom: 1px solid #003c78;
   color: #003c78;
-  font-size: 1.5rem;
+  font-size: 25px;
   line-height: 1;
-  padding-bottom: 0.5rem;
+  padding-bottom: 5px;
+}
+.profileTitle {
+  display: inline-block;
+  vertical-align: middle;
 }
 .profileName {
-  font-size: 2.5rem;
+  display: inline-block;
+  font-size: 40px;
+  vertical-align: middle;
 }
 .profileText {
-  padding: 0.5rem 0;
+  font-size: 20px;
+  padding: 5px 0;
+  text-align: justify;
 }
 
 .contact {
-  background: #00f;
+  background: #000;
   color: #fff;
-  padding: 1rem;
+  padding: 10px;
 }
 .contactWrap {
+  font-size: 20px;
   width: 100%;
 }
 .contactTitle {
-  width: 7%;
+  background: #003c78;
+  border-radius: 30px;
+  font-size: 15px;
+  vertical-align: middle;
+  width: 10%;
 }
 .contactCompany {
-  width: 18%;
+  font-weight: bold;
+  padding-left: 10px;
+  width: 30%;
 }
 .contactTel {
-  width: 35%;
+  font-weight: bold;
+  width: 30%;
 }
 .contactEmail {
-  width: 40%;
+  font-weight: bold;
+  width: 30%;
 }
