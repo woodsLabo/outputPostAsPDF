@@ -440,38 +440,40 @@ img {
   color: #fff;
   font-style: italic-bold;
   height: 30.5px;
-  padding: 12px 10px;
+  padding: 19px 10px 5px;
 }
 
 .contactWrap {
-  font-size: 20px;
+  font-size: 15px;
   width: 100%;
 }
 
 .contactTitle {
+  vertical-align: center;
+  line-height: 1;
+  display: inline-block;
   background: #003c78;
   border-radius: 30px;
-  font-size: 15px;
-  vertical-align: middle;
-  padding: 0 10px;
-  width: 13%;
+  padding: 0 3px 2px;
+  box-sizing: border-box;
   font-weight: normal;
 }
 
 .contactCompany {
+  display: inline-block;
+  vertical-align: center;
   padding-left: 10px;
-  width: 27%;
-  font-size: 15px;
+  width: 26%;
 }
 
 .contactTel {
-  width: 27%;
-  font-size: 15px;
+  display: inline-block;
+  width: 25%;
 }
 
 .contactEmail {
+  display: inline-block;
   width: 33%;
-  font-size: 15px;
 }
 </style>
 EOM;

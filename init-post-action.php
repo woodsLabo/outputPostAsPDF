@@ -237,14 +237,12 @@ function init_post_action($content) {
 			</table>
 		</div>
 		<div class="contact">
-			<table class="contactWrap">
-				<tr>
-					<th class="contactTitle">お問い合わせ</th>
-					<td class="contactCompany">$contact_company</td>
-					<td class="contactTel">TEL:$contact_tel</td>
-					<td class="contactEmail">メールアドレス:$contact_mail</td>
-				</tr>
-			</table>
+			<div class="contactWrap">
+				<span class="contactTitle">お問い合わせ</sapn>
+				<span class="contactCompany">$contact_company</span>
+				<span class="contactTel">TEL:$contact_tel</span>
+				<span class="contactEmail">メールアドレス:$contact_mail</span>
+			</div>
 		</div>
 			<div class="opap__wrap">
 				<form action="" method="post">
