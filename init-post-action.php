@@ -1,39 +1,10 @@
 <?php
-require_once("dompdf/autoload.inc.php");
-use Dompdf\Dompdf;
+include_once("action.php");
 
-function is_login_page() {
-    return in_array($GLOBALS['pagenow'], array('wp-login.php', 'wp-register.php'));
-}
-
-if (!is_admin() && !is_login_page()) {
-	function render($in_fn, $params){
-		extract($params);
-		ob_start();
-		include $in_fn;
-		$html = ob_get_contents();
-		ob_end_clean();
-		return $html;
-	}
-
-	if ($_POST && $_POST["dw"] === "true") {
-		$dompdf = new Dompdf();
-		$param = [];
-		include_once("layout-template.php");
-		$dompdf->loadHtml($html);
-		$options = $dompdf->getOptions();
-		$options->set(array('isRemoteEnabled' => false));
-		$dompdf->setOptions($options);
-		$dompdf->setPaper('A4');
-		$dompdf->render();
-		$dompdf->stream("smaple.pdf", array("Attachment" => 0));
-		// $dompdf->stream("smaple.pdf");
-	}
-
-}
 function init_post_action($content) {
 	$select_radio = createMetaItem("select_radio");
 	$pdf_type = createMetaItem("pdf_type");
+	$file_name = createMetaItem("input_file_name");
 	$title = createMetaItem("input_title");
 	$main_catch = createMetaItem("input_main_catch");
 	$sub_catch = createMetaItem("input_sub_catch");
@@ -248,6 +219,7 @@ function init_post_action($content) {
 				<form action="" method="post">
 					<input type="hidden" name="dw" value="true">
 					<input type="hidden" name="pdf_type" value="$pdf_type">
+					<input type="hidden" name="file_name" value="$file_name">
 					<input type="hidden" name="title" value="$title">
 					<input type="hidden" name="sub_catch" value="$sub_catch">
 					<input type="hidden" name="main_catch" value="$main_catch">

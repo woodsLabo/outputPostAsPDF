@@ -18,6 +18,7 @@ function save_custom_fields($post) {
 		$post_field_obj = array(
 			"select_radio" => sanitize_text_field($_POST["select_radio"]),
 			"pdf_type" => sanitize_text_field($_POST["pdf_type"]),
+			"input_file_name" => sanitize_text_field($_POST["input_file_name"]),
 			"input_title" => sanitize_text_field($_POST["input_title"]),
 			"input_main_catch" => $_POST["input_main_catch"],
 			"input_sub_catch" => sanitize_text_field($_POST["input_sub_catch"]),

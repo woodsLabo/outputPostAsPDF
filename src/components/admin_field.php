@@ -13,6 +13,8 @@
 <input id="select_pdf_type_b" type="radio" name="pdf_type" value="b" <?php if ($admin_field->pdf_type == "b") echo "checked"; ?>>
 
 <div class="field_wrap js-field" <?php if ($admin_field->select_radio == 2 || empty($admin_field->select_radio)) echo "style='display: none'" ?>>
+	<p class=field_title>ダウンロードファイル名</p>
+	<input type="text" class="input_file_name" name="input_file_name" value="<?= $admin_field->input_file_name; ?>">
 	<p class=field_title>タイトル</p>
 	<input type="text" class="input_title" name="input_title" value="<?= $admin_field->input_title; ?>">
 	<p class=field_title>サブキャッチコピー</p>
