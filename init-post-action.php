@@ -1,7 +1,5 @@
 <?php
-// require_once("TCPDF-main/tcpdf.php");
 require_once("dompdf/autoload.inc.php");
-include_once("style.php");
 use Dompdf\Dompdf;
 
 function is_login_page() {
@@ -19,20 +17,8 @@ if (!is_admin() && !is_login_page()) {
 	}
 
 	if ($_POST && $_POST["dw"] === "true") {
-		// $html = <<< EOM
-		// <html>
-		//   <head>
-		//     <meta charset="utf-8">
-		//   </head>
-		//   <body>
-		//     <div>this is dompdf sample!</div>
-		//     <div>これはPDFのサンプルです！</div>
-		//   </body>
-		// </html>
-		// EOM;
 		$dompdf = new Dompdf();
 		$param = [];
-		// $html = render("layout-template.php", $param);
 		include_once("layout-template.php");
 		$dompdf->loadHtml($html);
 		$options = $dompdf->getOptions();
@@ -42,24 +28,12 @@ if (!is_admin() && !is_login_page()) {
 		$dompdf->render();
 		$dompdf->stream("smaple.pdf", array("Attachment" => 0));
 		// $dompdf->stream("smaple.pdf");
-		// $pdf = new TCPDF("P", "mm", "A4",true, "UTF-8",false,false);
-		// $pdf->SetMargins(0, 0, 0);
-		// $pdf->setPrintHeader(false);
-		// $pdf->setPrintFooter(false);
-		// $pdf ->addPage();
-		// $pdf ->setFont("kozgopromedium");
-		// $param = [];
-		// $html = render("layout-template.php", $param);
-		// $pdf ->writeHTML($html);
-
-		// $_POST = array();
-		// // $pdf ->Output("hoge.pdf", "D");
-		// $pdf ->Output("hoge.pdf", "I");
 	}
 
 }
 function init_post_action($content) {
 	$select_radio = createMetaItem("select_radio");
+	$pdf_type = createMetaItem("pdf_type");
 	$title = createMetaItem("input_title");
 	$main_catch = createMetaItem("input_main_catch");
 	$sub_catch = createMetaItem("input_sub_catch");
@@ -275,6 +249,7 @@ function init_post_action($content) {
 			<div class="opap__wrap">
 				<form action="" method="post">
 					<input type="hidden" name="dw" value="true">
+					<input type="hidden" name="pdf_type" value="$pdf_type">
 					<input type="hidden" name="title" value="$title">
 					<input type="hidden" name="sub_catch" value="$sub_catch">
 					<input type="hidden" name="main_catch" value="$main_catch">

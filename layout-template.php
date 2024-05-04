@@ -5,11 +5,7 @@
 	$sub_catch = $_POST["sub_catch"] ?? null;
 	$main_catch = $_POST["main_catch"] ?? null;
 	$notice_text = $_POST["notice_text"] ?? null;
-	// $main_media = base64_encode(file_get_contents($_POST["main_media"])) ?? null;
-	// $main_media = $_POST["main_media"] ?? null;
-	// $main_media = base64_encode(file_get_contents("icon.png")) ?? null;
-	$main_media = base64_encode(file_get_contents("main_image.png")) ?? null;
-	// $datetime = $_POST["detail_item_date"];
+
 	$detail_item_date = $_POST["detail_item_date"] ?? null;
 	$detail_item_start_time =  $_POST["detail_item_start_time"] ?? null;
 	$detail_item_end_time = $_POST["detail_item_end_time"] ?? null;
@@ -21,6 +17,7 @@
 	$week = ["日", "月", "火", "水", "木", "金", "土"];
 	$list_title = $_POST["list_title"] ?? null;
 
+	$pdf_type_A = $_POST["pdf_type"] === "a" ? " type--a" : "";
 	$list_01 = "<p><span></span>{$_POST['list_01']}</p>" ?? null;
 	$list_02 = "<p><span></span>{$_POST['list_02']}</p>" ?? null;
 	$list_03 = "<p><span></span>{$_POST['list_03']}</p>" ?? null;
@@ -43,9 +40,25 @@
 	$contact_company = $_POST["contact_company"] ?? null;
 	$contact_tel = $_POST["contact_tel"] ?? null;
 	$contact_mail = $_POST["contact_mail"] ?? null;
+
+	$main_media = "";
+	$qr_media = "";
+	$profile_media = "";
+
+	if (wp_get_environment_type() == "development") {
+		$main_media = "https://kstg.devwl.work/wp-content/themes/lightning/main_image.png";
+		$qr_media = "https://kstg.devwl.work/wp-content/themes/lightning/01.jpg";
+		$profile_media = "https://kstg.devwl.work/wp-content/themes/lightning/no_image.png";
+	} else {
+		$main_media = $_POST["main_media"];
+		$qr_media = $_POST["qr_media"];
+		$profile_media = $_POST["profile_media"];
+	}
+
+	$main_media = base64_encode(file_get_contents($main_media));
+	$qr_media = base64_encode(file_get_contents($qr_media));
+	$profile_media = base64_encode(file_get_contents($profile_media));
 	endif;
-		// <img src="data:image/png;base64,$main_media">
-		// <img src="$main_media">
 
 $html = <<< EOM
 
@@ -75,7 +88,7 @@ $html = <<< EOM
 	<table class="detailTable">
 		<tr>
 			<th><span>開催日時</span></th>
-			<td class="long">$str_time({$week[$date]}){$detail_item_start_time}~{$detail_item_end_time}</td>
+			<td class="long">$str_time({$week[$date]}){$detail_item_start_time}〜{$detail_item_end_time}</td>
 			<th><span>定員</span></th>
 			<td class="short">{$detail_item_capacity}名</td>
 		</tr>
@@ -87,7 +100,7 @@ $html = <<< EOM
 		</tr>
 	</table>
 </div>
-<div class="listWrap">
+<div class="listWrap{$pdf_type_A}">
 	<p class="listTitle">$list_title</p>
 	<div class="listTable">
 		<div>
@@ -107,8 +120,8 @@ $html = <<< EOM
 			$list_08
 		</div>
 		<div>
-			<p><span></span>$list_09</p>
-			<p><span></span>$list_10</p>
+			$list_09
+			$list_10
 		</div>
 	</div>
 </div>
@@ -118,12 +131,13 @@ $html = <<< EOM
 		<p class="applicationText">$seminar_text</p>
 		<p class="applicationUrl">$seminar_url</p>
 	</div>
-	<div class="applicationImgWrap"><img src="$seminar_qr" alt=""></div>
+	<div class="applicationArrow"><span></span><span></span><span></span><span></span><span></span><span></span></div>
+	<div class="applicationImgWrap"><img src="data:image/png;base64,$qr_media"></div>
 </div>
 <div class="profileWrap">
 	<table style="table-layout: fixed">
 		<tr>
-			<th class="profileImg"><img src="data:image/png;base64,$main_media"></th>
+			<th class="profileImg"><img src="data:image/png;base64,$profile_media"></th>
 			<td class="profileDetail">
 				<div class="profileDetailHead">
 					<span class="profileTitle">$profile_title</span>

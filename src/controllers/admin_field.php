@@ -6,6 +6,7 @@ class Admin_field {
 
 	public function get_admin_field() {
 		$this->select_radio = get_post_meta($this->post->ID, "select_radio", true);
+		$this->pdf_type = get_post_meta($this->post->ID, "pdf_type", true);
 		$this->input_title = get_post_meta($this->post->ID, "input_title", true);
 		$this->input_sub_catch = get_post_meta($this->post->ID, "input_sub_catch", true);
 		$this->input_main_catch = get_post_meta($this->post->ID, "input_main_catch", true);

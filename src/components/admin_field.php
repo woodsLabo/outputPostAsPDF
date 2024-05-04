@@ -6,6 +6,11 @@
 <input id="select_output_pdf" type="radio" name="select_radio" class="js-selectOutput" value="1" <?php if ($admin_field->select_radio == 1) echo "checked"; ?>>
 <label for="output_pdf_false">しない</label>
 <input id="output_pdf_false" type="radio" name="select_radio" class="js-selectOutput" value="2" <?php if ($admin_field->select_radio == 2 || empty($admin_field->select_radio)) echo "checked"; ?>>
+<p class="field_title">PDFタイプ</p>
+<label for="select_pdf_true_a">Aタイプ</label>
+<input id="select_pdf_type_a" type="radio" name="pdf_type" value="a" <?php if ($admin_field->pdf_type == "a" || empty($admin_field->pdf_type)) echo "checked"; ?>>
+<label for="select_pdf_type_b">Bタイプ</label>
+<input id="select_pdf_type_b" type="radio" name="pdf_type" value="b" <?php if ($admin_field->pdf_type == "b") echo "checked"; ?>>
 
 <div class="field_wrap js-field" <?php if ($admin_field->select_radio == 2 || empty($admin_field->select_radio)) echo "style='display: none'" ?>>
 	<p class=field_title>タイトル</p>

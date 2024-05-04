@@ -27,8 +27,8 @@ table {
 }
 
 html {
-  font-family: serif;
   font-size: 67.5%;
+  font-family: serif;
 }
 
 img {
@@ -36,24 +36,35 @@ img {
 }
 
 .header {
-  height: 30.5px;
-  line-height: 25px;
-  padding: 10px 0;
+  height: 40px;
+  font-style: bold;
   background: #003c78;
   color: #fff;
-  font-size: 17px;
+  font-size: 18px;
+  letter-spacing: -1px;
+  line-height: 1.1;
   text-align: center;
 }
 
 .contentTop {
-  height: 340px;
+  font-style: bold;
+  height: 310px;
   position: relative;
+}
+
+.mainImage {
+  height: 310px;
+  overflow: hidden;
+}
+
+.mainImage img {
+  heght: 310px;
 }
 
 .titleWrap {
   color: #fff;
   left: 0;
-  padding: 50px 0;
+  padding: 35px 0;
   position: absolute;
   top: 0;
   z-index: 2;
@@ -62,40 +73,38 @@ img {
 .title_sub {
   background: #003c78;
   display: inline-block;
-  font-size: 18px;
-  padding: 8px;
+  line-height: 0.8;
+  font-size: 20px;
+  padding: 5px 8px;
 }
 
 .title_main {
   font-size: 40px;
-  line-height: 1.4;
+  line-height: 0.9;
   padding: 0 10px 10px;
   text-shadow: 2px 3px 8px rgba(0, 0, 0, 0.8);
 }
 
 .title_notice {
-  background: #f00;
-  border-radius: 50%;
   color: #fff;
-  display: table-cell;
-  font-size: 15px;
-  line-height: 30px;
+  padding-top: 30px;
   text-align: center;
-  vertical-align: middle;
+  font-size: 27px;
 }
 
 .title_notice p {
   position: relative;
-  top: -5px;
+  line-height: 0.7;
 }
 
 .title_noticeWrap {
-  bottom: 100px;
-  display: table;
-  height: 50px;
+  background: #f00;
+  border-radius: 50%;
+  bottom: 10px;
+  height: 150px;
   position: absolute;
   right: 10px;
-  width: 100px;
+  width: 150px;
   z-index: 2;
 }
 
@@ -107,6 +116,7 @@ img {
 
 .detailTable {
   font-size: 20px;
+  font-style: italic-bold;
   margin: 0 auto;
   width: 87%;
 }
@@ -126,6 +136,8 @@ img {
 .detailTable th span {
   background: #003c78;
   border-radius: 30px;
+  line-height: 0.8;
+  padding: 2px 0;
   font-weight: normal;
   display: block;
 }
@@ -135,9 +147,7 @@ img {
   color: #000;
   display: inline-block;
   font-size: 24px;
-  vertical-align: top;
-  position: relative;
-  top: -4px;
+  line-height: 0.7;
 }
 
 .detailTable td.long {
@@ -163,7 +173,7 @@ img {
 
 .listWrap {
   margin: 0 auto;
-  height: 280px;
+  height: 300px;
   width: 98%;
 }
 
@@ -171,19 +181,22 @@ img {
   background: #003c78;
   color: #fff;
   font-size: 20px;
+  line-height: 0.8;
+  font-style: italic-bold;
   padding: 5px 0;
   text-align: center;
   margin-bottom: 15px;
 }
 
 .listTable {
+  font-style: bold;
   border: 0;
   width: 100%;
 }
 
 .listTable div {
   font-size: 0;
-  margin-bottom: 6px;
+  margin-bottom: 10px;
 }
 
 .listTable div:last-of-type {
@@ -197,12 +210,15 @@ img {
   color: #fff;
   display: inline-block;
   font-size: 16px;
+  line-height: 0.8;
   padding: 10px 5px;
   width: 48.2%;
+  position: relative;
 }
 
 .listTable p::before {
-  background: #000;
+  background: #016fb9;
+  border: 1px solid #fff;
   content: "";
   display: inline-block;
   height: 15px;
@@ -212,27 +228,87 @@ img {
   margin-top: 5px;
 }
 
+.listTable p::after {
+  content: "";
+  border-left: 4px solid yellow;
+  border-bottom: 2px solid yellow;
+  width: 17px;
+  height: 10px;
+  transform: rotate(-45deg);
+  display: block;
+  position: absolute;
+  left: 3px;
+  top: 10px;
+}
+
 .listTable p:first-of-type {
   margin-right: 1%;
 }
 
+.listWrap.type--a {
+  border: 4px solid #003c78;
+  height: 240px;
+}
+
+.listWrap.type--a .listTitle {
+  margin-bottom: 5px;
+}
+
+.listWrap.type--a .listTable {
+  padding: 0 10px;
+}
+
+.listWrap.type--a .listTable p {
+  background: none;
+  color: #000;
+  padding: 5px;
+  width: 100%;
+}
+
+.listWrap.type--a .listTable p::before {
+  background: initial;
+  border: 1px solid #000;
+}
+
+.listTable p::after {
+  border-color: red;
+  top: 6px;
+}
+
+.listWrap.type--a .listTable div {
+  margin-bottom: 0;
+}
+.listWrap.type--a .listTable div:nth-of-type(4),
+.listWrap.type--a .listTable div:last-of-type {
+  display: none;
+}
+
 .message {
   font-size: 15px;
+  line-height: 0.8;
+  font-style: italic;
   height: 40px;
   padding-bottom: 10px;
   width: 98%;
   margin: 0 auto;
 }
 
+.listWrap.type--a + .message {
+  height: 77px;
+  padding: 15px 0 10px;
+}
+
 .application {
   background: #00f;
   font-size: 0;
-  height: 55px;
-  padding: 15px 20px 0;
+  height: 72px;
+  padding: 13px 20px 0;
 }
 
 .applicationText {
   font-size: 22px;
+  line-height: 1;
+  font-style: bold;
 }
 
 .applicationTextWrap {
@@ -241,31 +317,66 @@ img {
   font-size: 14px;
   text-align: center;
   vertical-align: middle;
-  width: 90%;
+  width: 87%;
 }
 
 .applicationUrl {
   font-size: 20px;
+  font-style: bold;
+  line-height: 0.7;
 }
 
 .applicationArrow {
-  color: #fff;
   display: inline-block;
-  font-size: 14px;
-  height: 20px;
+  position: relative;
+  height: 32px;
   vertical-align: middle;
-  width: 3%;
+  width: 4%;
+}
+
+.applicationArrow span {
+  background: yellow;
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  transform: rotate(45deg);
+  position: absolute;
+}
+
+.applicationArrow span:nth-of-type(2) {
+	left: 7px;
+	top: 6px;
+}
+
+.applicationArrow span:nth-of-type(3) {
+	left: 14px;
+	top: 13px;
+}
+
+.applicationArrow span:nth-of-type(4) {
+	left: 0px;
+	top: 13px;
+}
+
+.applicationArrow span:nth-of-type(5) {
+	left: 7px;
+	top: 20px;
+}
+
+.applicationArrow span:last-of-type {
+	left: 0;
+	top: 27px;
 }
 
 .applicationImgWrap {
   display: inline-block;
   vertical-align: middle;
-  width: 7%;
+  width: 9%;
 }
 
 .profileWrap {
   padding: 10px;
-  height: 180px;
+  height: 175px;
   width: 100%;
 }
 
@@ -287,7 +398,7 @@ img {
 }
 
 .profileDetail {
-  padding: 10px;
+  padding: 0 10px;
   vertical-align: top;
   width: 80%
 }
@@ -296,24 +407,29 @@ img {
   border-bottom: 1px solid #003c78;
   color: #003c78;
   font-size: 25px;
-  line-height: 1;
+  line-height: 0.8;
 }
 
 .profileTitle {
-  font-size: 18px;
+  letter-spacing: -1;
+  font-size: 19px;
+  font-style: bold;
   display: inline-block;
-  vertical-align: middle;
+  line-height: 0.8;
 }
 
 .profileName {
   display: inline-block;
-  font-size: 40px;
+  font-style: bold;
+  font-size: 35px;
+  line-height: 0.8;
   vertical-align: middle;
 }
 
 .profileText {
   font-size: 15px;
-  line-height: 1.3;
+  font-style: italic;
+  line-height: 0.9;
   padding: 5px 0;
   width: 100%;
   word-wrap: break-word;
@@ -322,7 +438,8 @@ img {
 .contact {
   background: #000;
   color: #fff;
-  height: 20px;
+  font-style: italic-bold;
+  height: 30.5px;
   padding: 12px 10px;
 }
 
@@ -336,6 +453,7 @@ img {
   border-radius: 30px;
   font-size: 15px;
   vertical-align: middle;
+  padding: 0 10px;
   width: 13%;
   font-weight: normal;
 }
