@@ -2,6 +2,7 @@
 include_once("action.php");
 
 function init_post_action($content) {
+	global $post;
 	$select_radio = createMetaItem("select_radio");
 	$pdf_type = createMetaItem("pdf_type");
 	$file_name = createMetaItem("input_file_name");
@@ -58,6 +59,7 @@ function init_post_action($content) {
 	$contact_company = createMetaItem("input_contact_company");
 	$contact_tel = createMetaItem("input_contact_tel");
 	$contact_mail = createMetaItem("input_contact_mail");
+	$post_id = $post->ID;
 
 	$el = "" ;
 	if ($select_radio == 1) {
@@ -253,6 +255,7 @@ function init_post_action($content) {
 					<input type="hidden" name="contact_company" value="$contact_company">
 					<input type="hidden" name="contact_tel" value="$contact_tel">
 					<input type="hidden" name="contact_mail" value="$contact_mail">
+					<input type="hidden" name="post_id" value="$post_id">
 				<button class="opap__button">PDF化</button>
 				</form>
 			</div>

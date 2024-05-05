@@ -1,5 +1,6 @@
 <?php // ボタンアクション ?>
 <?php
+include_once("insert_dl_log.php");
 require_once("dompdf/autoload.inc.php");
 use Dompdf\Dompdf;
 
@@ -21,6 +22,7 @@ if (!is_admin() && !is_login_page()) {
 		$dompdf = new Dompdf();
 		$param = [];
 		include_once("layout-template.php");
+		$post_id = $_POST["post_id"];
 		$file_name = $_POST["file_name"];
 		$dompdf->loadHtml($html);
 		$options = $dompdf->getOptions();
@@ -29,6 +31,7 @@ if (!is_admin() && !is_login_page()) {
 		$dompdf->setPaper('A4');
 		$dompdf->render();
 		$dompdf->stream("{$file_name}.pdf", array("Attachment" => 0));
+		$insert_dl_log->save_log($post_id);
 		// $dompdf->stream("{$file_name}.pdf");
 	}
 }
