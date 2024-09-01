@@ -4,13 +4,13 @@ if (isset($_POST)) :
 	$title = $_POST["title"] ?? null;
 	$sub_catch = $_POST["sub_catch"] ?? null;
 	$main_catch = $_POST["main_catch"] ?? null;
-	$notice_text = nl2br($_POST["notice_text"]) ?? null;
+	$notice_text = !empty($_POST["notice_text"]) ? nl2br($_POST["notice_text"]) : null;
 	$detail_item_date = $_POST["detail_item_date"] ?? null;
 	$detail_item_start_time =  $_POST["detail_item_start_time"] ?? null;
 	$detail_item_end_time = $_POST["detail_item_end_time"] ?? null;
 	$detail_item_capacity = $_POST["detail_item_capacity"] ?? null;
 	$detail_item_place = $_POST["detail_item_place"] ?? null;
-	$detail_item_price = number_format($_POST["detail_item_price"]) ?? null;
+	$detail_item_price = !empty($_POST["detail_item_price"]) ? number_format($_POST["detail_item_price"]) : null;
 	$str_time = date("n月j日", strtotime($detail_item_date));
 	$date = date('w', strtotime($detail_item_date));
 	$week = ["日", "月", "火", "水", "木", "金", "土"];
@@ -28,14 +28,14 @@ if (isset($_POST)) :
 	$list_09 = !empty($_POST['list_09']) ? "<p>{$_POST['list_09']}</p>" : null;
 	$list_10 = !empty($_POST['list_10']) ? "<p>{$_POST['list_10']}</p>" : null;
 
-	$message = nl2br($_POST["message"]) ?? null;
+	$message = !empty($_POST["message"]) ? nl2br($_POST["message"]) : null;
 	$seminar_text = $_POST["seminar_text"] ?? null;
 	$seminar_url = $_POST["seminar_url"] ?? null;
 	$seminar_qr = $_POST["seminar_qr"] ?? null;
 	$profile_img = $_POST["profile_img"] ?? null;
 	$profile_title = $_POST["profile_title"] ?? null;
 	$profile_name = $_POST["profile_name"] ?? null;
-	$profile_text = nl2br($_POST["profile_text"] ?? null);
+	$profile_text = !empty($_POST["profile_text"]) ? nl2br($_POST["profile_text"]) : null;
 	$contact_company = $_POST["contact_company"] ?? null;
 	$contact_tel = $_POST["contact_tel"] ?? null;
 	$contact_mail = $_POST["contact_mail"] ?? null;
