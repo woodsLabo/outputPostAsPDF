@@ -1,64 +1,73 @@
 <?php
-	if (isset($_POST)) :
+if (isset($_POST)) :
 	include_once("style.php");
 	$title = $_POST["title"] ?? null;
 	$sub_catch = $_POST["sub_catch"] ?? null;
 	$main_catch = $_POST["main_catch"] ?? null;
-	$notice_text = $_POST["notice_text"] ?? null;
-
+	$notice_text = nl2br($_POST["notice_text"]) ?? null;
 	$detail_item_date = $_POST["detail_item_date"] ?? null;
 	$detail_item_start_time =  $_POST["detail_item_start_time"] ?? null;
 	$detail_item_end_time = $_POST["detail_item_end_time"] ?? null;
 	$detail_item_capacity = $_POST["detail_item_capacity"] ?? null;
 	$detail_item_place = $_POST["detail_item_place"] ?? null;
-	$detail_item_price = $_POST["detail_item_price"] ?? null;
+	$detail_item_price = number_format($_POST["detail_item_price"]) ?? null;
 	$str_time = date("n月j日", strtotime($detail_item_date));
 	$date = date('w', strtotime($detail_item_date));
 	$week = ["日", "月", "火", "水", "木", "金", "土"];
 	$list_title = $_POST["list_title"] ?? null;
 
 	$pdf_type_A = $_POST["pdf_type"] === "a" ? " type--a" : "";
-	$list_01 = "<p><span></span>{$_POST['list_01']}</p>" ?? null;
-	$list_02 = "<p><span></span>{$_POST['list_02']}</p>" ?? null;
-	$list_03 = "<p><span></span>{$_POST['list_03']}</p>" ?? null;
-	$list_04 = "<p><span></span>{$_POST['list_04']}</p>" ?? null;
-	$list_05 = "<p><span></span>{$_POST['list_05']}</p>" ?? null;
-	$list_06 = "<p><span></span>{$_POST['list_06']}</p>" ?? null;
-	$list_07 = "<p><span></span>{$_POST['list_07']}</p>" ?? null;
-	$list_08 = "<p><span></span>{$_POST['list_08']}</p>" ?? null;
-	$list_09 = "<p><span></span>{$_POST['list_09']}</p>" ?? null;
-	$list_10 = "<p><span></span>{$_POST['list_10']}</p>" ?? null;
+	$list_01 = !empty($_POST['list_01']) ? "<p>{$_POST['list_01']}</p>" : null;
+	$list_02 = !empty($_POST['list_02']) ? "<p>{$_POST['list_02']}</p>" : null;
+	$list_03 = !empty($_POST['list_03']) ? "<p>{$_POST['list_03']}</p>" : null;
+	$list_04 = !empty($_POST['list_04']) ? "<p>{$_POST['list_04']}</p>" : null;
+	$list_05 = !empty($_POST['list_05']) ? "<p>{$_POST['list_05']}</p>" : null;
+	$list_06 = !empty($_POST['list_06']) ? "<p>{$_POST['list_06']}</p>" : null;
+	$list_07 = !empty($_POST['list_07']) ? "<p>{$_POST['list_07']}</p>" : null;
+	$list_08 = !empty($_POST['list_08']) ? "<p>{$_POST['list_08']}</p>" : null;
+	$list_09 = !empty($_POST['list_09']) ? "<p>{$_POST['list_09']}</p>" : null;
+	$list_10 = !empty($_POST['list_10']) ? "<p>{$_POST['list_10']}</p>" : null;
 
-	$message = $_POST["message"] ?? null;
+	$message = nl2br($_POST["message"]) ?? null;
 	$seminar_text = $_POST["seminar_text"] ?? null;
 	$seminar_url = $_POST["seminar_url"] ?? null;
 	$seminar_qr = $_POST["seminar_qr"] ?? null;
 	$profile_img = $_POST["profile_img"] ?? null;
 	$profile_title = $_POST["profile_title"] ?? null;
 	$profile_name = $_POST["profile_name"] ?? null;
-	$profile_text = $_POST["profile_text"] ?? null;
+	$profile_text = nl2br($_POST["profile_text"] ?? null);
 	$contact_company = $_POST["contact_company"] ?? null;
 	$contact_tel = $_POST["contact_tel"] ?? null;
 	$contact_mail = $_POST["contact_mail"] ?? null;
 
 	$main_media = "";
-	$qr_media = "";
-	$profile_media = "";
+	$qr_media = $_POST["seminar_qr"];
+	$profile_media = $_POST["profile_img"];
+
+	if (!empty($notice_text)) {
+		$notice_ele = <<< EOM
+		<table class="title_noticeWrap">
+			<td class="title_notice">$notice_text</td>
+		</table>
+		EOM;
+	} else {
+		$notice_ele = "";
+	}
 
 	if (wp_get_environment_type() == "development") {
 		$main_media = "https://kstg.devwl.work/wp-content/themes/lightning/main_image.png";
-		$qr_media = "https://kstg.devwl.work/wp-content/themes/lightning/01.jpg";
-		$profile_media = "https://kstg.devwl.work/wp-content/themes/lightning/no_image.png";
+		// $qr_media = "https://kstg.devwl.work/wp-content/themes/lightning/01.jpg";
+		// $profile_media = "https://kstg.devwl.work/wp-content/themes/lightning/no_image.png";
 	} else {
 		$main_media = $_POST["main_media"];
-		$qr_media = $_POST["qr_media"];
-		$profile_media = $_POST["profile_media"];
+		// $qr_media = $_POST["seminar_qr"];
+		// $profile_media = $_POST["profile_img"];
 	}
 
 	$main_media = base64_encode(file_get_contents($main_media));
-	$qr_media = base64_encode(file_get_contents($qr_media));
-	$profile_media = base64_encode(file_get_contents($profile_media));
-	endif;
+	// $qr_media = base64_encode(file_get_contents($qr_media));
+	// $profile_media = base64_encode(file_get_contents($profile_media));
+endif;
 
 $html = <<< EOM
 
@@ -80,9 +89,7 @@ $html = <<< EOM
 		<p class="title_sub">$sub_catch</p>
 		<div class="title_main">$main_catch</div>
 	</div>
-	<div class="title_noticeWrap">
-		<div class="title_notice">$notice_text</div>
-	</div>
+	$notice_ele
 </div>
 <div class="detailWrap">
 	<table class="detailTable">
@@ -132,12 +139,12 @@ $html = <<< EOM
 		<p class="applicationUrl">$seminar_url</p>
 	</div>
 	<div class="applicationArrow"><span></span><span></span><span></span><span></span><span></span><span></span></div>
-	<div class="applicationImgWrap"><img src="data:image/png;base64,$qr_media"></div>
+	<div class="applicationImgWrap"><img src="$qr_media"></div>
 </div>
 <div class="profileWrap">
 	<table style="table-layout: fixed">
 		<tr>
-			<th class="profileImg"><img src="data:image/png;base64,$profile_media"></th>
+			<th class="profileImg"><img src="$profile_media"></th>
 			<td class="profileDetail">
 				<div class="profileDetailHead">
 					<span class="profileTitle">$profile_title</span>

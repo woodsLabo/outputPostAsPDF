@@ -5,7 +5,7 @@
 			'custom_field',
 			'PDF出力',
 			'custom_fields_form',
-			'post',
+			'news',
 			'normal',
 			'default'
 		);

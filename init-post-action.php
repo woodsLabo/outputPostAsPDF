@@ -63,205 +63,125 @@ function init_post_action($content) {
 
 	$el = "" ;
 	if ($select_radio == 1) {
-		// TODO : button文言fix時に対応
-			// <header class="topSubTitle">$sub_catch</header>
-			// <div class="contentTop">
-			//     <div class="titleWrap">
-			//         <p class="title_sub">$sub_catch</p>
-			//         <h2 class="title_main">$main_catch</h2>
-			//     </div>
-			//     <p class="limitCount">$notice_text</p>
-			// </div>
-			// <div class="detailWrap">
-			//     <dl>
-			//         <dt>開催日時</dt>
-			//         <dd>$datetime</dd>
-			//     </dl>
-			//     <dl>
-			//         $detail_item_title_01
-			//         $detail_item_text_01
-			//         $detail_item_title_02
-			//         $detail_item_text_02
-			//         $detail_item_title_03
-			//         $detail_item_text_03
-			//         $detail_item_title_04
-			//         $detail_item_text_04
-			//         $detail_item_title_05
-			//         $detail_item_text_05
-			//     </dl>
-			// </div>
-			// <div class="listWrap">
-			//     <p class="listTitle">$list_title</p>
-			//     <ul>
-			//         $list_01
-			//         $list_02
-			//         $list_03
-			//         $list_04
-			//         $list_05
-			//     </ul>
-			// </div>
-			// <div class="message">$message</div>
-			// <div class="application">
-			//     <div class="applicationTextWrap">
-			//         <p class="applicationText">$seminar_text</p>
-			//         <p class="applicationUrl">$seminar_url</p>
-			//     </div>
-			//     <div class="applicationImgWrap"><img src="$seminar_qr" alt=""></div>
-			// </div>
-			// <div class="profileWrap">
-			//     <div class="profileImg"><img src="$profile_img" alt=""></div>
-			//     <div class="profileDetail">
-			//         <p class="profileTitle">$profile_title</p>
-			//         <p class="profileName">$profile_name</p>
-			//         <p class="profileText">$profile_text</p>
-			//     </div>
-			// </div>
-			// <footer class="footer">
-			//     <dl>
-			//         <dt>お問い合わせ</dt>
-			//         <dd>$contact_company</dd>
-			//         <dt>TEL</dt>
-			//         <dd>$contact_tel</dd>
-			//         <dt>メールアドレス</dt>
-			//         <dd>$contact_mail</dd>
-			//     </dl>
-			// </footer>
-		//
-		//
-		//
-
 		$el = <<<EOM
-		  <body>
-		<div class="header">$title</div>
-		<div class="contentTop">
-			<div class="mainImage">
-				<img src="$main_media">
-			</div>
-			<div class="titleWrap">
-				<p class="title_sub">$sub_catch</p>
-				<div class="title_main">$main_catch</div>
-			</div>
-			<div class="title_noticeWrap">
-				<div class="title_notice">$notice_text</div>
-			</div>
-		</div>
-		<div class="detailWrap">
-			<table class="detailTable">
-				<tr>
-					<th><span>開催日時</span></th>
-					<td class="long">$str_time({$week[$date]}){$detail_item_start_time}~{$detail_item_end_time}</td>
-					<th><span>定員</span></th>
-					<td class="short">{$detail_item_capacity}名</td>
-				</tr>
-				<tr>
-					<th><span>場所</span></th>
-					<td class="long">$detail_item_place</td>
-					<th><span>料金</span></th>
-					<td class="short">{$detail_item_price}円</td>
-				</tr>
-			</table>
-		</div>
-		<div class="listWrap">
-			<p class="listTitle">$list_title</p>
-			<div class="listTable">
-				<div>
-					<p><span></span>$list_01</p>
-					<p><span></span>$list_02</p>
+		<div class="opap__wrap">
+			<p>タイプを選択</p>
+			<input class="types" type="radio" name="type" id="type1" value="a" checked><label for="type1">タイプ1</label>
+			<input class="types" type="radio" name="type" id="type2" value="b"><label for="type2">タイプ2</label>
+			<p>タイトル</p>
+			<input type="text" class="title" name="title" placeholder="タイトルを入力">
+			<p>メインキャッチ</p>
+			<input class="main_catch" type="text" name="main_catch" placeholder="キャッチコピーを入力">
+			<p>サブキャッチ</p>
+			<input class="sub_catch" type="text" name="sub_catch" placeholder="キャッチコピー上部に表示するテキストを入力">
+			<p>注目テキスト</p>
+			<textarea id="" class="notice_text" name="notice_text" cols="30" rows="10" placeholder="先着&#13;&#10;お申し込み&#13;&#10;x名限定"></textarea>
+			<p>開催日</p>
+			<input class="detail_item_date" type="date" name="detail_item_date">
+			<p>開催開始時間</p>
+			<input class="detail_item_start_time" type="time" name="detail_item_start_time">
+			<p>開催終了時間</p>
+			<input class="detail_item_end_time" type="time" name="detail_item_end_time">
+			<p>定員</p>
+			<input class="detail_item_capacity" type="number" name="detail_item_capacity">
+			<p>場所</p>
+			<input class="detail_item_place" type="text" name="detail_item_place" placeholder="開催場所を入力">
+			<p>料金</p>
+			<input class="detail_item_price" type="text" name="detail_item_price" placeholder="カンマと単位不要で数値のみ入力">
+			<p>リスト見出し</p>
+			<input class="list_title" type="text" name="list_title" value="">
+			<p>リスト1</p>
+			<input class="list list_01" type="text" name="list_01">
+			<p>リスト2</p>
+			<input class="list list_02" type="text" name="list_02">
+			<p>リスト3</p>
+			<input class="list list_03" type="text" name="list_03">
+			<p>リスト4</p>
+			<input class="list list_04" type="text" name="list_04">
+			<p>リスト5</p>
+			<input class="list list_05" type="text" name="list_05">
+			<p>リスト6</p>
+			<input class="list list_06" type="text" name="list_06">
+			<p class="list_status">リスト7</p>
+			<input class="list list_07" type="text" name="list_07">
+			<p class="list_status">リスト8</p>
+			<input class="list list_08" type="text" name="list_08">
+			<p class="list_status">リスト9</p>
+			<input class="list list_09" type="text" name="list_09">
+			<p class="list_status">リスト10</p>
+			<input class="list list_10" type="text" name="list_10">
+			<p>メッセージ</p>
+			<textarea class="message" id="" name="message" cols="30" rows="10"></textarea>
+			<p>セミナー案内</p>
+			<input class="seminar_text" type="text" name="seminar_text" value="">
+			<p>セミナーurl</p>
+			<input class="seminar_url" type="text" name="seminar_url" value="">
+			<p>QRコード</p>
+			<input type="file" accept="image/*" class="qr_image" name="seminar_qr" style="display: none"><button class="qr_image_select" type="button">画像を選択</button><button class="qr_image_delete" type="button">削除</button>
+			<div class="qr_preview"></div>
+			<p>プロフィール画像<span class="label_notice">横幅150px 高さ200px推奨</span></p>
+			<input type="file" accept="image/*" class="profile_image" name="profile_img" style="display: none;"><button class="profile_image_select" type="button">画像を選択</button><button class="profile_image_delete" type="button">削除</button>
+			<div class="profile_preview"></div>
+			<p>肩書き</p>
+			<input class="profile_title" type="text" name="profile_title" value="">
+			<p>名前</p>
+			<input class="profile_name" type="text" name="profile_name" value="">
+			<p>プロフィール</p>
+			<textarea class="profile_text" id="" name="profile_text" cols="30" rows="10"></textarea>
+			<p>問い合わせ先名称</p>
+			<input class="contact_company" type="text" name="contact_company" value="">
+			<p>問い合わせ先電話番号</p>
+			<input class="contact_tel" type="tel" name="contact_tel" value="">
+			<p>問い合わせ先メールアドレス</p>
+			<input class="contact_mail" type="email" name="contact_mail" value="">
+			<form action="" target="_blonk" method="post" class="opap_form">
+				<input type="hidden" name="dw" value="true">
+				<input type="hidden" class="opap_pdf_type" name="pdf_type" value="$pdf_type">
+				<input type="hidden" name="file_name" value="$file_name">
+				<input type="hidden" class="opap_title" name="title" value="">
+				<input type="hidden" class="opap_sub_catch" name="sub_catch" value="">
+				<input type="hidden" class="opap_main_catch" name="main_catch" value="">
+				<input type="hidden" class="opap_notice_text" name="notice_text" value="">
+				<input type="hidden" class="opap_main_media" name="main_media" value="">
+				<input type="hidden" class="opap_detail_item_date" name="detail_item_date" value="">
+				<input type="hidden" class="opap_detail_item_start_time" name="detail_item_start_time" value="">
+				<input type="hidden" class="opap_detail_item_end_time" name="detail_item_end_time" value="">
+				<input type="hidden" class="opap_detail_item_capacity" name="detail_item_capacity" value="">
+				<input type="hidden" class="opap_detail_item_place" name="detail_item_place" value="">
+				<input type="hidden" class="opap_detail_item_price" name="detail_item_price" value="">
+				<input type="hidden" class="opap_list_title" name="list_title" value="">
+				<input type="hidden" class="opap_list_01" name="list_01" value="">
+				<input type="hidden" class="opap_list_02" name="list_02" value="">
+				<input type="hidden" class="opap_list_03" name="list_03" value="">
+				<input type="hidden" class="opap_list_04" name="list_04" value="">
+				<input type="hidden" class="opap_list_05" name="list_05" value="">
+				<input type="hidden" class="opap_list_06" name="list_06" value="">
+				<input type="hidden" class="opap_list_07" name="list_07" value="">
+				<input type="hidden" class="opap_list_08" name="list_08" value="">
+				<input type="hidden" class="opap_list_09" name="list_09" value="">
+				<input type="hidden" class="opap_list_10" name="list_10" value="">
+				<input type="hidden" class="opap_message" name="message" value="">
+				<input type="hidden" class="opap_seminar_text" name="seminar_text" value="">
+				<input type="hidden" class="opap_seminar_url" name="seminar_url" value="">
+				<input type="hidden" class="opap_qr_img" name="seminar_qr" value="">
+				<input type="hidden" class="opap_profile_img" name="profile_img" value="">
+				<input type="hidden" class="opap_profile_title" name="profile_title" value="">
+				<input type="hidden" class="opap_profile_name" name="profile_name" value="">
+				<input type="hidden" class="opap_profile_text" name="profile_text" value="">
+				<input type="hidden" class="opap_contact_company" name="contact_company" value="">
+				<input type="hidden" class="opap_contact_tel" name="contact_tel" value="">
+				<input type="hidden" class="opap_contact_mail" name="contact_mail" value="">
+				<input type="hidden" name="post_id" value="$post_id">
+				<div class="opap_button_wrap">
+					<button class="form_preview" name="dl_type" value="preview">プレビュー</button>
+					<span class="form_reset js-reset-form-bt">全ての入力をリセット</span>
+					<button class="form_dl" name="dl_type" value="dl">PDF化</button>
 				</div>
-				<div>
-					<p><span></span>$list_03</p>
-					<p><span></span>$list_04</p>
-				</div>
-				<div>
-					<p><span></span>$list_05</p>
-					<p><span></span>$list_06</p>
-				</div>
-				<div>
-					<p><span></span>$list_07</p>
-					<p><span></span>$list_08</p>
-				</div>
-				<div>
-					<p><span></span>$list_09</p>
-					<p><span></span>$list_10</p>
-				</div>
-			</div>
-			<div class="message">$message</div>
+			</form>
 		</div>
-		<div class="application">
-			<div class="applicationTextWrap">
-				<p class="applicationText">$seminar_text</p>
-				<p class="applicationUrl">$seminar_url</p>
-			</div>
-			<div class="applicationArrow">></div>
-			<div class="applicationImgWrap"><img src="$seminar_qr" alt=""></div>
-		</div>
-		<div class="profileWrap">
-			<table>
-				<tr>
-					<th class="profileImg"><img src="$profile_img" alt=""></th>
-					<td class="profileDetail">
-						<div class="profileDetailHead">
-							<span class="profileTitle">$profile_title</span>
-							<span class="profileName">$profile_name</span>
-						</div>
-						<div class="profileText">$profile_text</div>
-					</td>
-				</tr>
-			</table>
-		</div>
-		<div class="contact">
-			<div class="contactWrap">
-				<span class="contactTitle">お問い合わせ</sapn>
-				<span class="contactCompany">$contact_company</span>
-				<span class="contactTel">TEL:$contact_tel</span>
-				<span class="contactEmail">メールアドレス:$contact_mail</span>
-			</div>
-		</div>
-			<div class="opap__wrap">
-				<form action="" method="post">
-					<input type="hidden" name="dw" value="true">
-					<input type="hidden" name="pdf_type" value="$pdf_type">
-					<input type="hidden" name="file_name" value="$file_name">
-					<input type="hidden" name="title" value="$title">
-					<input type="hidden" name="sub_catch" value="$sub_catch">
-					<input type="hidden" name="main_catch" value="$main_catch">
-					<input type="hidden" name="notice_text" value="$notice_text">
-					<input type="hidden" name="main_media" value="$main_media">
-					<input type="hidden" name="detail_item_date" value="$detail_item_date">
-					<input type="hidden" name="detail_item_start_time" value="$detail_item_start_time">
-					<input type="hidden" name="detail_item_end_time" value="$detail_item_end_time">
-					<input type="hidden" name="detail_item_capacity" value="$detail_item_capacity">
-					<input type="hidden" name="detail_item_place" value="$detail_item_place">
-					<input type="hidden" name="detail_item_price" value="$detail_item_price">
-					<input type="hidden" name="list_title" value="$list_title">
-					<input type="hidden" name="list_01" value="$list_01">
-					<input type="hidden" name="list_02" value="$list_02">
-					<input type="hidden" name="list_03" value="$list_03">
-					<input type="hidden" name="list_04" value="$list_04">
-					<input type="hidden" name="list_05" value="$list_05">
-					<input type="hidden" name="list_06" value="$list_06">
-					<input type="hidden" name="list_07" value="$list_07">
-					<input type="hidden" name="list_08" value="$list_08">
-					<input type="hidden" name="list_09" value="$list_09">
-					<input type="hidden" name="list_10" value="$list_10">
-					<input type="hidden" name="message" value="$message">
-					<input type="hidden" name="seminar_text" value="$seminar_text">
-					<input type="hidden" name="seminar_url" value="$seminar_url">
-					<input type="hidden" name="seminar_qr" value="$seminar_qr">
-					<input type="hidden" name="profile_img" value="$profile_img">
-					<input type="hidden" name="profile_title" value="$profile_title">
-					<input type="hidden" name="profile_name" value="$profile_name">
-					<input type="hidden" name="profile_text" value="$profile_text">
-					<input type="hidden" name="contact_company" value="$contact_company">
-					<input type="hidden" name="contact_tel" value="$contact_tel">
-					<input type="hidden" name="contact_mail" value="$contact_mail">
-					<input type="hidden" name="post_id" value="$post_id">
-				<button class="opap__button">PDF化</button>
-				</form>
-			</div>
 		EOM;
 	}
-	return "{$content}{$el}";
+	return $el;
 }
 
 /*

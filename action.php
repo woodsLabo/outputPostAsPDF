@@ -23,16 +23,20 @@ if (!is_admin() && !is_login_page()) {
 		$param = [];
 		include_once("layout-template.php");
 		$post_id = $_POST["post_id"];
-		$file_name = $_POST["file_name"];
+		// $file_name = $_POST["file_name"];
+		$file_name = "file";
 		$dompdf->loadHtml($html);
 		$options = $dompdf->getOptions();
 		$options->set(array('isRemoteEnabled' => false));
 		$dompdf->setOptions($options);
 		$dompdf->setPaper('A4');
 		$dompdf->render();
-		$dompdf->stream("{$file_name}.pdf", array("Attachment" => 0));
-		$insert_dl_log->save_log($post_id);
-		// $dompdf->stream("{$file_name}.pdf");
+		if ($_POST["dl_type"] === "preview") {
+			$dompdf->stream("{$file_name}.pdf", array("Attachment" => 0));
+		} elseif ($_POST["dl_type"] === "dl") {
+			$dompdf->stream("{$file_name}.pdf");
+		}
+		// $insert_dl_log->save_log($post_id);
 	}
 }
 ?>

@@ -13,12 +13,12 @@ table, caption, tbody, tfoot, thead, tr, th, td,
 article, aside, canvas, details, figcaption, figure,
 footer, header, hgroup, menu, nav, section, summary,
 time, mark, audio, video {
+  padding: 0;
+  margin: 0;
+  vertical-align: baseline;
   background: transparent;
   border: 0;
-  margin: 0;
   outline: 0;
-  padding: 0;
-  vertical-align: baseline;
 }
 
 table {
@@ -26,6 +26,7 @@ table {
 }
 
 html {
+  font-family: ipam;
   font-size: 67.5%;
 }
 
@@ -38,208 +39,228 @@ main {
 }
 
 .header {
-  background: #003c78;
-  color: #fff;
-  font-size: 17px;
   padding: 10px 0;
+  font-size: 17px;
+  color: #fff;
   text-align: center;
+  background: #003c78;
 }
 
 .contentTop {
-  height: 400px;
   position: relative;
+  height: 400px;
+}
+
+.form_reset,
+.form_preview,
+.form_dl {
+  display: inline-block;
+  padding: 1em 2em 0.8em;
+  font-size: 16px;
+  line-height: 1;
+  color: #000;
+  cursor: pointer;
+  background: #fff;
+  border: 1px solid #000;
+  border-radius: 50px;
+  transition: 0.3s;
+}
+.form_reset:hover,
+.form_preview:hover,
+.form_dl:hover {
+  background: #eaeaea;
 }
 
 .titleWrap {
-  color: #fff;
-  left: 0;
-  padding: 50px 0;
   position: absolute;
   top: 0;
+  left: 0;
   z-index: 2;
+  padding: 50px 0;
+  color: #fff;
 }
 .title_sub {
-  background: #003c78;
   display: inline-block;
-  font-size: 17px;
   padding: 8px;
+  font-size: 17px;
+  background: #003c78;
 }
 .title_main {
+  padding: 10px;
   font-size: 40px;
   line-height: 1.4;
-  padding: 10px;
   text-shadow: 2px 3px 8px rgba(0, 0, 0, 0.8);
 }
 .title_notice {
-  background: #f00;
-  border-radius: 50%;
-  color: #fff;
   display: table-cell;
   font-size: 30px;
   line-height: 30px;
+  color: #fff;
   text-align: center;
   vertical-align: middle;
+  background: #f00;
+  border-radius: 50%;
 }
 .title_noticeWrap {
-  bottom: 10px;
-  display: table;
-  height: 150px;
   position: absolute;
   right: 10px;
-  width: 150px;
+  bottom: 10px;
   z-index: 2;
+  display: table;
+  width: 150px;
+  height: 150px;
 }
 
 .detailWrap {
-  background: #fff;
   padding: 10px 0;
+  background: #fff;
 }
 .detailTable {
-  font-size: 20px;
-  margin: 0 auto;
   width: 87%;
+  margin: 0 auto;
+  font-size: 20px;
 }
 .detailTable tr {
   padding-bottom: 12px;
 }
 .detailTable th {
-  color: #fff;
-  font-size: 18px;
-  padding-right: 10px;
-  text-align: center;
   width: 10%;
+  padding-right: 10px;
+  font-size: 18px;
+  color: #fff;
+  text-align: center;
 }
 .detailTable th span {
+  display: block;
   background: #003c78;
   border-radius: 30px;
-  display: block;
 }
 .detailTable td {
-  border: 0;
-  color: #000;
   display: inline-block;
   font-size: 30px;
   font-weight: bold;
+  color: #000;
   vertical-align: middle;
+  border: 0;
 }
 .detailTable td.long {
   width: 95%;
 }
 .detailWeek {
-  background: #000;
-  color: #fff;
-  font-size: 20px;
-  margin: 0 10px 0 5px;
   padding: 2px;
+  margin: 0 10px 0 5px;
+  font-size: 20px;
+  color: #fff;
+  background: #000;
 }
 .detailTime {
   font-size: 25px;
 }
 .detailUnit {
-  font-size: 18px;
   margin-left: 5px;
+  font-size: 18px;
 }
 
 .listWrap {
-  margin: 0 auto;
   width: 98%;
+  margin: 0 auto;
 }
 .listTitle {
-  background: #003c78;
-  color: #fff;
+  padding: 5px 0;
+  margin-bottom: 15px;
   font-size: 25px;
   font-weight: bold;
-  margin-bottom: 15px;
-  padding: 5px 0;
+  color: #fff;
   text-align: center;
+  background: #003c78;
 }
 .listTable {
-  border: 0;
   width: 100%;
+  border: 0;
 }
 .listTable div {
-  font-size: 0;
   margin-bottom: 10px;
+  font-size: 0;
 }
 .listTable p {
+  box-sizing: border-box;
+  display: inline-block;
+  width: 49.5%;
+  padding: 10px 5px;
+  font-size: 15px;
+  color: #fff;
   background: #016fb9;
   border: 0;
-  box-sizing: border-box;
-  color: #fff;
-  display: inline-block;
-  font-size: 15px;
-  padding: 10px 5px;
-  width: 49.5%;
 }
 .listTable p::before {
-  background: #000;
-  content: "";
   display: inline-block;
+  width: 15px;
   height: 15px;
   margin-right: 5px;
   vertical-align: middle;
-  width: 15px;
+  content: "";
+  background: #000;
 }
 .listTable p:first-of-type {
   margin-right: 1%;
 }
 
 .message {
-  font-size: 15px;
   padding-bottom: 5px;
+  font-size: 15px;
 }
 
 .application {
-  background: #00f;
-  font-size: 0;
   padding: 10px 20px;
+  font-size: 0;
+  background: #00f;
 }
 .applicationText {
   font-size: 22px;
 }
 .applicationTextWrap {
-  color: #fff;
   display: inline-block;
+  width: 90%;
   font-size: 14px;
+  color: #fff;
   text-align: center;
   vertical-align: middle;
-  width: 90%;
 }
 .applicationUrl {
   font-size: 20px;
 }
 .applicationArrow {
-  color: #fff;
   display: inline-block;
-  font-size: 14px;
-  height: 20px;
-  vertical-align: middle;
   width: 3%;
+  height: 20px;
+  font-size: 14px;
+  color: #fff;
+  vertical-align: middle;
 }
 .applicationImgWrap {
   display: inline-block;
-  vertical-align: middle;
   width: 7%;
+  vertical-align: middle;
 }
 
 .profileWrap {
-  background: #808080;
   padding: 10px;
+  background: #808080;
 }
 .profileImg {
   width: 15%;
 }
 .profileDetail {
+  width: 85%;
   padding: 10px;
   vertical-align: top;
-  width: 85%;
 }
 .profileDetailHead {
-  border-bottom: 1px solid #003c78;
-  color: #003c78;
+  padding-bottom: 5px;
   font-size: 25px;
   line-height: 1;
-  padding-bottom: 5px;
+  color: #003c78;
+  border-bottom: 1px solid #003c78;
 }
 .profileTitle {
   display: inline-block;
@@ -251,37 +272,105 @@ main {
   vertical-align: middle;
 }
 .profileText {
-  font-size: 20px;
   padding: 5px 0;
+  font-size: 20px;
   text-align: justify;
 }
 
 .contact {
-  background: #000;
-  color: #fff;
   padding: 10px;
+  color: #fff;
+  background: #000;
 }
 .contactWrap {
-  font-size: 20px;
   width: 100%;
+  font-size: 20px;
 }
 .contactTitle {
-  background: #003c78;
-  border-radius: 30px;
+  width: 10%;
   font-size: 15px;
   vertical-align: middle;
-  width: 10%;
+  background: #003c78;
+  border-radius: 30px;
 }
 .contactCompany {
-  font-weight: bold;
-  padding-left: 10px;
   width: 30%;
+  padding-left: 10px;
+  font-weight: bold;
 }
 .contactTel {
-  font-weight: bold;
   width: 30%;
+  font-weight: bold;
 }
 .contactEmail {
-  font-weight: bold;
   width: 30%;
+  font-weight: bold;
+}
+
+.opap__wrap p {
+  margin-top: 10px;
+  font-size: 16px;
+}
+.opap__wrap input[type=text],
+.opap__wrap input[type=tel],
+.opap__wrap input[type=email],
+.opap__wrap textarea {
+  flex-grow: 1;
+  width: 80%;
+  padding: 10px;
+  font-size: 16px;
+  color: #333;
+  background-color: #f2f4f5;
+  border: none;
+  border-radius: 3px;
+}
+.opap__wrap input[type=number],
+.opap__wrap input[type=date],
+.opap__wrap input[type=time] {
+  flex-grow: 1;
+  padding: 10px;
+  font-size: 16px;
+  color: #333;
+  background-color: #f2f4f5;
+  border: none;
+  border-radius: 3px;
+}
+
+.qr_preview,
+.profile_preview {
+  margin-top: 5px;
+}
+.qr_preview img,
+.profile_preview img {
+  width: 200px;
+  height: auto;
+}
+
+.qr_image_delete,
+.profile_image_delete {
+  display: none;
+  margin-left: 10px;
+}
+
+.opap_form {
+  margin-top: 100px;
+}
+.opap_button_wrap {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  gap: 30px;
+  justify-content: center;
+  width: 100vw;
+  padding: 20px 0;
+  background: #fff;
+  border-top: 1px solid #eaeaea;
+}
+
+.label_notice {
+  display: inline-block;
+  margin-left: 10px;
+  font-size: 12px;
+  color: #f00;
 }
