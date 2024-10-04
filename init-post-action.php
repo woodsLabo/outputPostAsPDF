@@ -2,141 +2,106 @@
 include_once("action.php");
 
 function init_post_action($content) {
-	global $post;
-	$select_radio = createMetaItem("select_radio");
-	$pdf_type = createMetaItem("pdf_type");
-	$file_name = createMetaItem("input_file_name");
-	$title = createMetaItem("input_title");
-	$main_catch = createMetaItem("input_main_catch");
-	$sub_catch = createMetaItem("input_sub_catch");
-	$notice_text = createMetaItem("input_notice_text");
-	$main_media = createMetaItem("main_media");
-	$datetime = createMetaItem("input_datetime");
-	$detail_item_date = createMetaItem("input_detail_item_date");
-	$detail_item_start_time = createMetaItem("input_detail_item_start_time");
-	$detail_item_end_time = createMetaItem("input_detail_item_end_time");
-	$detail_item_capacity = createMetaItem("input_detail_item_capacity");
-	$detail_item_place = createMetaItem("input_detail_item_place");
-	$detail_item_price = createMetaItem("input_detail_item_price");
-	$detail_item_date = $detail_item_date ? $detail_item_date : "";
-	$detail_item_start_time = $detail_item_start_time ? $detail_item_start_time : "";
-	$detail_item_end_time = $detail_item_end_time ? $detail_item_end_time : "";
-	$detail_item_capacity = $detail_item_capacity ? $detail_item_capacity : "";
-	$detail_item_place = $detail_item_place ? $detail_item_place : "";
-	$detail_item_price = $detail_item_price ? number_format($detail_item_price) : "";
-	$str_time = date("n月j日", strtotime($detail_item_date));
-	$date = date('w', strtotime($detail_item_date));
-	$week = ["日", "月", "火", "水", "木", "金", "土"];
-	$list_title = createMetaItem("input_list_title");
-	$list_01 = createMetaItem("input_list_01");
-	$list_02 = createMetaItem("input_list_02");
-	$list_03 = createMetaItem("input_list_03");
-	$list_04 = createMetaItem("input_list_04");
-	$list_05 = createMetaItem("input_list_05");
-	$list_06 = createMetaItem("input_list_06");
-	$list_07 = createMetaItem("input_list_07");
-	$list_08 = createMetaItem("input_list_08");
-	$list_09 = createMetaItem("input_list_09");
-	$list_10 = createMetaItem("input_list_10");
-	$list_01 = $list_01 ? $list_01 : "";
-	$list_02 = $list_02 ? $list_02 : "";
-	$list_03 = $list_03 ? $list_03 : "";
-	$list_04 = $list_04 ? $list_04 : "";
-	$list_05 = $list_05 ? $list_05 : "";
-	$list_06 = $list_06 ? $list_06 : "";
-	$list_07 = $list_07 ? $list_07 : "";
-	$list_08 = $list_08 ? $list_08 : "";
-	$list_09 = $list_09 ? $list_09 : "";
-	$list_10 = $list_10 ? $list_10 : "";
-	$message = createMetaItem("input_message");
-	$seminar_text = createMetaItem("input_seminar_text");
-	$seminar_url = createMetaItem("input_seminar_url");
-	$seminar_qr = createMetaItem("seminar_qr_media");
-	$profile_img = createMetaItem("profile_media");
-	$profile_title = createMetaItem("input_profile_title");
-	$profile_name = createMetaItem("input_profile_name");
-	$profile_text = createMetaItem("input_profile");
-	$contact_company = createMetaItem("input_contact_company");
-	$contact_tel = createMetaItem("input_contact_tel");
-	$contact_mail = createMetaItem("input_contact_mail");
-	$post_id = $post->ID;
+	$bg_image01 = get_option("main_media01");
+	$bg_image02 = get_option("main_media02");
+	$bg_image03 = get_option("main_media03");
+	$bg_image04 = get_option("main_media04");
+	$bg_image05 = get_option("main_media05");
+
+	$file_name = "pdf";
+	$post_label = "pdf_post";
 
 	$el = "" ;
-	if ($select_radio == 1) {
-		$el = <<<EOM
+	$el = <<<EOM
 		<div class="opap__wrap">
-			<p>タイプを選択</p>
-			<input class="types" type="radio" name="type" id="type1" value="a" checked><label for="type1">タイプ1</label>
-			<input class="types" type="radio" name="type" id="type2" value="b"><label for="type2">タイプ2</label>
-			<p>タイトル</p>
-			<input type="text" class="title" name="title" placeholder="タイトルを入力">
-			<p>メインキャッチ</p>
-			<input class="main_catch" type="text" name="main_catch" placeholder="キャッチコピーを入力">
-			<p>サブキャッチ</p>
-			<input class="sub_catch" type="text" name="sub_catch" placeholder="キャッチコピー上部に表示するテキストを入力">
-			<p>注目テキスト</p>
-			<textarea id="" class="notice_text" name="notice_text" cols="30" rows="10" placeholder="先着&#13;&#10;お申し込み&#13;&#10;x名限定"></textarea>
-			<p>開催日</p>
-			<input class="detail_item_date" type="date" name="detail_item_date">
-			<p>開催開始時間</p>
-			<input class="detail_item_start_time" type="time" name="detail_item_start_time">
-			<p>開催終了時間</p>
-			<input class="detail_item_end_time" type="time" name="detail_item_end_time">
-			<p>定員</p>
-			<input class="detail_item_capacity" type="number" name="detail_item_capacity">
-			<p>場所</p>
-			<input class="detail_item_place" type="text" name="detail_item_place" placeholder="開催場所を入力">
-			<p>料金</p>
-			<input class="detail_item_price" type="text" name="detail_item_price" placeholder="カンマと単位不要で数値のみ入力">
-			<p>リスト見出し</p>
-			<input class="list_title" type="text" name="list_title" value="">
-			<p>リスト1</p>
-			<input class="list list_01" type="text" name="list_01">
-			<p>リスト2</p>
-			<input class="list list_02" type="text" name="list_02">
-			<p>リスト3</p>
-			<input class="list list_03" type="text" name="list_03">
-			<p>リスト4</p>
-			<input class="list list_04" type="text" name="list_04">
-			<p>リスト5</p>
-			<input class="list list_05" type="text" name="list_05">
-			<p>リスト6</p>
-			<input class="list list_06" type="text" name="list_06">
-			<p class="list_status">リスト7</p>
-			<input class="list list_07" type="text" name="list_07">
-			<p class="list_status">リスト8</p>
-			<input class="list list_08" type="text" name="list_08">
-			<p class="list_status">リスト9</p>
-			<input class="list list_09" type="text" name="list_09">
-			<p class="list_status">リスト10</p>
-			<input class="list list_10" type="text" name="list_10">
-			<p>メッセージ</p>
-			<textarea class="message" id="" name="message" cols="30" rows="10"></textarea>
-			<p>セミナー案内</p>
-			<input class="seminar_text" type="text" name="seminar_text" value="">
-			<p>セミナーurl</p>
-			<input class="seminar_url" type="text" name="seminar_url" value="">
-			<p>QRコード</p>
-			<input type="file" accept="image/*" class="qr_image" name="seminar_qr" style="display: none"><button class="qr_image_select" type="button">画像を選択</button><button class="qr_image_delete" type="button">削除</button>
-			<div class="qr_preview"></div>
-			<p>プロフィール画像<span class="label_notice">横幅150px 高さ200px推奨</span></p>
-			<input type="file" accept="image/*" class="profile_image" name="profile_img" style="display: none;"><button class="profile_image_select" type="button">画像を選択</button><button class="profile_image_delete" type="button">削除</button>
-			<div class="profile_preview"></div>
-			<p>肩書き</p>
-			<input class="profile_title" type="text" name="profile_title" value="">
-			<p>名前</p>
-			<input class="profile_name" type="text" name="profile_name" value="">
-			<p>プロフィール</p>
-			<textarea class="profile_text" id="" name="profile_text" cols="30" rows="10"></textarea>
-			<p>問い合わせ先名称</p>
-			<input class="contact_company" type="text" name="contact_company" value="">
-			<p>問い合わせ先電話番号</p>
-			<input class="contact_tel" type="tel" name="contact_tel" value="">
-			<p>問い合わせ先メールアドレス</p>
-			<input class="contact_mail" type="email" name="contact_mail" value="">
+			<p>PDFのタイプを選択</p>
+			<input class="pdf_types" type="radio" name="pdf_type" id="type1" value="a" checked><label for="type1">タイプ1</label>
+			<input class="pdf_types" type="radio" name="pdf_type" id="type2" value="b"><label for="type2">タイプ2</label>
+			<p>背景を選択</p>
+			<div class="bg_type_wrap">
+				<input class="bg_types" type="radio" name="bg_type" id="bg_type1" value="$bg_image01" checked><label for="bg_type1">タイプ1</label>
+				<input class="bg_types" type="radio" name="bg_type" id="bg_type2" value="$bg_image02"><label for="bg_type2">タイプ2</label>
+				<input class="bg_types" type="radio" name="bg_type" id="bg_type3" value="$bg_image03"><label for="bg_type3">タイプ3</label>
+				<input class="bg_types" type="radio" name="bg_type" id="bg_type4" value="$bg_image04"><label for="bg_type4">タイプ4</label>
+				<input class="bg_types" type="radio" name="bg_type" id="bg_type5" value="$bg_image05"><label for="bg_type5">タイプ5</label>
+			</div>
+			<p>背景をアップロード</p>
+			<input type="file" accept="image/*" class="bg_image" name="bg_image" style="display: none"><button class="bg_image_select" type="button">画像を選択</button><button class="bg_image_delete" type="button">削除</button>
+			<div class="title_wrap">
+				<input type="text" class="title" name="title" placeholder="タイトルを入力" style="text-align: center;" maxlength=44>
+			</div>
+			<div class="bg_img_wrap">
+				<div class="bg_preview"><img src="" class="bg_setting_image"></div>
+				<div class="sub_wrap">
+					<input class="sub_catch" type="text" name="sub_catch" placeholder="キャッチコピー上部に表示するテキストを入力" maxlength="36">
+				</div>
+				<div class="main_wrap">
+					<textarea class="main_catch" name="main_catch" placeholder="キャッチコピーを入力" rows="3"></textarea>
+					<textarea id="" class="notice_text" name="notice_text" cols="5" rows="3" placeholder="先着&#13;&#10;お申し込み&#13;&#10;x名限定"></textarea>
+				</div>
+			</div>
+			<div class="date_wrap">
+				<p>開催日時</p>
+				<input class="detail_item_date" type="date" name="detail_item_date">
+				<input class="detail_item_start_time" type="time" name="detail_item_start_time">〜<input class="detail_item_end_time" type="time" name="detail_item_end_time">
+				<p>定員</p>
+				<input class="detail_item_capacity" type="number" name="detail_item_capacity">
+				<p>場所</p>
+				<input class="detail_item_place" type="text" name="detail_item_place" placeholder="開催場所を入力">
+				<p>料金</p>
+				<input class="detail_item_price" type="number" name="detail_item_price" placeholder="数値のみ">
+			</div>
+			<div class="list_wrap">
+				<input class="list_title" type="text" name="list_title" value="" placeholder="リストの見出し">
+				<div class="list_text_wrap">
+					<input class="list list_01" type="text" name="list_01">
+					<input class="list list_02" type="text" name="list_02">
+					<input class="list list_03" type="text" name="list_03">
+					<input class="list list_04" type="text" name="list_04">
+					<input class="list list_05" type="text" name="list_05">
+					<input class="list list_06" type="text" name="list_06">
+					<input class="list list_07" type="text" name="list_07">
+					<input class="list list_08" type="text" name="list_08">
+					<input class="list list_09" type="text" name="list_09">
+					<input class="list list_10" type="text" name="list_10">
+				</div>
+			</div>
+			<textarea class="message" id="" name="message" cols="30" rows="4" placeholder="リストの下に表示するテキストを入力"></textarea>
+			<div class="seminar_wrap">
+				<input class="seminar_text" type="text" name="seminar_text" placeholder="セミナー案内のテキスト" value="">
+				<input class="seminar_url" type="text" name="seminar_url" placeholder="セミナーのurl" value="">
+				<div class="qr_wrap">
+					<p class="qr_title">QRコード</p>
+					<div class="qr_preview"></div>
+					<div class="qr_btn_wrap">
+						<input type="file" accept="image/*" class="qr_image" name="seminar_qr" style="display: none"><button class="qr_image_select" type="button">画像を選択</button><button class="qr_image_delete" type="button">削除</button>
+					</div>
+
+				</div>
+			</div>
+			<div class="profile_wrap">
+				<div class="profile_image_wrap">
+					<p>プロフィール画像<span class="label_notice">横幅150px<br>高さ200px推奨</span></p>
+					<input type="file" accept="image/*" class="profile_image" name="profile_img" style="display: none;"><button class="profile_image_select" type="button">画像を選択</button><button class="profile_image_delete" type="button">削除</button>
+					<div class="profile_preview"></div>
+				</div>
+				<div class="profile_detail_wrap">
+					<input class="profile_title" type="text" name="profile_title" placeholder="社名や肩書きを記入" value="">
+					<input class="profile_name" type="text" name="profile_name" placeholder="名前を入力" value="">
+					<textarea class="profile_text" id="" name="profile_text" cols="30" rows="5" placeholder="プロフィールを記入"></textarea>
+				</div>
+			</div>
+			<div class="contact_wrap">
+				<input class="contact_company" type="text" name="contact_company" placeholder="問い合わせ先名称" value="">
+				<input class="contact_tel" type="tel" name="contact_tel" placeholder="問い合わせTEL" value="">
+				<input class="contact_mail" type="email" name="contact_mail" placeholder="問い合わせmail" value="">
+			</div>
 			<form action="" target="_blonk" method="post" class="opap_form">
 				<input type="hidden" name="dw" value="true">
-				<input type="hidden" class="opap_pdf_type" name="pdf_type" value="$pdf_type">
+				<input type="hidden" class="opap_pdf_type" name="pdf_type" value="">
+				<input type="hidden" class="opap_bg_type" name="bg_type" value="">
+				<input type="hidden" class="opap_bg_img" name="bg_img" value="">
+				<input type="hidden" class="opap_bg_setting_img" name="bg_setting_img" value="">
 				<input type="hidden" name="file_name" value="$file_name">
 				<input type="hidden" class="opap_title" name="title" value="">
 				<input type="hidden" class="opap_sub_catch" name="sub_catch" value="">
@@ -171,7 +136,7 @@ function init_post_action($content) {
 				<input type="hidden" class="opap_contact_company" name="contact_company" value="">
 				<input type="hidden" class="opap_contact_tel" name="contact_tel" value="">
 				<input type="hidden" class="opap_contact_mail" name="contact_mail" value="">
-				<input type="hidden" name="post_id" value="$post_id">
+				<input type="hidden" name="post_label" value="$post_label">
 				<div class="opap_button_wrap">
 					<button class="form_preview" name="dl_type" value="preview">プレビュー</button>
 					<span class="form_reset js-reset-form-bt">全ての入力をリセット</span>
@@ -179,18 +144,9 @@ function init_post_action($content) {
 				</div>
 			</form>
 		</div>
-		EOM;
-	}
+EOM;
 	return $el;
 }
 
-/*
-	カスタムフィールドの値を取得
-*/
-function createMetaItem($field = false) {
-	$post_id = get_the_ID();
-	return get_post_meta($post_id, $field, true);
-}
-
-add_filter("the_content", "init_post_action");
+add_shortcode("create_pdf", "init_post_action");
 ?>

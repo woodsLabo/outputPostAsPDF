@@ -12,8 +12,8 @@ class Field {
     this.image_url;
     this.selectState;
 
-    this.handleSelect();
-    this.initTinyMce();
+    // this.handleSelect();
+    // this.initTinyMce();
     this.selectImage();
     this.imageDelete();
   }
@@ -23,23 +23,23 @@ class Field {
    * @desc pdf出力選択
    */
   handleSelect() {
-    this.selectOutput.forEach(button => {
-      button.addEventListener("click", () => {
-        this.selectState = button.value === "1" ? "block" : "none";
-        this.field.style.display = this.selectState;
-      });
-    });
+    // this.selectOutput.forEach(button => {
+    //   button.addEventListener("click", () => {
+    //     this.selectState = button.value === "1" ? "block" : "none";
+    //     this.field.style.display = this.selectState;
+    //   });
+    // });
   }
 
   /**
    * initTinyMce.
    * @desc textareaにtinymceを設定
    */
-  initTinyMce() {
-    tinymce.init({
-      selector: "textarea.has_tinymce",
-    });
-  }
+  // initTinyMce() {
+  //   tinymce.init({
+  //     selector: "textarea.has_tinymce",
+  //   });
+  // }
 
   /**
    * selectImage.

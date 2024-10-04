@@ -72,3 +72,23 @@ function add_dl_log_page() {
 </style>
 <?php
 }
+
+function set_pdf_bg_page() {
+	add_menu_page("pdfダウンロード設定", "pdfダウンロード設定", "manage_options", "set_pdf_bg__page", "add_set_pdf_bg_page", "dashicons-admin-generic", 60);
+}
+
+add_action("admin_menu", "set_pdf_bg_page");
+
+function add_set_pdf_bg_page() {
+	include_once("src/components/new_admin_field.php");
+}
+
+function my_custom_plugin_register_settings() {
+    register_setting('my_custom_plugin_settings_group', 'main_media01');
+    register_setting('my_custom_plugin_settings_group', 'main_media02');
+    register_setting('my_custom_plugin_settings_group', 'main_media03');
+    register_setting('my_custom_plugin_settings_group', 'main_media04');
+    register_setting('my_custom_plugin_settings_group', 'main_media05');
+}
+
+add_action('admin_init', 'my_custom_plugin_register_settings');

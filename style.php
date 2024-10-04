@@ -89,9 +89,9 @@ img {
   vertical-align: middle;
   color: #fff;
   font-size: 27px;
-  height: 200px;
+  height: 180px;
   width: 100px;
-  line-height: 1;
+  line-height: 0.8;
   word-break: break-all;
   white-space: normal
   word-wrap: break-word;
@@ -105,10 +105,10 @@ img {
   background: #f00;
   border-radius: 50%;
   bottom: 10px;
-  height: 200px;
+  height: 180px;
   position: absolute;
   right: 10px;
-  width: 200px;
+  width: 180px;
   z-index: 2;
   table-layout: fixed;
 }
@@ -126,37 +126,54 @@ img {
   width: 87%;
 }
 
+.detailTable:first-of-type {
+  margin-bottom: 10px;
+}
+
 .detailTable tr {
   padding-bottom: 12px;
+  width: 100%;
+  vertical-align: center;
 }
 
-.detailTable th {
+.detailTable th,
+.detailTableHead {
   color: #fff;
   font-size: 18px;
-  padding: 0 10px 15px 0;
+  padding: 0 7px;
   text-align: center;
-  width: 15%;
-}
-
-.detailTable th span {
+  box-sizing: border-box;
+  width: 70px;
   background: #003c78;
   border-radius: 30px;
-  line-height: 0.8;
-  padding: 2px 0;
-  font-weight: normal;
-  display: block;
+  line-height: 0.9;
+  vertical-align: center;
 }
 
-.detailTable td {
+.detailTable td:first-of-type,
+.detailTable td:nth-of-type(3) {
   border: 0;
   color: #000;
-  display: inline-block;
-  font-size: 24px;
+  vertical-align: middle;
+  font-size: 26px;
   line-height: 0.7;
+  padding: 0 3px;
+}
+
+.detailTable td.short {
+  width: 110px;
 }
 
 .detailTable td.long {
-  width: 95%;
+  width: 350px;
+}
+
+.detailTimeSpacer {
+  margin-left: 20px;
+}
+
+.detailPlace {
+  padding-right: 5px;
 }
 
 .detailWeek {
@@ -214,6 +231,7 @@ img {
   box-sizing: border-box;
   color: #fff;
   display: inline-block;
+  vertical-align: top;
   font-size: 16px;
   line-height: 0.8;
   padding: 10px 5px;
@@ -263,8 +281,13 @@ img {
   padding: 0 10px;
 }
 
+.listWrap.type--a .listTable div {
+  margin-top: 0;
+}
+
 .listWrap.type--a .listTable p {
   background: none;
+  vertical-align: initial;
   color: #000;
   padding: 5px;
   width: 100%;
@@ -296,6 +319,7 @@ img {
   padding-bottom: 10px;
   width: 98%;
   margin: 0 auto;
+  overflow-wrap: break-word;
 }
 
 .listWrap.type--a + .message {
@@ -374,6 +398,8 @@ img {
 }
 
 .applicationImgWrap {
+  position: relative;
+  top: 3px;
   display: inline-block;
   vertical-align: middle;
   width: 9%;
@@ -459,9 +485,10 @@ img {
   display: inline-block;
   background: #003c78;
   border-radius: 30px;
-  padding: 0 3px 2px;
+  padding: 0 5px 2px;
   box-sizing: border-box;
   font-weight: normal;
+  width: 12%;
 }
 
 .contactCompany {
@@ -469,6 +496,7 @@ img {
   vertical-align: center;
   padding-left: 10px;
   width: 26%;
+  box-sizing: border-box;
 }
 
 .contactTel {

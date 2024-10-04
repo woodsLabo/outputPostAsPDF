@@ -22,8 +22,6 @@ if (!is_admin() && !is_login_page()) {
 		$dompdf = new Dompdf();
 		$param = [];
 		include_once("layout-template.php");
-		$post_id = $_POST["post_id"];
-		// $file_name = $_POST["file_name"];
 		$file_name = "file";
 		$dompdf->loadHtml($html);
 		$options = $dompdf->getOptions();
@@ -35,8 +33,8 @@ if (!is_admin() && !is_login_page()) {
 			$dompdf->stream("{$file_name}.pdf", array("Attachment" => 0));
 		} elseif ($_POST["dl_type"] === "dl") {
 			$dompdf->stream("{$file_name}.pdf");
+			// $insert_dl_log->save_log($post_id);
 		}
-		// $insert_dl_log->save_log($post_id);
 	}
 }
 ?>

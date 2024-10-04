@@ -208,6 +208,7 @@ main {
 .message {
   padding-bottom: 5px;
   font-size: 15px;
+  resize: none;
 }
 
 .application {
@@ -307,16 +308,21 @@ main {
   font-weight: bold;
 }
 
+.opap__wrap {
+  max-width: 700px;
+  margin: 0 auto;
+}
 .opap__wrap p {
   margin-top: 10px;
+  margin-bottom: 0 !important;
   font-size: 16px;
 }
 .opap__wrap input[type=text],
 .opap__wrap input[type=tel],
 .opap__wrap input[type=email],
 .opap__wrap textarea {
-  flex-grow: 1;
-  width: 80%;
+  box-sizing: border-box;
+  width: 100%;
   padding: 10px;
   font-size: 16px;
   color: #333;
@@ -327,6 +333,7 @@ main {
 .opap__wrap input[type=number],
 .opap__wrap input[type=date],
 .opap__wrap input[type=time] {
+  box-sizing: border-box;
   flex-grow: 1;
   padding: 10px;
   font-size: 16px;
@@ -336,20 +343,177 @@ main {
   border-radius: 3px;
 }
 
-.qr_preview,
+.title_wrap {
+  margin-top: 10px;
+}
+
+.bg_img_wrap {
+  position: relative;
+  padding: 30px 0 60px;
+  overflow: hidden;
+}
+.bg_preview {
+  position: absolute;
+  top: 0;
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+}
+.bg_preview img {
+  height: 100%;
+  object-fit: cover;
+}
+
+.main_wrap {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+.date_wrap {
+  display: grid;
+  grid-template-rows: 50px 50px;
+  grid-template-columns: 80px 1fr 1fr 10px 1fr 80px 1fr;
+  row-gap: 10px;
+  column-gap: 3px;
+  align-items: center;
+  margin-top: 10px;
+}
+.date_wrap p {
+  margin-top: 0;
+}
+
+input[type=text].detail_item_place {
+  grid-column: 2/6;
+}
+
+input[type=number].detail_item_capacity, input[type=number].detail_item_price {
+  width: 100%;
+}
+
+input[type=text].title {
+  width: 100%;
+}
+
+input[type=text].sub_catch {
+  width: 85%;
+}
+
+textarea.main_catch {
+  width: 45%;
+  resize: none;
+}
+
+textarea.notice_text {
+  position: absolute;
+  right: 0;
+  bottom: 10px;
+  width: 20%;
+  text-align: center;
+  resize: none;
+}
+
+.list_title {
+  color: #fff !important;
+  text-align: center;
+  background-color: #003c78 !important;
+  border-radius: 0 !important;
+}
+.list_title::placeholder {
+  color: #e1e1e1;
+}
+.list_wrap {
+  box-sizing: border-box;
+  margin-top: 20px;
+  border: 4px solid #003c78;
+}
+.list_wrap input[type=text] {
+  margin-bottom: 10px;
+}
+.list_text_wrap {
+  padding: 10px;
+}
+
+.message {
+  margin-top: 10px;
+}
+
+.seminar_wrap {
+  display: grid;
+  grid-template-rows: 45px 45px 1fr;
+  grid-template-columns: 80% 20%;
+  row-gap: 5px;
+  padding: 13px 20px;
+  margin: 10px 0;
+  background: #00f;
+}
+.seminar_wrap input[type=text] {
+  text-align: center;
+  border-radius: 0;
+}
+.seminar_text {
+  margin-top: 10px;
+}
+.seminar_url {
+  margin-bottom: 10px;
+}
+
+.qr_wrap {
+  box-sizing: border-box;
+  grid-row: 1/5;
+  grid-column: 2/3;
+  padding: 0 5px;
+}
+.qr_wrap p {
+  margin-top: 0;
+}
+.qr_title {
+  color: #fff;
+}
+.qr_btn_wrap {
+  display: flex;
+}
+.qr_btn_wrap button {
+  font-size: 11px;
+}
+
+.profile_wrap {
+  display: flex;
+  gap: 10px;
+  align-items: flex-end;
+  margin-bottom: 10px;
+}
+.profile_image_wrap {
+  width: 150px;
+}
+.profile_image_wrap button {
+  font-size: 11px;
+}
 .profile_preview {
   margin-top: 5px;
 }
-.qr_preview img,
 .profile_preview img {
-  width: 200px;
+  width: 100%;
   height: auto;
 }
+.profile_detail_wrap input[type=text] {
+  width: 45%;
+}
+.profile_text {
+  margin-top: 10px;
+  resize: none;
+}
 
+.bg_image_delete,
 .qr_image_delete,
 .profile_image_delete {
   display: none;
   margin-left: 10px;
+}
+
+.contact_wrap {
+  display: flex;
+  gap: 10px;
 }
 
 .opap_form {
@@ -369,8 +533,7 @@ main {
 }
 
 .label_notice {
-  display: inline-block;
-  margin-left: 10px;
+  display: block;
   font-size: 12px;
   color: #f00;
 }

@@ -13,14 +13,10 @@ define("OPAP_VERSION", "1.0");
 class Output_post_as_pdf {
 	public function __construct() {
 		global $pagenow;
-		// 投稿画面にカスタムフィールドのエリア設定
-		include_once("init-admin-field.php");
-		// カスタムフィールド設定
-		include_once("create-output-field.php");
-		// dl log用のオプションページ設置
+		// オプションページ設置
 		include_once("init_option_page.php");
 		// admin_assets設定
-		if ($pagenow === "post-new.php" || $pagenow === "post.php") add_action("admin_enqueue_scripts", array($this, "init_admin_assets"));
+		if ($pagenow === "admin.php" && strpos($_GET["page"], "set_pdf_bg__page") !== false) add_action("admin_enqueue_scripts", array($this, "init_admin_assets"));
 		// postにボタン反映
 		include_once("init-post-action.php");
 
@@ -28,6 +24,7 @@ class Output_post_as_pdf {
 	}
 
 	public function init_admin_assets() {
+		wp_enqueue_media();
 		wp_enqueue_script("script", plugins_url("assets/dist/js/field.js", __FILE__));
 		wp_enqueue_style("style", plugins_url("assets/dist/css/style.css", __FILE__));
 	}
