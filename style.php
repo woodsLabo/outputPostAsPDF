@@ -207,7 +207,7 @@ img {
   font-style: italic-bold;
   padding: 5px 0;
   text-align: center;
-  margin-bottom: 15px;
+  margin-bottom: 5px;
 }
 
 .listTable {
@@ -231,7 +231,7 @@ img {
   box-sizing: border-box;
   color: #fff;
   display: inline-block;
-  vertical-align: top;
+  vertical-align: bottom;
   font-size: 16px;
   line-height: 0.8;
   padding: 10px 5px;
@@ -501,12 +501,20 @@ img {
 
 .contactTel {
   display: inline-block;
-  width: 25%;
+  vertical-align: center;
+  width: 21%;
+}
+
+.contactEmailTitle {
+  display: inline-block;
+  vertical-align: center;
+  width: 14.5%;
 }
 
 .contactEmail {
   display: inline-block;
-  width: 33%;
+  vertical-align: center;
+  width: 23%;
 }
 
 </style>

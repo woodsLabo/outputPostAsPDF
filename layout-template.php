@@ -2,6 +2,8 @@
 $html = "";
 if (isset($_POST) && $_POST["post_label"] === "pdf_post") :
 	include_once("style.php");
+	$main_color = $_POST["main_color"] ?? null;
+	$sub_color = $_POST["sub_color"] ?? null;
 	$title = $_POST["title"] ?? null;
 	$sub_catch = $_POST["sub_catch"] ?? null;
 	$main_catch = $_POST["main_catch"] ? nl2br($_POST["main_catch"]) : null;
@@ -18,16 +20,17 @@ if (isset($_POST) && $_POST["post_label"] === "pdf_post") :
 	$list_title = $_POST["list_title"] ?? null;
 
 	$pdf_type_A = $_POST["pdf_type"] === "a" ? " type--a" : "";
-	$list_01 = !empty($_POST['list_01']) ? "<p>{$_POST['list_01']}</p>" : null;
-	$list_02 = !empty($_POST['list_02']) ? "<p>{$_POST['list_02']}</p>" : null;
-	$list_03 = !empty($_POST['list_03']) ? "<p>{$_POST['list_03']}</p>" : null;
-	$list_04 = !empty($_POST['list_04']) ? "<p>{$_POST['list_04']}</p>" : null;
-	$list_05 = !empty($_POST['list_05']) ? "<p>{$_POST['list_05']}</p>" : null;
-	$list_06 = !empty($_POST['list_06']) ? "<p>{$_POST['list_06']}</p>" : null;
-	$list_07 = !empty($_POST['list_07']) ? "<p>{$_POST['list_07']}</p>" : null;
-	$list_08 = !empty($_POST['list_08']) ? "<p>{$_POST['list_08']}</p>" : null;
-	$list_09 = !empty($_POST['list_09']) ? "<p>{$_POST['list_09']}</p>" : null;
-	$list_10 = !empty($_POST['list_10']) ? "<p>{$_POST['list_10']}</p>" : null;
+	$select_sub_color = $_POST["pdf_type"] === "b" ? $sub_color : "initial";
+	$list_01 = !empty($_POST['list_01']) ? "<p style='background: $select_sub_color;'>{$_POST['list_01']}</p>" : null;
+	$list_02 = !empty($_POST['list_02']) ? "<p style='background: $select_sub_color;'>{$_POST['list_02']}</p>" : null;
+	$list_03 = !empty($_POST['list_03']) ? "<p style='background: $select_sub_color;'>{$_POST['list_03']}</p>" : null;
+	$list_04 = !empty($_POST['list_04']) ? "<p style='background: $select_sub_color;'>{$_POST['list_04']}</p>" : null;
+	$list_05 = !empty($_POST['list_05']) ? "<p style='background: $select_sub_color;'>{$_POST['list_05']}</p>" : null;
+	$list_06 = !empty($_POST['list_06']) ? "<p style='background: $select_sub_color;'>{$_POST['list_06']}</p>" : null;
+	$list_07 = !empty($_POST['list_07']) ? "<p style='background: $select_sub_color;'>{$_POST['list_07']}</p>" : null;
+	$list_08 = !empty($_POST['list_08']) ? "<p style='background: $select_sub_color;'>{$_POST['list_08']}</p>" : null;
+	$list_09 = !empty($_POST['list_09']) ? "<p style='background: $select_sub_color;'>{$_POST['list_09']}</p>" : null;
+	$list_10 = !empty($_POST['list_10']) ? "<p style='background: $select_sub_color;'>{$_POST['list_10']}</p>" : null;
 
 	$message = !empty($_POST["message"]) ? nl2br($_POST["message"]) : null;
 	$seminar_text = $_POST["seminar_text"] ?? null;
@@ -40,6 +43,11 @@ if (isset($_POST) && $_POST["post_label"] === "pdf_post") :
 	$contact_company = $_POST["contact_company"] ?? null;
 	$contact_tel = $_POST["contact_tel"] ?? null;
 	$contact_mail = $_POST["contact_mail"] ?? null;
+
+	$notice_text_size = $_POST["notice_text_size"];
+	$detail_item_place_text_size = $_POST["detail_item_place_text_size"];
+	$contact_company_text_size = $_POST["contact_company_text_size"];
+	$contact_mail_text_size = $_POST["contact_mail_text_size"];
 
 	// ローカルではfile_get_contentesでこけるため、リリース時にはこの分岐は除却
 	$main_media = wp_get_environment_type() == "development" ? "https://kstg.devwl.work/wp-content/themes/lightning/main_image.png" : $_POST["bg_type"]; // 選択デフォルト画像
@@ -71,14 +79,14 @@ $html = <<< EOM
 		$style
 	</head>
 	<body>
-		<div class="header">$title</div>
+		<div class="header" style="background: $main_color;">$title</div>
 		<div class="contentTop">
 			<div class="mainImage">
 				<img src="$main_media">
 			</div>
 			<div class="titleWrap">
 				<p class="title_sub">$sub_catch</p>
-				<div class="title_main">$main_catch</div>
+				<div class="title_main" style="font-size: $notice_text_size;">$main_catch</div>
 			</div>
 			$notice_ele
 		</div>
@@ -94,14 +102,14 @@ $html = <<< EOM
 			<table class="detailTable">
 				<tr>
 					<th>場所</th>
-					<td class="long detailPlace" style="font-size: 20px;">$detail_item_place</td>
+					<td class="long detailPlace" style="font-size: $detail_item_place_text_size;">$detail_item_place</td>
 					<td class="detailTableHead"h>料金</td>
 					<td class="short">{$detail_item_price}円</td>
 				</tr>
 			</table>
 		</div>
 		<div class="listWrap{$pdf_type_A}">
-			<p class="listTitle">$list_title</p>
+			<p class="listTitle" style="background: $main_color;">$list_title</p>
 			<div class="listTable">
 				<div>
 					$list_01
@@ -152,9 +160,10 @@ $html = <<< EOM
 			<table class="contactWrap">
 				<tr>
 					<th class="contactTitle">お問い合わせ</th>
-					<td class="contactCompany">$contact_company</td>
+					<td class="contactCompany" style="font-size: $contact_company_text_size;">$contact_company</td>
 					<td class="contactTel">TEL:$contact_tel</td>
-					<td class="contactEmail">メールアドレス:$contact_mail</td>
+					<td class="contactEmailTitle">メールアドレス:</td>
+					<td class="contactEmail" style="font-size: $contact_mail_text_size;">$contact_mail</td>
 				</tr>
 			</table>
 		</div>

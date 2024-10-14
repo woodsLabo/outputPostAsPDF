@@ -17,6 +17,10 @@ function init_post_action($content) {
 			<p>PDFのタイプを選択</p>
 			<input class="pdf_types" type="radio" name="pdf_type" id="type1" value="a" checked><label for="type1">タイプ1</label>
 			<input class="pdf_types" type="radio" name="pdf_type" id="type2" value="b"><label for="type2">タイプ2</label>
+			<p>テーマカラーを選択</p>
+			<input type="color" class="main_color" name="main_color">
+			<p>サブテーマカラーを選択</p>
+			<input type="color" class="sub_color" name="sub_color">
 			<p>背景を選択</p>
 			<div class="bg_type_wrap">
 				<input class="bg_types" type="radio" name="bg_type" id="bg_type1" value="$bg_image01" checked><label for="bg_type1">タイプ1</label>
@@ -39,6 +43,7 @@ function init_post_action($content) {
 					<textarea class="main_catch" name="main_catch" placeholder="キャッチコピーを入力" rows="3"></textarea>
 					<textarea id="" class="notice_text" name="notice_text" cols="5" rows="3" placeholder="先着&#13;&#10;お申し込み&#13;&#10;x名限定"></textarea>
 				</div>
+				<span>キャッチコピーのフォントサイズ</span><input type="range" class="notice_text_size" name="notice_text_size" min="10" max="40" value="40">
 			</div>
 			<div class="date_wrap">
 				<p>開催日時</p>
@@ -46,11 +51,12 @@ function init_post_action($content) {
 				<input class="detail_item_start_time" type="time" name="detail_item_start_time">〜<input class="detail_item_end_time" type="time" name="detail_item_end_time">
 				<p>定員</p>
 				<input class="detail_item_capacity" type="number" name="detail_item_capacity">
-				<p>場所</p>
-				<input class="detail_item_place" type="text" name="detail_item_place" placeholder="開催場所を入力">
+				<p>場所<br><span>(上限25文字)</span></p>
+				<input class="detail_item_place" type="text" name="detail_item_place" placeholder="開催場所を入力" maxlength="25">
 				<p>料金</p>
 				<input class="detail_item_price" type="number" name="detail_item_price" placeholder="数値のみ">
 			</div>
+			<span>場所のフォントサイズ</span><input type="range" class="detail_item_place_text_size" name="detail_item_place_text_size" min="10" max="18" value="18">
 			<div class="list_wrap">
 				<input class="list_title" type="text" name="list_title" value="" placeholder="リストの見出し">
 				<div class="list_text_wrap">
@@ -96,8 +102,12 @@ function init_post_action($content) {
 				<input class="contact_tel" type="tel" name="contact_tel" placeholder="問い合わせTEL" value="">
 				<input class="contact_mail" type="email" name="contact_mail" placeholder="問い合わせmail" value="">
 			</div>
+			<span>問い合わせ先名称ののフォントサイズ</span><input type="range" class="contact_company_text_size" name="contact_company_text_size" min="10" max="15" value="15">
+			<span>問い合わせmailのフォントサイズ</span><input type="range" class="contact_mail_text_size" name="contact_mail_text_size" min="10" max="15" value="15">
 			<form action="" target="_blonk" method="post" class="opap_form">
 				<input type="hidden" name="dw" value="true">
+				<input type="hidden" class="opap_main_color" name="main_color" value="">
+				<input type="hidden" class="opap_sub_color" name="sub_color" value="">
 				<input type="hidden" class="opap_pdf_type" name="pdf_type" value="">
 				<input type="hidden" class="opap_bg_type" name="bg_type" value="">
 				<input type="hidden" class="opap_bg_img" name="bg_img" value="">
@@ -107,12 +117,14 @@ function init_post_action($content) {
 				<input type="hidden" class="opap_sub_catch" name="sub_catch" value="">
 				<input type="hidden" class="opap_main_catch" name="main_catch" value="">
 				<input type="hidden" class="opap_notice_text" name="notice_text" value="">
+				<input type="hidden" class="opap_notice_text_size" name="notice_text_size" value="">
 				<input type="hidden" class="opap_main_media" name="main_media" value="">
 				<input type="hidden" class="opap_detail_item_date" name="detail_item_date" value="">
 				<input type="hidden" class="opap_detail_item_start_time" name="detail_item_start_time" value="">
 				<input type="hidden" class="opap_detail_item_end_time" name="detail_item_end_time" value="">
 				<input type="hidden" class="opap_detail_item_capacity" name="detail_item_capacity" value="">
 				<input type="hidden" class="opap_detail_item_place" name="detail_item_place" value="">
+				<input type="hidden" class="opap_detail_item_place_text_size" name="detail_item_place_text_size" value="">
 				<input type="hidden" class="opap_detail_item_price" name="detail_item_price" value="">
 				<input type="hidden" class="opap_list_title" name="list_title" value="">
 				<input type="hidden" class="opap_list_01" name="list_01" value="">
@@ -134,8 +146,10 @@ function init_post_action($content) {
 				<input type="hidden" class="opap_profile_name" name="profile_name" value="">
 				<input type="hidden" class="opap_profile_text" name="profile_text" value="">
 				<input type="hidden" class="opap_contact_company" name="contact_company" value="">
+				<input type="hidden" class="opap_contact_company_text_size" name="contact_company_text_size" value="">
 				<input type="hidden" class="opap_contact_tel" name="contact_tel" value="">
 				<input type="hidden" class="opap_contact_mail" name="contact_mail" value="">
+				<input type="hidden" class="opap_contact_mail_text_size" name="contact_mail_text_size" value="">
 				<input type="hidden" name="post_label" value="$post_label">
 				<div class="opap_button_wrap">
 					<button class="form_preview" name="dl_type" value="preview">プレビュー</button>

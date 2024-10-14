@@ -56,24 +56,26 @@ class Form {
     const nodeObjects = this.createNodeObjects();
     const selectObjects = this.createSelectObjects();
     const imageObjects = this.createImageObjects();
+    const sizeRangeObjects = this.createSizeRange();
+    const colorArray = this.createColorArray();
 
     // init sessionStrage
-    selectObjects.map(e => this.initSessionStrageSelect(e));
-    nodeObjects.map(e => this.initSessionStrageText(e));
-    this.lists.map(e => this.initSessionStrageText(e));
-    imageObjects.map(e => this.initSessionStrageImage(e));
+    selectObjects.map(e => this.initSessionStorageSelect(e));
+    nodeObjects.map(e => this.initSessionStorageText(e));
+    this.lists.map(e => this.initSessionStorageText(e));
+    imageObjects.map(e => this.initSessionStorageImage(e));
+    sizeRangeObjects.map(e => this.initSessionStorageRange(e));
+    colorArray.map(e => this.initSessionStorageColor(e));
 
     this.initImagePreview();
+    this.initSizeRange();
+    this.initThemeColor();
 
-    // this.selectPdfType();
-    // this.selectTypes(this.pdfTypes, "pdf");
-    // this.selectTypes(this.bgTypes, "bg");
     selectObjects.map(e => this.selectTypes(e));
     nodeObjects.map(e => this.handleFormChange(e));
     this.lists.map(e => this.handleFormChange(e));
 
     this.resetForm();
-    this.fittingFontSize(this.detailItemPlace, "place", 20);
   }
 
   /**
@@ -102,6 +104,13 @@ class Form {
       this.profileCompany,
       this.profileTel,
       this.profileMail
+    ];
+  }
+
+  createColorArray() {
+    return [
+      "main_color",
+      "sub_color",
     ];
   }
 
@@ -143,6 +152,27 @@ class Form {
     ];
   }
 
+  createSizeRange() {
+    return [
+      {
+        ele: "notice_text_size",
+        type: "notice_size"
+      },
+      {
+        ele: "detail_item_place_text_size",
+        type: "place_size"
+      },
+      {
+        ele: "contact_company_text_size",
+        type: "company_size"
+      },
+      {
+        ele: "contact_mail_text_size",
+        type: "main_size"
+      }
+    ];
+  }
+
   /**
    * ラジオボタンセレクトを検知
    * @return {Object} object - ラジオボタン要素のオブジェクト
@@ -154,7 +184,7 @@ class Form {
       if (e.checked) opapType.value = e.value; // select type init
       e.addEventListener("change", (e) => { // typeの変更をハンドリング
         opapType.value = e.target.value;
-        this.setSessionStrage(`${object.type}_type`, e.target.value);
+        this.setSessionStorage(`${object.type}_type`, e.target.value);
         // 選択状態によってリストの表示非表示設定
         if (object.type === "pdf") {
           this.settingShowList(e.target.value === "a" ? "none" : "block");
@@ -186,11 +216,11 @@ class Form {
   handleFormChange(node) {
     node.addEventListener("change", (e) => {
       document.querySelector(`.opap_${node.name}`).value = e.target.value;
-      this.setSessionStrage(node.name, e.target.value);
+      this.setSessionStorage(node.name, e.target.value);
     });
     node.addEventListener("keyup", (e) => {
       document.querySelector(`.opap_${node.name}`).value = e.target.value;
-      this.setSessionStrage(node.name, e.target.value);
+      this.setSessionStorage(node.name, e.target.value);
     });
   }
 
@@ -233,9 +263,31 @@ class Form {
           }
 
           document.querySelector(`.opap_${obj.preview}_img`).value = e.target.result;
-          this.setSessionStrage(obj.preview, e.target.result);
-          this.setSessionStrage(`${obj.preview}_img`, file.name);
+          this.setSessionStorage(obj.preview, e.target.result);
+          this.setSessionStorage(`${obj.preview}_img`, file.name);
         });
+      });
+    });
+  }
+
+  initSizeRange() {
+    const sizeRanges = this.createSizeRange();
+    sizeRanges.forEach((item) => {
+      document.querySelector(`.${item.ele}`).addEventListener("change", () => {
+        const rangeValue = document.querySelector(`.${item.ele}`).value;
+        this.setSessionStorage(item.type, rangeValue);
+        document.querySelector(`.opap_${item.ele}`).value = rangeValue;
+      });
+    });
+  }
+
+  initThemeColor() {
+    const themeColors = this.createColorArray();
+    themeColors.forEach(ele => {
+      document.querySelector(`.${ele}`).addEventListener("change", () => {
+        const colorCode = document.querySelector(`.${ele}`).value;
+        this.setSessionStorage(ele, colorCode);
+        document.querySelector(`.opap_${ele}`).value = colorCode;
       });
     });
   }
@@ -253,39 +305,38 @@ class Form {
   /**
    * メディア削除時の処理
    *
-   * @param {Object} imageObjects - 画像の設定配列オブジェクト
-   * @param {Number} index - 配列のindex指定
+   * @param {object} imageobjects - 画像の設定配列オブジェクト
+   * @param {number} index - 配列のindex指定
    */
   deleteMedia(imageObjects, index) {
     document.querySelector(`.${imageObjects[index].preview}_preview .preview_image`).remove();
     document.querySelector(`.opap_${imageObjects[index].preview}_img`).value = "";
     document.querySelector(`.${imageObjects[index].preview}_image`).value = "";
     document.querySelector(`.${imageObjects[index].preview}_image_delete`).style.display = "none";
+    /**
+     * if.
+     *
+     * @param {} index
+     */
     if (index === 0) {
       document.querySelector(`.${imageObjects[index].preview}_type_wrap`).style.display = "block";
       this.bgSettingImage.style.display = "block";
     }
   }
 
-  fittingFontSize(ele, strage, fontSize) {
-    const targetFontLength = ele.value.length;
-    const sizeDownLenght = 14;
-    if (targetFontLength > sizeDownLenght) this.setSessionStrage(`${strage}_size`, fontSize);
-  }
-
   /**
    * sessionStrageに入力値を保存
-   * 画像は容量の問題でstrageに含めない
+   * 画像は容量の問題でstorageに含めない
    *
    * @param {String} key - nodeのname
    * @param {String} value - 値
    * @return {Object} sessionStrageのデータ
    */
-  setSessionStrage(key, value) {
+  setSessionStorage(key, value) {
     if (key !== "bg" && key !== "qr" && key !== "profile") return sessionStorage.setItem(key, value);
   }
 
-  initSessionStrageSelect(object) {
+  initSessionStorageSelect(object) {
     object.ele.forEach(e => {
       if (e.value === sessionStorage.getItem(`${object.type}_type`)) {
         e.checked = true;
@@ -299,16 +350,26 @@ class Form {
    *
    * @param {Object} node - 対象のnode
    */
-  initSessionStrageText(node) {
+  initSessionStorageText(node) {
     document.querySelector(`.${node.name}`).value = sessionStorage.getItem(node.name) !== null ? sessionStorage.getItem(node.name) : "";
     document.querySelector(`.opap_${node.name}`).value = sessionStorage.getItem(node.name) !== null ? sessionStorage.getItem(node.name) : "";
+  }
+
+  initSessionStorageRange(obj) {
+    document.querySelector(`.${obj.ele}`).value = sessionStorage.getItem(obj.type) !== null ? sessionStorage.getItem(obj.type) : "";
+    document.querySelector(`.opap_${obj.ele}`).value = sessionStorage.getItem(obj.type) !== null ? sessionStorage.getItem(obj.type) : "";
+  }
+
+  initSessionStorageColor(ele) {
+    document.querySelector(`.${ele}`).value = sessionStorage.getItem(ele) !== null ? sessionStorage.getItem(ele) : "";
+    document.querySelector(`.opap_${ele}`).value = sessionStorage.getItem(ele) !== null ? sessionStorage.getItem(ele) : "";
   }
 
   /**
    * sessionStrageに入っている画像をフォームに返す
    * @param {Object} obj - 画像の設定オブジェクト
    */
-  initSessionStrageImage(obj) {
+  initSessionStorageImage(obj) {
     if (sessionStorage.getItem(obj.preview) !== null) {
       const imgElm = document.createElement("img");
       imgElm.className = "preview_image";

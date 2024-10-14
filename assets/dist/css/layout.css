@@ -381,6 +381,11 @@ main {
 }
 .date_wrap p {
   margin-top: 0;
+  line-height: 1;
+}
+.date_wrap span {
+  font-size: 12px;
+  color: #f00;
 }
 
 input[type=text].detail_item_place {
