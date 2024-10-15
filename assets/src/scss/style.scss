@@ -12,12 +12,20 @@
     }
 
     textarea {
-      height: 10rem;
       width: 100%;
+      height: 10rem;
     }
   }
 
   &_image {
     margin-bottom: 1rem;
+  }
+
+  &_image_wrap,
+  &_default_wrap {
+    img {
+      display: block;
+      max-width: 60%;
+    }
   }
 }

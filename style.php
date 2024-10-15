@@ -275,6 +275,7 @@ img {
 
 .listWrap.type--a .listTitle {
   margin-bottom: 5px;
+  margin-top: -1px;
 }
 
 .listWrap.type--a .listTable {
@@ -471,7 +472,7 @@ img {
   color: #fff;
   font-style: italic-bold;
   height: 30.5px;
-  padding: 19px 10px 5px;
+  padding: 14.7px 10px 9px;
 }
 
 .contactWrap {
@@ -480,8 +481,7 @@ img {
 }
 
 .contactTitle {
-  vertical-align: center;
-  line-height: 1;
+  vertical-align: middle;
   display: inline-block;
   background: #003c78;
   border-radius: 30px;
@@ -493,7 +493,7 @@ img {
 
 .contactCompany {
   display: inline-block;
-  vertical-align: center;
+  vertical-align: middle;
   padding-left: 10px;
   width: 26%;
   box-sizing: border-box;
@@ -501,19 +501,19 @@ img {
 
 .contactTel {
   display: inline-block;
-  vertical-align: center;
+  vertical-align: middle;
   width: 21%;
 }
 
 .contactEmailTitle {
   display: inline-block;
-  vertical-align: center;
+  vertical-align: middle;
   width: 14.5%;
 }
 
 .contactEmail {
   display: inline-block;
-  vertical-align: center;
+  vertical-align: middle;
   width: 23%;
 }
 

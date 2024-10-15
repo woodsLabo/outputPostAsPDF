@@ -93,17 +93,17 @@ $html = <<< EOM
 		<div class="detailWrap">
 			<table class="detailTable">
 				<tr>
-					<th>開催日時</th>
+					<th style="background: $main_color;">開催日時</th>
 					<td class="long">$str_time({$week[$date]})<span class="detailTimeSpacer">{$detail_item_start_time->format("g:i")}〜{$detail_item_end_time->format("g:i")}</span></td>
-					<td class="detailTableHead">定員</td>
+					<td class="detailTableHead" style="background: $main_color;">定員</td>
 					<td class="short">{$detail_item_capacity}名</td>
 				</tr>
 			</table>
 			<table class="detailTable">
 				<tr>
-					<th>場所</th>
+					<th style="background: $main_color;">場所</th>
 					<td class="long detailPlace" style="font-size: $detail_item_place_text_size;">$detail_item_place</td>
-					<td class="detailTableHead"h>料金</td>
+					<td class="detailTableHead" style="background: $main_color;">料金</td>
 					<td class="short">{$detail_item_price}円</td>
 				</tr>
 			</table>
@@ -159,7 +159,7 @@ $html = <<< EOM
 		<div class="contact">
 			<table class="contactWrap">
 				<tr>
-					<th class="contactTitle">お問い合わせ</th>
+					<th class="contactTitle" style="background: $main_color;">お問い合わせ</th>
 					<td class="contactCompany" style="font-size: $contact_company_text_size;">$contact_company</td>
 					<td class="contactTel">TEL:$contact_tel</td>
 					<td class="contactEmailTitle">メールアドレス:</td>
@@ -168,6 +168,15 @@ $html = <<< EOM
 			</table>
 		</div>
 	</body>
+	<style>
+		.listTable p::before {
+			background: $select_sub_color
+		}
+
+		.listWrap.type--a {
+			border-color: $main_color;
+		}
+	</style>
  </html>
 EOM;
 

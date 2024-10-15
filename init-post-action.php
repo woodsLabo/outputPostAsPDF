@@ -2,11 +2,12 @@
 include_once("action.php");
 
 function init_post_action($content) {
-	$bg_image01 = get_option("main_media01");
-	$bg_image02 = get_option("main_media02");
-	$bg_image03 = get_option("main_media03");
-	$bg_image04 = get_option("main_media04");
-	$bg_image05 = get_option("main_media05");
+	$plugin_path = plugins_url("output-post-as-pdf") . "/assets/src/img/";
+	$bg_image01 = get_option("main_media01") != "" ? get_option("main_media01") : "{$plugin_path}/img01.png";
+	$bg_image02 = get_option("main_media02") != "" ? get_option("main_media02") : "{$plugin_path}/img02.png";
+	$bg_image03 = get_option("main_media03") != "" ? get_option("main_media03") : "{$plugin_path}/img03.png";
+	$bg_image04 = get_option("main_media04") != "" ? get_option("main_media04") : "{$plugin_path}/img04.png";
+	$bg_image05 = get_option("main_media05") != "" ? get_option("main_media05") : "{$plugin_path}/img05.png";
 
 	$file_name = "pdf";
 	$post_label = "pdf_post";
@@ -102,8 +103,8 @@ function init_post_action($content) {
 				<input class="contact_tel" type="tel" name="contact_tel" placeholder="問い合わせTEL" value="">
 				<input class="contact_mail" type="email" name="contact_mail" placeholder="問い合わせmail" value="">
 			</div>
-			<span>問い合わせ先名称ののフォントサイズ</span><input type="range" class="contact_company_text_size" name="contact_company_text_size" min="10" max="15" value="15">
-			<span>問い合わせmailのフォントサイズ</span><input type="range" class="contact_mail_text_size" name="contact_mail_text_size" min="10" max="15" value="15">
+			<span>問い合わせ先名称ののフォントサイズ</span><input type="range" class="contact_company_text_size" name="contact_company_text_size" min="8" max="13" value="13">
+			<span>問い合わせmailのフォントサイズ</span><input type="range" class="contact_mail_text_size" name="contact_mail_text_size" min="8" max="13" value="13">
 			<form action="" target="_blonk" method="post" class="opap_form">
 				<input type="hidden" name="dw" value="true">
 				<input type="hidden" class="opap_main_color" name="main_color" value="">
