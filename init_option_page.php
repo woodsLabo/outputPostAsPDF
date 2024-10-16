@@ -1,6 +1,6 @@
 <?php
 function dl_log_page() {
-	add_menu_page("ダウンロードログ", "ダウンロードログ", "manage_options", "dl_log__page", "add_dl_log_page", "dashicons-admin-generic", 60);
+	// add_menu_page("ダウンロードログ", "ダウンロードログ", "manage_options", "dl_log__page", "add_dl_log_page", "dashicons-admin-generic", 60);
 }
 
 add_action("admin_menu", "dl_log_page");
