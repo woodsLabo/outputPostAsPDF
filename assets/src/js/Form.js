@@ -110,7 +110,7 @@ class Form {
   createColorArray() {
     return [
       "main_color",
-      "sub_color",
+      "seminar_arrow_color",
     ];
   }
 

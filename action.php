@@ -18,7 +18,7 @@ if (!is_admin() && !is_login_page()) {
 		return $html;
 	}
 
-	if ($_POST && $_POST["dw"] === "true") {
+	if (isset($_POST["dw"]) && $_POST["dw"] === "true") {
 		$dompdf = new Dompdf();
 		$param = [];
 		include_once("layout-template.php");
