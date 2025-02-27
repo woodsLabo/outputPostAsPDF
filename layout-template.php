@@ -18,23 +18,27 @@ if (isset($_POST) && $_POST["post_label"] === "pdf_post") :
 	$date = date('w', strtotime($detail_item_date));
 	$week = ["日", "月", "火", "水", "木", "金", "土"];
 	$list_title = $_POST["list_title"] ?? null;
+	$checkbox_img = "data:image/png;base64," . base64_encode(file_get_contents(WP_PLUGIN_DIR . "/output-post-as-pdf/assets/src/img/checkbox.png"));
+	$checkbox_ele = "<span class='listCheckbox'><img src='{$checkbox_img}'></span>";
 
 	$pdf_type_A = $_POST["pdf_type"] === "a" ? " type--a" : "";
 	$select_sub_color = $_POST["pdf_type"] === "b" ? $sub_color : "initial";
-	$list_01 = !empty($_POST['list_01']) ? "<p style='background: $select_sub_color;'>{$_POST['list_01']}</p>" : null;
-	$list_02 = !empty($_POST['list_02']) ? "<p style='background: $select_sub_color;'>{$_POST['list_02']}</p>" : null;
-	$list_03 = !empty($_POST['list_03']) ? "<p style='background: $select_sub_color;'>{$_POST['list_03']}</p>" : null;
-	$list_04 = !empty($_POST['list_04']) ? "<p style='background: $select_sub_color;'>{$_POST['list_04']}</p>" : null;
-	$list_05 = !empty($_POST['list_05']) ? "<p style='background: $select_sub_color;'>{$_POST['list_05']}</p>" : null;
-	$list_06 = !empty($_POST['list_06']) ? "<p style='background: $select_sub_color;'>{$_POST['list_06']}</p>" : null;
-	$list_07 = !empty($_POST['list_07']) ? "<p style='background: $select_sub_color;'>{$_POST['list_07']}</p>" : null;
-	$list_08 = !empty($_POST['list_08']) ? "<p style='background: $select_sub_color;'>{$_POST['list_08']}</p>" : null;
-	$list_09 = !empty($_POST['list_09']) ? "<p style='background: $select_sub_color;'>{$_POST['list_09']}</p>" : null;
-	$list_10 = !empty($_POST['list_10']) ? "<p style='background: $select_sub_color;'>{$_POST['list_10']}</p>" : null;
+	$list_01 = !empty($_POST['list_01']) ? "<p style='background: $select_sub_color;'>$checkbox_ele{$_POST['list_01']}</p>" : null;
+	$list_02 = !empty($_POST['list_02']) ? "<p style='background: $select_sub_color;'>$checkbox_ele{$_POST['list_02']}</p>" : null;
+	$list_03 = !empty($_POST['list_03']) ? "<p style='background: $select_sub_color;'>$checkbox_ele{$_POST['list_03']}</p>" : null;
+	$list_04 = !empty($_POST['list_04']) ? "<p style='background: $select_sub_color;'>$checkbox_ele{$_POST['list_04']}</p>" : null;
+	$list_05 = !empty($_POST['list_05']) ? "<p style='background: $select_sub_color;'>$checkbox_ele{$_POST['list_05']}</p>" : null;
+	$list_06 = !empty($_POST['list_06']) ? "<p style='background: $select_sub_color;'>$checkbox_ele{$_POST['list_06']}</p>" : null;
+	$list_07 = !empty($_POST['list_07']) ? "<p style='background: $select_sub_color;'>$checkbox_ele{$_POST['list_07']}</p>" : null;
+	$list_08 = !empty($_POST['list_08']) ? "<p style='background: $select_sub_color;'>$checkbox_ele{$_POST['list_08']}</p>" : null;
+	$list_09 = !empty($_POST['list_09']) ? "<p style='background: $select_sub_color;'>$checkbox_ele{$_POST['list_09']}</p>" : null;
+	$list_10 = !empty($_POST['list_10']) ? "<p style='background: $select_sub_color;'>$checkbox_ele{$_POST['list_10']}</p>" : null;
 
 	$message = !empty($_POST["message"]) ? nl2br($_POST["message"]) : null;
 	$seminar_text = $_POST["seminar_text"] ?? null;
 	$seminar_url = $_POST["seminar_url"] ?? null;
+	$seminar_arrow_color = $_POST["seminar_arrow_color"] ?? "#fff100";
+	$seminar_arrow_style = "style='background: $seminar_arrow_color;'";
 	$seminar_qr = $_POST["seminar_qr"] ?? null;
 	$profile_img = $_POST["profile_img"] ?? null;
 	$profile_title = $_POST["profile_title"] ?? null;
@@ -50,15 +54,20 @@ if (isset($_POST) && $_POST["post_label"] === "pdf_post") :
 	$contact_mail_text_size = $_POST["contact_mail_text_size"];
 
 	// ローカルではfile_get_contentesでこけるため、リリース時にはこの分岐は除却
-	$main_media = wp_get_environment_type() == "development" ? "https://kstg.devwl.work/wp-content/themes/lightning/main_image.png" : $_POST["bg_type"]; // 選択デフォルト画像
+	$main_media = wp_get_environment_type() == "local" ? WP_PLUGIN_DIR . "/output-post-as-pdf/assets/src/img/img01.png" : $_POST["bg_type"]; // 選択デフォルト画像
 	// $main_media = $_POST["bg_type"]; // 選択デフォルト画像
 	$up_main_media = $_POST["bg_img"]; // upload画像
 	$qr_media = $_POST["seminar_qr"];
 	$profile_media = $_POST["profile_img"];
+	$main_bg = "data:image/png;base64," . base64_encode(file_get_contents(WP_PLUGIN_DIR . "/output-post-as-pdf/assets/src/img/main_bg.png"));
+	$notice_bg_img = "data:image/png;base64," . base64_encode(file_get_contents(WP_PLUGIN_DIR . "/output-post-as-pdf/assets/src/img/deadline_bg.png"));
+	$seminar_bg = "data:image/png;base64," . base64_encode(file_get_contents(WP_PLUGIN_DIR . "/output-post-as-pdf/assets/src/img/seminar_bg.png"));
+	$footer_bg = "data:image/png;base64," . base64_encode(file_get_contents(WP_PLUGIN_DIR . "/output-post-as-pdf/assets/src/img/footer_bg.png"));
 
 	if (!empty($notice_text)) {
 		$notice_ele = <<< EOM
 		<table class="title_noticeWrap">
+			<div class="title_noticeBg"><img src="$notice_bg_img" alt=""></div>
 			<td class="title_notice">$notice_text</td>
 		</table>
 		EOM;
@@ -76,7 +85,9 @@ $html = <<< EOM
 		<link rel="preconnect" href="https://fonts.googleapis.com">
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 		<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP&display=swap" rel="stylesheet">
-		$style
+		<style>
+			$style
+		</style>
 	</head>
 	<body>
 		<div class="header" style="background: $main_color;">$title</div>
@@ -90,56 +101,60 @@ $html = <<< EOM
 			</div>
 			$notice_ele
 		</div>
-		<div class="detailWrap">
-			<table class="detailTable">
-				<tr>
-					<th style="background: $main_color;">開催日時</th>
-					<td class="long">$str_time({$week[$date]})<span class="detailTimeSpacer">{$detail_item_start_time->format("g:i")}〜{$detail_item_end_time->format("g:i")}</span></td>
-					<td class="detailTableHead" style="background: $main_color;">定員</td>
-					<td class="short">{$detail_item_capacity}名</td>
-				</tr>
-			</table>
-			<table class="detailTable">
-				<tr>
-					<th style="background: $main_color;">場所</th>
-					<td class="long detailPlace" style="font-size: $detail_item_place_text_size;">$detail_item_place</td>
-					<td class="detailTableHead" style="background: $main_color;">料金</td>
-					<td class="short">{$detail_item_price}円</td>
-				</tr>
-			</table>
-		</div>
-		<div class="listWrap{$pdf_type_A}">
-			<p class="listTitle" style="background: $main_color;">$list_title</p>
-			<div class="listTable">
-				<div>
-					$list_01
-					$list_02
-				</div>
-				<div>
-					$list_03
-					$list_04
-				</div>
-				<div>
-					$list_05
-					$list_06
-				</div>
-				<div>
-					$list_07
-					$list_08
-				</div>
-				<div>
-					$list_09
-					$list_10
+		<div class="contentWrap">
+			<div class="contentBg"><img src="$main_bg"></div>
+			<div class="detailWrap">
+				<table class="detailTable">
+					<tr>
+						<th style="background: $main_color;">開催日時</th>
+						<td class="long">$str_time({$week[$date]})<span class="detailTimeSpacer">{$detail_item_start_time->format("g:i")}〜{$detail_item_end_time->format("g:i")}</span></td>
+						<td class="detailTableHead" style="background: $main_color;">定員</td>
+						<td class="short">{$detail_item_capacity}名</td>
+					</tr>
+				</table>
+				<table class="detailTable">
+					<tr>
+						<th style="background: $main_color;">場所</th>
+						<td class="long detailPlace" style="font-size: $detail_item_place_text_size;">$detail_item_place</td>
+						<td class="detailTableHead" style="background: $main_color;">料金</td>
+						<td class="short">{$detail_item_price}円</td>
+					</tr>
+				</table>
+			</div>
+			<div class="listWrap{$pdf_type_A}">
+				<p class="listTitle" style="background: $main_color;">$list_title</p>
+				<div class="listTable">
+					<div>
+						$list_01
+						$list_02
+					</div>
+					<div>
+						$list_03
+						$list_04
+					</div>
+					<div>
+						$list_05
+						$list_06
+					</div>
+					<div>
+						$list_07
+						$list_08
+					</div>
+					<div>
+						$list_09
+						$list_10
+					</div>
 				</div>
 			</div>
+			<div class="message">$message</div>
 		</div>
-		<div class="message">$message</div>
 		<div class="application">
+			<img src="$seminar_bg">
 			<div class="applicationTextWrap">
 				<p class="applicationText">$seminar_text</p>
 				<p class="applicationUrl">$seminar_url</p>
 			</div>
-			<div class="applicationArrow"><span></span><span></span><span></span><span></span><span></span><span></span></div>
+			<div class="applicationArrow"><span style="background: $seminar_arrow_color"></span><span $seminar_arrow_style></span><span $seminar_arrow_style></span><span $seminar_arrow_style></span><span $seminar_arrow_style></span><span $seminar_arrow_style></span></div>
 			<div class="applicationImgWrap"><img src="$qr_media"></div>
 		</div>
 		<div class="profileWrap">
@@ -157,15 +172,14 @@ $html = <<< EOM
 			</table>
 		</div>
 		<div class="contact">
-			<table class="contactWrap">
-				<tr>
-					<th class="contactTitle" style="background: $main_color;">お問い合わせ</th>
-					<td class="contactCompany" style="font-size: $contact_company_text_size;">$contact_company</td>
-					<td class="contactTel">TEL:$contact_tel</td>
-					<td class="contactEmailTitle">メールアドレス:</td>
-					<td class="contactEmail" style="font-size: $contact_mail_text_size;">$contact_mail</td>
-				</tr>
-			</table>
+			<div class="contactBg"><img src="$footer_bg"></div>
+			<div class="contactWrap">
+				<span class="contactTitle" style="background: $main_color;"><span>お問い合わせ</span></span>
+				<span class="contactCompany" style="font-size: $contact_company_text_size;">$contact_company</span>
+				<span class="contactTel">TEL:$contact_tel</span>
+				<span class="contactEmailTitle">メールアドレス:</span>
+				<span class="contactEmail" style="font-size: $contact_mail_text_size;">$contact_mail</span>
+			</div>
 		</div>
 	</body>
 	<style>
