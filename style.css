@@ -1,28 +1,78 @@
-<?php
-// 全体サイズ 1102.5px
-$plugin_dir = WP_PLUGIN_DIR . "/output-post-as-pdf/style.css";
-$style = file_get_contents($plugin_dir);
-
-$styles = <<<EOM
-	<style>
-html, body, div, span, object, iframe,
-h1, h2, h3, h4, h5, h6, p, blockquote, pre,
-abbr, address, cite, code,
-del, dfn, em, img, ins, kbd, q, samp,
-small, strong, sub, sup, var,
-b, i,
-dl, dt, dd, ol, ul, li,
-fieldset, form, label, legend,
-table, caption, tbody, tfoot, thead, tr, th, td,
-article, aside, canvas, details, figcaption, figure,
-footer, header, hgroup, menu, nav, section, summary,
-time, mark, audio, video {
+html,
+body,
+div,
+span,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+abbr,
+address,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+samp,
+small,
+strong,
+sub,
+sup,
+var,
+b,
+i,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section,
+summary,
+time,
+mark,
+audio,
+video {
+  padding: 0;
+  margin: 0;
+  vertical-align: baseline;
   background: transparent;
   border: 0;
-  margin: 0;
   outline: 0;
-  padding: 0;
-  vertical-align: baseline;
 }
 
 table {
@@ -30,8 +80,8 @@ table {
 }
 
 html {
-  font-size: 67.5%;
   font-family: serif;
+  font-size: 67.5%;
 }
 
 img {
@@ -40,22 +90,25 @@ img {
 
 .header {
   height: 40px;
-  font-style: bold;
-  background: #003c78;
-  color: #fff;
   font-size: 18px;
-  letter-spacing: -1px;
+  font-style: bold;
   line-height: 1.1;
+  color: #fff;
   text-align: center;
+  letter-spacing: -1px;
+  background: #003c78;
 }
 
 .contentTop {
-  font-style: bold;
-  height: 310px;
   position: relative;
+  z-index: 2;
+  height: 310px;
+  font-style: bold;
 }
 
 .mainImage {
+  position: relative;
+  z-index: -1;
   height: 310px;
   overflow: hidden;
 }
@@ -65,68 +118,84 @@ img {
 }
 
 .titleWrap {
-  color: #fff;
-  left: 0;
-  padding: 35px 0;
   position: absolute;
-  top: 0;
+  top: 50%;
+  left: 0;
   z-index: 2;
+  color: #fff;
+  transform: translateY(-50%);
 }
 
 .title_sub {
-  background: #003c78;
   display: inline-block;
-  line-height: 0.8;
-  font-size: 20px;
   padding: 5px 8px;
+  font-size: 20px;
+  line-height: 0.8;
+  background: #003c78;
 }
 
 .title_main {
-  font-size: 40px;
-  line-height: 0.9;
   padding: 0 10px 10px;
-  text-shadow: 2px 3px 8px rgba(0, 0, 0, 0.8);
+  font-size: 43px;
+  line-height: 0.7em;
+  text-shadow: 2px 3px 8px rgba(0 0 0 / 100%);
 }
 
 .title_notice {
-  vertical-align: middle;
-  color: #fff;
-  font-size: 27px;
-  height: 180px;
-  width: 100px;
+  box-sizing: border-box;
+  width: 100%;
+  height: 110px;
+  padding: 0 10px;
+  font-size: 19px;
+  font-style: bold;
   line-height: 0.8;
+  color: #fff;
+  text-align: center;
   word-break: break-all;
-  white-space: normal
   word-wrap: break-word;
   overflow-wrap: break-word;
-  text-align: center;
-  padding: 0 10px;
-  box-sizing: border-box;
+  white-space: normal;
+  vertical-align: middle;
 }
 
 .title_noticeWrap {
-  background: url(/wp-content/plugins/output-post-as-pdf/assets/src/img/deadline_bg.png) no-repeat;
-  border-radius: 50%;
-  bottom: 10px;
-  height: 180px;
   position: absolute;
   right: 10px;
-  width: 180px;
+  bottom: 10px;
   z-index: 2;
+  width: 110px;
+  height: 110px;
   table-layout: fixed;
+}
+
+.title_noticeBg {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+}
+
+.contentWrap {
+  position: relative;
+}
+
+.contentBg {
+  position: absolute;
+  top: -10px;
+  left: 0;
+  z-index: -1;
+  width: 100%;
 }
 
 .detailWrap {
   height: 78px;
-  background: #fff;
   padding: 10px 0 0;
 }
 
 .detailTable {
+  width: 94%;
+  margin: 0 auto;
   font-size: 20px;
   font-style: italic-bold;
-  margin: 0 auto;
-  width: 87%;
 }
 
 .detailTable:first-of-type {
@@ -134,33 +203,33 @@ img {
 }
 
 .detailTable tr {
-  padding-bottom: 12px;
   width: 100%;
+  padding-bottom: 12px;
   vertical-align: center;
 }
 
 .detailTable th,
 .detailTableHead {
-  color: #fff;
-  font-size: 18px;
-  padding: 0 7px;
-  text-align: center;
   box-sizing: border-box;
   width: 70px;
+  padding: 0 7px;
+  font-size: 18px;
+  line-height: 0.9;
+  color: #fff;
+  text-align: center;
+  vertical-align: center;
   background: #003c78;
   border-radius: 30px;
-  line-height: 0.9;
-  vertical-align: center;
 }
 
 .detailTable td:first-of-type,
 .detailTable td:nth-of-type(3) {
-  border: 0;
-  color: #000;
-  vertical-align: middle;
+  padding: 0 3px;
   font-size: 26px;
   line-height: 0.7;
-  padding: 0 3px;
+  color: #000;
+  vertical-align: middle;
+  border: 0;
 }
 
 .detailTable td.short {
@@ -180,11 +249,11 @@ img {
 }
 
 .detailWeek {
-  background: #000;
-  color: #fff;
-  font-size: 20px;
-  margin: 0 10px 0 5px;
   padding: 2px;
+  margin: 0 10px 0 5px;
+  font-size: 20px;
+  color: #fff;
+  background: #000;
 }
 
 .detailTime {
@@ -192,36 +261,37 @@ img {
 }
 
 .detailUnit {
-  font-size: 18px;
   margin-left: 5px;
+  font-size: 18px;
 }
 
 .listWrap {
-  margin: 0 auto;
+  width: 96%;
   height: 300px;
-  width: 98%;
+  margin: 0 auto;
+  background: #fff;
 }
 
 .listTitle {
-  background: #003c78;
-  color: #fff;
-  font-size: 20px;
-  line-height: 0.8;
-  font-style: italic-bold;
   padding: 5px 0;
-  text-align: center;
   margin-bottom: 5px;
+  font-size: 20px;
+  font-style: italic-bold;
+  line-height: 0.8;
+  color: #fff;
+  text-align: center;
+  background: #003c78;
 }
 
 .listTable {
+  width: 100%;
   font-style: bold;
   border: 0;
-  width: 100%;
 }
 
 .listTable div {
-  font-size: 0;
   margin-top: 10px;
+  font-size: 0;
 }
 
 .listTable div:first-of-type {
@@ -229,42 +299,28 @@ img {
 }
 
 .listTable p {
+  position: relative;
+  box-sizing: border-box;
+  display: inline-block;
+  width: 48.2%;
+  padding: 10px 5px;
+  font-size: 17px;
+  line-height: 0.8;
+  color: #fff;
+  vertical-align: bottom;
   background: #016fb9;
   border: 0;
-  box-sizing: border-box;
-  color: #fff;
-  display: inline-block;
-  vertical-align: bottom;
-  font-size: 16px;
-  line-height: 0.8;
-  padding: 10px 5px;
-  width: 48.2%;
+}
+
+.listCheckbox {
   position: relative;
-}
-
-.listTable p::before {
-  background: #016fb9;
-  border: 1px solid #fff;
-  content: "";
+  top: 3px;
   display: inline-block;
-  height: 15px;
-  margin-right: 5px;
-  vertical-align: middle;
-  width: 15px;
-  margin-top: 5px;
+  width: 20px;
 }
 
-.listTable p::after {
-  content: "";
-  border-left: 4px solid yellow;
-  border-bottom: 2px solid yellow;
-  width: 17px;
-  height: 10px;
-  transform: rotate(-45deg);
-  display: block;
-  position: absolute;
-  left: 3px;
-  top: 10px;
+.listCheckbox img {
+  width: 20px;
 }
 
 .listTable p:first-of-type {
@@ -272,13 +328,13 @@ img {
 }
 
 .listWrap.type--a {
-  border: 4px solid #003c78;
   height: 240px;
+  border: 4px solid #003c78;
 }
 
 .listWrap.type--a .listTitle {
-  margin-bottom: 5px;
   margin-top: -1px;
+  margin-bottom: 5px;
 }
 
 .listWrap.type--a .listTable {
@@ -287,14 +343,15 @@ img {
 
 .listWrap.type--a .listTable div {
   margin-top: 0;
+  margin-bottom: 0;
 }
 
 .listWrap.type--a .listTable p {
-  background: none;
-  vertical-align: initial;
-  color: #000;
-  padding: 5px;
   width: 100%;
+  padding: 5px;
+  color: #000;
+  vertical-align: initial;
+  background: none;
 }
 
 .listWrap.type--a .listTable p::before {
@@ -302,27 +359,19 @@ img {
   border: 1px solid #000;
 }
 
-.listTable p::after {
-  border-color: red;
-  top: 6px;
-}
-
-.listWrap.type--a .listTable div {
-  margin-bottom: 0;
-}
 .listWrap.type--a .listTable div:nth-of-type(4),
 .listWrap.type--a .listTable div:last-of-type {
   display: none;
 }
 
 .message {
-  font-size: 15px;
-  line-height: 0.8;
-  font-style: italic;
+  width: 96%;
   height: 40px;
   padding-bottom: 10px;
-  width: 98%;
   margin: 0 auto;
+  font-size: 15px;
+  font-style: italic;
+  line-height: 0.8;
   overflow-wrap: break-word;
 }
 
@@ -332,25 +381,32 @@ img {
 }
 
 .application {
-  background: #00f;
-  font-size: 0;
+  position: relative;
   height: 72px;
   padding: 13px 20px 0;
+  font-size: 0;
+}
+
+.application img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
 }
 
 .applicationText {
   font-size: 22px;
-  line-height: 1;
   font-style: bold;
+  line-height: 1;
 }
 
 .applicationTextWrap {
-  color: #fff;
   display: inline-block;
+  width: 87%;
   font-size: 14px;
+  color: #fff;
   text-align: center;
   vertical-align: middle;
-  width: 87%;
 }
 
 .applicationUrl {
@@ -360,59 +416,59 @@ img {
 }
 
 .applicationArrow {
-  display: inline-block;
   position: relative;
-  height: 32px;
-  vertical-align: middle;
+  display: inline-block;
   width: 4%;
+  height: 32px;
+  vertical-align: baseline;
 }
 
 .applicationArrow span {
-  background: yellow;
+  position: absolute;
   display: inline-block;
   width: 7px;
   height: 7px;
+  background: #fff100;
   transform: rotate(45deg);
-  position: absolute;
 }
 
 .applicationArrow span:nth-of-type(2) {
-	left: 7px;
-	top: 6px;
+  top: 6px;
+  left: 7px;
 }
 
 .applicationArrow span:nth-of-type(3) {
-	left: 14px;
-	top: 13px;
+  top: 13px;
+  left: 14px;
 }
 
 .applicationArrow span:nth-of-type(4) {
-	left: 0px;
-	top: 13px;
+  top: 13px;
+  left: 0;
 }
 
 .applicationArrow span:nth-of-type(5) {
-	left: 7px;
-	top: 20px;
+  top: 20px;
+  left: 7px;
 }
 
 .applicationArrow span:last-of-type {
-	left: 0;
-	top: 27px;
+  top: 27px;
+  left: 0;
 }
 
 .applicationImgWrap {
   position: relative;
   top: 3px;
   display: inline-block;
-  vertical-align: middle;
   width: 9%;
+  vertical-align: middle;
 }
 
 .profileWrap {
-  padding: 10px;
-  height: 175px;
   width: 100%;
+  height: 175.5px;
+  padding: 10px;
 }
 
 .profileWrap table {
@@ -425,7 +481,7 @@ img {
 
 .profileImg {
   width: 150px;
-  fheight: 200px;
+  height: 200px;
 }
 
 .profileImg img {
@@ -433,92 +489,101 @@ img {
 }
 
 .profileDetail {
+  width: 80%;
   padding: 0 10px;
   vertical-align: top;
-  width: 80%
 }
 
 .profileDetailHead {
-  border-bottom: 1px solid #003c78;
-  color: #003c78;
   font-size: 25px;
   line-height: 0.8;
+  color: #003c78;
+  border-bottom: 1px solid #003c78;
 }
 
 .profileTitle {
-  letter-spacing: -1;
+  display: inline-block;
+  margin-right: 5px;
   font-size: 19px;
   font-style: bold;
-  display: inline-block;
   line-height: 0.8;
+  letter-spacing: -1;
 }
 
 .profileName {
+  position: relative;
+  top: -3px;
   display: inline-block;
-  font-style: bold;
   font-size: 35px;
+  font-style: bold;
   line-height: 0.8;
   vertical-align: middle;
 }
 
 .profileText {
+  width: 100%;
+  padding: 5px 0;
   font-size: 15px;
   font-style: italic;
   line-height: 0.9;
-  padding: 5px 0;
-  width: 100%;
   word-wrap: break-word;
 }
 
 .contact {
-  background: #000;
-  color: #fff;
+  position: relative;
+  height: 30px;
+  padding: 18.7px 5px 5px 10px;
   font-style: italic-bold;
-  height: 30.5px;
-  padding: 14.7px 10px 9px;
+  color: #fff;
 }
 
-.contactWrap {
-  font-size: 15px;
+.contactBg {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  z-index: -1;
   width: 100%;
 }
 
+.contactWrap {
+  width: 100%;
+  font-size: 15px;
+  line-height: 1;
+}
+
 .contactTitle {
-  vertical-align: middle;
-  display: inline-block;
-  background: #003c78;
-  border-radius: 30px;
-  padding: 0 5px 2px;
   box-sizing: border-box;
-  font-weight: normal;
-  width: 12%;
+  display: inline-block;
+  width: 11%;
+  font-size: 12px;
+  line-height: 1;
+  text-align: center;
+  vertical-align: middle;
+  background: #003c78;
+  border-radius: 50px;
+}
+
+.contactTitle span {
+  position: relative;
+  top: -1px;
 }
 
 .contactCompany {
   display: inline-block;
-  vertical-align: middle;
-  padding-left: 10px;
   width: 26%;
-  box-sizing: border-box;
 }
 
 .contactTel {
   display: inline-block;
-  vertical-align: middle;
-  width: 21%;
+  width: 18%;
 }
 
 .contactEmailTitle {
   display: inline-block;
-  vertical-align: middle;
   width: 14.5%;
 }
 
 .contactEmail {
   display: inline-block;
-  vertical-align: middle;
-  width: 23%;
+  width: 28%;
 }
-
-</style>
-EOM;
