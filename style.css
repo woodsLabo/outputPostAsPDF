@@ -114,6 +114,7 @@ img {
 }
 
 .mainImage img {
+  width: 794px;
   height: 310px;
 }
 
@@ -403,6 +404,7 @@ img {
 .applicationTextWrap {
   display: inline-block;
   width: 87%;
+  height: 100%;
   font-size: 14px;
   color: #fff;
   text-align: center;
@@ -420,7 +422,7 @@ img {
   display: inline-block;
   width: 4%;
   height: 32px;
-  vertical-align: baseline;
+  vertical-align: middle;
 }
 
 .applicationArrow span {
@@ -459,10 +461,10 @@ img {
 
 .applicationImgWrap {
   position: relative;
-  top: 3px;
+  top: -3px;
   display: inline-block;
   width: 9%;
-  vertical-align: middle;
+  vertical-align: top;
 }
 
 .profileWrap {

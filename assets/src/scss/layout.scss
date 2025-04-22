@@ -388,6 +388,14 @@ time, mark, audio, video {
     border: none;
     border-radius: 3px;
   }
+
+  input[type="text"].title {
+    color: #fff;
+
+    &::placeholder {
+      color: #fff;
+    }
+  }
 }
 
 .title_wrap {
@@ -480,9 +488,9 @@ textarea.notice_text {
 
 .list {
   &_title {
-    color: #fff !important;
+    // color: #fff !important;
     text-align: center;
-    background-color: #003c78 !important;
+    // background-color: #003c78 !important;
     border-radius: 0 !important;
 
     &::placeholder {
@@ -513,11 +521,13 @@ textarea.notice_text {
   &_wrap {
     display: grid;
     grid-template-rows: 45px 45px 1fr;
-    grid-template-columns: 80% 20%;
+    grid-template-columns: 85% 1fr;
     row-gap: 5px;
+    column-gap: 20px;
     padding: 13px 20px;
     margin: 10px 0;
-    background: #00f;
+    background-repeat: no-repeat;
+    background-size: contain;
 
     input[type="text"] {
       text-align: center;

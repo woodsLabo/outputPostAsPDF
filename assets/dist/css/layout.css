@@ -321,6 +321,12 @@ time, mark, audio, video {
   border: none;
   border-radius: 3px;
 }
+.opap__wrap input[type=text].title {
+  color: #fff;
+}
+.opap__wrap input[type=text].title::placeholder {
+  color: #fff;
+}
 
 .title_wrap {
   margin-top: 10px;
@@ -398,9 +404,7 @@ textarea.notice_text {
 }
 
 .list_title {
-  color: #fff !important;
   text-align: center;
-  background-color: #003c78 !important;
   border-radius: 0 !important;
 }
 .list_title::placeholder {
@@ -425,11 +429,13 @@ textarea.notice_text {
 .seminar_wrap {
   display: grid;
   grid-template-rows: 45px 45px 1fr;
-  grid-template-columns: 80% 20%;
+  grid-template-columns: 85% 1fr;
   row-gap: 5px;
+  column-gap: 20px;
   padding: 13px 20px;
   margin: 10px 0;
-  background: #00f;
+  background-repeat: no-repeat;
+  background-size: contain;
 }
 .seminar_wrap input[type=text] {
   text-align: center;

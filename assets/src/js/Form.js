@@ -10,6 +10,7 @@ class Form {
     window.addEventListener("load", () => {
       this.pdfTypes = document.querySelectorAll(".pdf_types");
       this.bgTypesWrap = document.querySelector(".bg_type_wrap");
+      this.colorTypes = document.querySelectorAll(".color_types");
       this.bgTypes = document.querySelectorAll(".bg_types");
       this.title = document.querySelector(".title");
       this.subCatch = document.querySelector(".sub_catch");
@@ -26,6 +27,7 @@ class Form {
       this.message = document.querySelector(".message");
       this.seminarText = document.querySelector(".seminar_text");
       this.seminarUrl = document.querySelector(".seminar_url");
+      this.seminarWrap = document.querySelector(".seminar_wrap");
       this.profileTitle = document.querySelector(".profile_title");
       this.profileName = document.querySelector(".profile_name");
       this.profileText = document.querySelector(".profile_text");
@@ -43,6 +45,7 @@ class Form {
       this.bgImageDeleteBtn = document.querySelector(".bg_image_delete");
       this.qrImageDeleteBtn = document.querySelector(".qr_image_delete");
       this.profileImageDeletBtn = document.querySelector(".profile_image_delete");
+      this.footerBg = "";
       this.resetFormBt = document.querySelector(".js-reset-form-bt");
 
       this.eventListener();
@@ -58,6 +61,7 @@ class Form {
     const imageObjects = this.createImageObjects();
     const sizeRangeObjects = this.createSizeRange();
     const colorArray = this.createColorArray();
+    const imageArray = this.createImageArray();
 
     // init sessionStrage
     selectObjects.map(e => this.initSessionStorageSelect(e));
@@ -66,14 +70,17 @@ class Form {
     imageObjects.map(e => this.initSessionStorageImage(e));
     sizeRangeObjects.map(e => this.initSessionStorageRange(e));
     colorArray.map(e => this.initSessionStorageColor(e));
+    imageArray.map(e => this.initSessionStorageBg(e));
 
-    this.initImagePreview();
-    this.initSizeRange();
-    this.initThemeColor();
+    // init strage and form
 
     selectObjects.map(e => this.selectTypes(e));
     nodeObjects.map(e => this.handleFormChange(e));
     this.lists.map(e => this.handleFormChange(e));
+    this.initImagePreview();
+    sizeRangeObjects.map(e => this.initSizeRange(e));
+    colorArray.map(e => this.initThemeColor(e));
+    // imageArray.map(e => this.initBgImage(e));
 
     this.resetForm();
   }
@@ -114,6 +121,13 @@ class Form {
     ];
   }
 
+  createImageArray() {
+    return [
+      "seminar_bg",
+      "footer_bg",
+    ];
+  }
+
   /**
    * 画像用に配列オブジェクト生成
    * @return {Array} オブジェクト配列
@@ -144,6 +158,10 @@ class Form {
       {
         ele: this.pdfTypes,
         type: "pdf",
+      },
+      {
+        ele: this.colorTypes,
+        type: "color",
       },
       {
         ele: this.bgTypes,
@@ -179,6 +197,7 @@ class Form {
    */
   selectTypes(object) {
     const opapType = document.querySelector(`.opap_${object.type}_type`);
+    const listWrap = document.querySelector(".list_wrap");
 
     object.ele.forEach(e => {
       if (e.checked) opapType.value = e.value; // select type init
@@ -194,6 +213,20 @@ class Form {
         if (object.type === "bg") {
           this.bgSettingImage.setAttribute("src", e.target.value);
         }
+
+        if (object.type === "color") {
+          this.setSessionStorage("seminar_bg", e.target.dataset.seminar);
+          this.setSessionStorage("footer_bg", e.target.dataset.footer);
+          this.initBgImage("seminar_bg", e.target.dataset.seminar);
+          this.initBgImage("footer_bg", e.target.dataset.footer);
+          this.title.style.background = e.target.value;
+          this.title.style.color = e.target.value === "yellow" ? "#000" : "#fff";
+          this.listTitle.style.background = e.target.value;
+          this.listTitle.style.color = e.target.value === "yellow" ? "#000" : "#fff";
+          listWrap.style.borderColor = e.target.value;
+          this.seminarWrap.style.background = "url(" + e.target.dataset.seminar + ") no-repeat";
+          this.seminarWrap.style.backgroundSize = "cover";
+        }
       });
     });
 
@@ -205,6 +238,14 @@ class Form {
 
     if (object.type === "bg") {
       this.bgSettingImage.setAttribute("src", opapType.value);
+    }
+
+    if (object.type === "color") {
+      this.title.style.background = opapType.value;
+      this.title.style.color = opapType.value === "yellow" ? "#000" : "#fff";
+      this.listTitle.style.background = opapType.value;
+      this.listTitle.style.color = opapType.value === "yellow" ? "#000" : "#fff";
+      listWrap.style.borderColor = opapType.value;
     }
   }
 
@@ -263,6 +304,7 @@ class Form {
           }
 
           document.querySelector(`.opap_${obj.preview}_img`).value = e.target.result;
+          // サイズ的にstrageにセットできないのでIndexdDBを使用する
           this.setSessionStorage(obj.preview, e.target.result);
           this.setSessionStorage(`${obj.preview}_img`, file.name);
         });
@@ -270,26 +312,24 @@ class Form {
     });
   }
 
-  initSizeRange() {
-    const sizeRanges = this.createSizeRange();
-    sizeRanges.forEach((item) => {
-      document.querySelector(`.${item.ele}`).addEventListener("change", () => {
-        const rangeValue = document.querySelector(`.${item.ele}`).value;
-        this.setSessionStorage(item.type, rangeValue);
-        document.querySelector(`.opap_${item.ele}`).value = rangeValue;
-      });
+  initSizeRange(obj) {
+    document.querySelector(`.${obj.ele}`).addEventListener("change", () => {
+      const rangeValue = document.querySelector(`.${obj.ele}`).value;
+      this.setSessionStorage(obj.type, rangeValue);
+      document.querySelector(`.opap_${obj.ele}`).value = rangeValue;
     });
   }
 
-  initThemeColor() {
-    const themeColors = this.createColorArray();
-    themeColors.forEach(ele => {
-      document.querySelector(`.${ele}`).addEventListener("change", () => {
-        const colorCode = document.querySelector(`.${ele}`).value;
-        this.setSessionStorage(ele, colorCode);
-        document.querySelector(`.opap_${ele}`).value = colorCode;
-      });
+  initThemeColor(ele) {
+    document.querySelector(`.${ele}`).addEventListener("change", () => {
+      const colorCode = document.querySelector(`.${ele}`).value;
+      this.setSessionStorage(ele, colorCode);
+      document.querySelector(`.opap_${ele}`).value = colorCode;
     });
+  }
+
+  initBgImage(ele, value) {
+    document.querySelector(`.opap_${ele}`).value = value;
   }
 
   /**
@@ -336,17 +376,22 @@ class Form {
     if (key !== "bg" && key !== "qr" && key !== "profile") return sessionStorage.setItem(key, value);
   }
 
-  initSessionStorageSelect(object) {
-    object.ele.forEach(e => {
-      if (e.value === sessionStorage.getItem(`${object.type}_type`)) {
+  /**
+   * sessionStrageに入っている選択情報をフォームに返す
+   *
+   * @param {Object} obj - 対象のオブジェクト
+   */
+  initSessionStorageSelect(obj) {
+    obj.ele.forEach(e => {
+      if (e.value === sessionStorage.getItem(`${obj.type}_type`)) {
         e.checked = true;
-        document.querySelector(`.opap_${object.type}_type`).value = e.value;
+        document.querySelector(`.opap_${obj.type}_type`).value = e.value;
       }
     });
   }
 
   /**
-   * sessionStrageに入っているテキストをフォームに返す
+   * sessionStrageに入っているテキストを画面とフォームに返す
    *
    * @param {Object} node - 対象のnode
    */
@@ -355,14 +400,37 @@ class Form {
     document.querySelector(`.opap_${node.name}`).value = sessionStorage.getItem(node.name) !== null ? sessionStorage.getItem(node.name) : "";
   }
 
+  /**
+   * sessionStrageに入っている選択範囲を画面とフォームに返す
+   *
+   * @param {Object} obj - 対象のオブジェクト
+   */
   initSessionStorageRange(obj) {
     document.querySelector(`.${obj.ele}`).value = sessionStorage.getItem(obj.type) !== null ? sessionStorage.getItem(obj.type) : "";
     document.querySelector(`.opap_${obj.ele}`).value = sessionStorage.getItem(obj.type) !== null ? sessionStorage.getItem(obj.type) : "";
   }
 
+  /**
+   * sessionStrageに入っている色情報を画面とフォームに返す
+   *
+   * @param {Object} ele - 対象のエレメント
+   */
   initSessionStorageColor(ele) {
     document.querySelector(`.${ele}`).value = sessionStorage.getItem(ele) !== null ? sessionStorage.getItem(ele) : "";
     document.querySelector(`.opap_${ele}`).value = sessionStorage.getItem(ele) !== null ? sessionStorage.getItem(ele) : "";
+  }
+
+  /**
+   * sessionStrageに入っている画像情報を画面とフォームに返す
+   *
+   * @param {Object} obj - 対象のオブジェクト
+   */
+  initSessionStorageBg(ele) {
+    if (ele === "seminar_bg" && sessionStorage.getItem(ele) !== null) {
+      this.seminarWrap.style.background = "url(" + sessionStorage.getItem(ele) + ") no-repeat";
+      this.seminarWrap.style.backgroundSize = "cover";
+    }
+    document.querySelector(`.opap_${ele}`).value = sessionStorage.getItem(ele);
   }
 
   /**

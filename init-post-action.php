@@ -9,6 +9,25 @@ function init_post_action($content) {
 	$bg_image04 = get_option("main_media04") != "" ? get_option("main_media04") : "{$plugin_path}/img04.png";
 	$bg_image05 = get_option("main_media05") != "" ? get_option("main_media05") : "{$plugin_path}/img05.png";
 
+	$seminar_image_path = "{$plugin_path}/bg/seminar_";
+	$footer_image_path = "{$plugin_path}/bg/footer_";
+	$image_prefix = "_bg.png";
+
+	$seminar_image01 = "{$seminar_image_path}blue${image_prefix}";
+	$seminar_image02 = "{$seminar_image_path}green${image_prefix}";
+	$seminar_image03 = "{$seminar_image_path}red${image_prefix}";
+	$seminar_image04 = "{$seminar_image_path}orange${image_prefix}";
+	$seminar_image05 = "{$seminar_image_path}pink${image_prefix}";
+	$seminar_image06 = "{$seminar_image_path}yellow${image_prefix}";
+	$seminar_image07 = "{$seminar_image_path}gray${image_prefix}";
+	$footer_image01 = "{$footer_image_path}blue${image_prefix}";
+	$footer_image02 = "{$footer_image_path}green${image_prefix}";
+	$footer_image03 = "{$footer_image_path}red${image_prefix}";
+	$footer_image04 = "{$footer_image_path}orange${image_prefix}";
+	$footer_image05 = "{$footer_image_path}pink${image_prefix}";
+	$footer_image06 = "{$footer_image_path}yellow${image_prefix}";
+	$footer_image07 = "{$footer_image_path}gray${image_prefix}";
+
 	$file_name = "pdf";
 	$post_label = "pdf_post";
 
@@ -17,6 +36,15 @@ function init_post_action($content) {
 		<div class="opap__wrap">
 			<input class="pdf_types" type="hidden" name="pdf_type" id="type1" value="a" checked>
 			<p>テーマカラーを選択</p>
+			<div class="bg_type_wrap">
+				<input class="color_types" type="radio" name="color_type" id="main_color1" value="blue" data-seminar="$seminar_image01" data-footer="$footer_image01" checked><label for="main_color1">カラー1</label>
+				<input class="color_types" type="radio" name="color_type" id="main_color2" value="green" data-seminar="$seminar_image02" data-footer="$footer_image02"><label for="main_color2">カラー2</label>
+				<input class="color_types" type="radio" name="color_type" id="main_color3" value="red" data-seminar="$seminar_image03" data-footer="$footer_image03"><label for="main_color3">カラー3</label>
+				<input class="color_types" type="radio" name="color_type" id="main_color4" value="orange" data-seminar="$seminar_image04" data-footer="$footer_image04"><label for="main_color4">カラー4</label>
+				<input class="color_types" type="radio" name="color_type" id="main_color5" value="pink" data-seminar="$seminar_image05" data-footer="$footer_image05"><label for="main_color5">カラー5</label>
+				<input class="color_types" type="radio" name="color_type" id="main_color6" value="yellow" data-seminar="$seminar_image06" data-footer="$footer_image06"><label for="main_color6">カラー6</label>
+				<input class="color_types" type="radio" name="color_type" id="main_color7" value="gray" data-seminar="$seminar_image07" data-footer="$footer_image07"><label for="main_color7">カラー7</label>
+			</div>
 			<input type="color" class="main_color" name="main_color">
 			<p>キャッチコピー背景を選択</p>
 			<div class="bg_type_wrap">
@@ -29,16 +57,16 @@ function init_post_action($content) {
 			<p>キャッチコピー背景をアップロード</p>
 			<input type="file" accept="image/*" class="bg_image" name="bg_image" style="display: none"><button class="bg_image_select" type="button">画像を選択</button><button class="bg_image_delete" type="button">削除</button>
 			<div class="title_wrap">
-				<input type="text" class="title" name="title" placeholder="タイトルを入力" style="text-align: center;" maxlength=44>
+				<input type="text" class="title" name="title" placeholder="最上部テキストを入力" style="text-align: center;" maxlength=44>
 			</div>
 			<div class="bg_img_wrap">
-				<div class="bg_preview"><img src="" class="bg_setting_image"></div>
+				<div class="bg_preview"><img src="$bg_image01" class="bg_setting_image"></div>
 				<div class="sub_wrap">
 					<input class="sub_catch" type="text" name="sub_catch" placeholder="キャッチコピー上部に表示するテキストを入力" maxlength="36">
 				</div>
 				<div class="main_wrap">
 					<textarea class="main_catch" name="main_catch" placeholder="キャッチコピーを入力" rows="3"></textarea>
-					<textarea id="" class="notice_text" name="notice_text" cols="5" rows="3" placeholder="先着&#13;&#10;お申し込み&#13;&#10;x名限定"></textarea>
+					<textarea id="" class="notice_text" name="notice_text" cols="5" rows="3" placeholder="先着&#13;&#10;お申込み&#13;&#10;x名限定"></textarea>
 				</div>
 				<span>キャッチコピーのフォントサイズ</span><input type="range" class="notice_text_size" name="notice_text_size" min="10" max="42" value="42">
 			</div>
@@ -48,8 +76,8 @@ function init_post_action($content) {
 				<input class="detail_item_start_time" type="time" name="detail_item_start_time">〜<input class="detail_item_end_time" type="time" name="detail_item_end_time">
 				<p>定員</p>
 				<input class="detail_item_capacity" type="number" name="detail_item_capacity">
-				<p>場所<br><span>(上限25文字)</span></p>
-				<input class="detail_item_place" type="text" name="detail_item_place" placeholder="開催場所を入力" maxlength="25">
+				<p>会場<br><span>(上限25文字)</span></p>
+				<input class="detail_item_place" type="text" name="detail_item_place" placeholder="開催会場を入力" maxlength="25">
 				<p>料金</p>
 				<input class="detail_item_price" type="text" name="detail_item_price" placeholder="数値のみ">
 			</div>
@@ -70,7 +98,7 @@ function init_post_action($content) {
 				</div>
 			</div>
 			<textarea class="message" id="" name="message" cols="30" rows="4" placeholder="リストの下に表示するテキストを入力"></textarea>
-			<p>セミナーの矢印アイコンの色</p>
+			<p>矢印アイコンの色</p>
 			<input type="color" class="seminar_arrow_color" name="seminar_arrow_color">
 			<div class="seminar_wrap">
 				<input class="seminar_text" type="text" name="seminar_text" placeholder="セミナー案内のテキスト" value="">
@@ -106,6 +134,7 @@ function init_post_action($content) {
 			<form action="" target="_blonk" method="post" class="opap_form">
 				<input type="hidden" name="dw" value="true">
 				<input type="hidden" class="opap_main_color" name="main_color" value="">
+				<input type="hidden" class="opap_color_type" name="color_type" value="">
 				<input type="hidden" class="opap_pdf_type" name="pdf_type" value="">
 				<input type="hidden" class="opap_bg_type" name="bg_type" value="">
 				<input type="hidden" class="opap_bg_img" name="bg_img" value="">
@@ -139,6 +168,7 @@ function init_post_action($content) {
 				<input type="hidden" class="opap_seminar_text" name="seminar_text" value="">
 				<input type="hidden" class="opap_seminar_url" name="seminar_url" value="">
 				<input type="hidden" class="opap_seminar_arrow_color" name="seminar_arrow_color" value="">
+				<input type="hidden" class="opap_seminar_bg" name="seminar_bg" value="">
 				<input type="hidden" class="opap_qr_img" name="seminar_qr" value="">
 				<input type="hidden" class="opap_profile_img" name="profile_img" value="">
 				<input type="hidden" class="opap_profile_title" name="profile_title" value="">
@@ -149,6 +179,7 @@ function init_post_action($content) {
 				<input type="hidden" class="opap_contact_tel" name="contact_tel" value="">
 				<input type="hidden" class="opap_contact_mail" name="contact_mail" value="">
 				<input type="hidden" class="opap_contact_mail_text_size" name="contact_mail_text_size" value="">
+				<input type="hidden" class="opap_footer_bg" name="footer_bg" value="">
 				<input type="hidden" name="post_label" value="$post_label">
 				<div class="opap_button_wrap">
 					<button class="form_preview" name="dl_type" value="preview">プレビュー</button>

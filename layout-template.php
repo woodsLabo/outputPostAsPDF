@@ -3,6 +3,7 @@ $html = "";
 if (isset($_POST) && $_POST["post_label"] === "pdf_post") :
 	include_once("style.php");
 	$main_color = $_POST["main_color"] ?? null;
+	$color_type = $_POST["color_type"] ?? null;
 	$sub_color = $_POST["sub_color"] ?? null;
 	$title = $_POST["title"] ?? null;
 	$sub_catch = $_POST["sub_catch"] ?? null;
@@ -54,6 +55,7 @@ if (isset($_POST) && $_POST["post_label"] === "pdf_post") :
 	$contact_mail_text_size = $_POST["contact_mail_text_size"];
 
 	// ローカルではfile_get_contentesでこけるため、リリース時にはこの分岐は除却
+	$plugins_url = plugins_url("output-post-as-pdf");
 	$main_media = wp_get_environment_type() == "local" ? WP_PLUGIN_DIR . "/output-post-as-pdf/assets/src/img/img01.png" : $_POST["bg_type"]; // 選択デフォルト画像
 	// $main_media = $_POST["bg_type"]; // 選択デフォルト画像
 	$up_main_media = $_POST["bg_img"]; // upload画像
@@ -61,8 +63,18 @@ if (isset($_POST) && $_POST["post_label"] === "pdf_post") :
 	$profile_media = $_POST["profile_img"];
 	$main_bg = "data:image/png;base64," . base64_encode(file_get_contents(WP_PLUGIN_DIR . "/output-post-as-pdf/assets/src/img/main_bg.png"));
 	$notice_bg_img = "data:image/png;base64," . base64_encode(file_get_contents(WP_PLUGIN_DIR . "/output-post-as-pdf/assets/src/img/deadline_bg.png"));
-	$seminar_bg = "data:image/png;base64," . base64_encode(file_get_contents(WP_PLUGIN_DIR . "/output-post-as-pdf/assets/src/img/seminar_bg.png"));
-	$footer_bg = "data:image/png;base64," . base64_encode(file_get_contents(WP_PLUGIN_DIR . "/output-post-as-pdf/assets/src/img/footer_bg.png"));
+	$seminar_bg_img = str_replace($plugins_url, "/output-post-as-pdf", $_POST["seminar_bg"]);
+	$footer_bg_img = str_replace($plugins_url, "/output-post-as-pdf", $_POST["footer_bg"]);
+	$seminar_bg = "data:image/png;base64," . base64_encode(file_get_contents(WP_PLUGIN_DIR . $seminar_bg_img));
+	$footer_bg = "data:image/png;base64," . base64_encode(file_get_contents(WP_PLUGIN_DIR . $footer_bg_img));
+
+	if (!empty($sub_catch)) {
+		$sub_catch_ele = <<< EOM
+			<p class="title_sub">$sub_catch</p>
+		EOM;
+	} else {
+		$sub_catch_ele = "";
+	}
 
 	if (!empty($notice_text)) {
 		$notice_ele = <<< EOM
@@ -90,13 +102,13 @@ $html = <<< EOM
 		</style>
 	</head>
 	<body>
-		<div class="header" style="background: $main_color;">$title</div>
+		<div class="header" style="background: $color_type;">$title</div>
 		<div class="contentTop">
 			<div class="mainImage">
 				<img src="$main_media">
 			</div>
 			<div class="titleWrap">
-				<p class="title_sub">$sub_catch</p>
+				$sub_catch_ele
 				<div class="title_main" style="font-size: $notice_text_size;">$main_catch</div>
 			</div>
 			$notice_ele
@@ -106,23 +118,23 @@ $html = <<< EOM
 			<div class="detailWrap">
 				<table class="detailTable">
 					<tr>
-						<th style="background: $main_color;">開催日時</th>
-						<td class="long">$str_time({$week[$date]})<span class="detailTimeSpacer">{$detail_item_start_time->format("g:i")}〜{$detail_item_end_time->format("g:i")}</span></td>
-						<td class="detailTableHead" style="background: $main_color;">定員</td>
+						<th style="background: $color_type;">開催日時</th>
+						<td class="long">$str_time({$week[$date]})<span class="detailTimeSpacer">{$detail_item_start_time->format("H:i")}〜{$detail_item_end_time->format("H:i")}</span></td>
+						<td class="detailTableHead" style="background: $color_type;">定員</td>
 						<td class="short">{$detail_item_capacity}名</td>
 					</tr>
 				</table>
 				<table class="detailTable">
 					<tr>
-						<th style="background: $main_color;">場所</th>
+						<th style="background: $color_type;">会場</th>
 						<td class="long detailPlace" style="font-size: $detail_item_place_text_size;">$detail_item_place</td>
-						<td class="detailTableHead" style="background: $main_color;">料金</td>
+						<td class="detailTableHead" style="background: $color_type;">料金</td>
 						<td class="short">{$detail_item_price}円</td>
 					</tr>
 				</table>
 			</div>
-			<div class="listWrap{$pdf_type_A}">
-				<p class="listTitle" style="background: $main_color;">$list_title</p>
+			<div class="listWrap{$pdf_type_A}" style="border-color: $color_type;">
+				<p class="listTitle" style="background: $color_type;">$list_title</p>
 				<div class="listTable">
 					<div>
 						$list_01
@@ -174,7 +186,7 @@ $html = <<< EOM
 		<div class="contact">
 			<div class="contactBg"><img src="$footer_bg"></div>
 			<div class="contactWrap">
-				<span class="contactTitle" style="background: $main_color;"><span>お問い合わせ</span></span>
+				<span class="contactTitle" style="background: $color_type;"><span>お問い合わせ</span></span>
 				<span class="contactCompany" style="font-size: $contact_company_text_size;">$contact_company</span>
 				<span class="contactTel">TEL:$contact_tel</span>
 				<span class="contactEmailTitle">メールアドレス:</span>
