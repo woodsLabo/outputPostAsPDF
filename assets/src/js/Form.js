@@ -73,7 +73,6 @@ class Form {
     imageArray.map(e => this.initSessionStorageBg(e));
 
     // init strage and form
-
     selectObjects.map(e => this.selectTypes(e));
     nodeObjects.map(e => this.handleFormChange(e));
     this.lists.map(e => this.handleFormChange(e));
@@ -114,6 +113,10 @@ class Form {
     ];
   }
 
+  /**
+   * 配色周りのフォームのclass名を配列化
+   * @return {Array} class名の配列
+   */
   createColorArray() {
     return [
       "main_color",
@@ -121,6 +124,10 @@ class Form {
     ];
   }
 
+  /**
+   * 画像周りのフォームのclass名を配列化
+   * @return {Array} class名の配列
+   */
   createImageArray() {
     return [
       "seminar_bg",
@@ -170,6 +177,10 @@ class Form {
     ];
   }
 
+  /**
+   * サイズ指定用に配列オブジェクト生成
+   * @return {Array} オブジェクト配列
+   */
   createSizeRange() {
     return [
       {
@@ -312,6 +323,10 @@ class Form {
     });
   }
 
+  /**
+   * サイズ指定フォーム値の反映と受け渡し用に設定
+   * @param {object} obj - サイズ指定要素のオブジェクト
+   */
   initSizeRange(obj) {
     document.querySelector(`.${obj.ele}`).addEventListener("change", () => {
       const rangeValue = document.querySelector(`.${obj.ele}`).value;
@@ -320,6 +335,10 @@ class Form {
     });
   }
 
+  /**
+   * システムの全体色の反映と受け渡し様に設定
+   * @param {string} ele - 色指定の要素
+   */
   initThemeColor(ele) {
     document.querySelector(`.${ele}`).addEventListener("change", () => {
       const colorCode = document.querySelector(`.${ele}`).value;
@@ -328,6 +347,11 @@ class Form {
     });
   }
 
+  /**
+   * 背景画像の受け渡し
+   * @param {string} ele - 背景指定の要素
+   * @param {string} value - 画像のurl
+   */
   initBgImage(ele, value) {
     document.querySelector(`.opap_${ele}`).value = value;
   }
@@ -353,11 +377,7 @@ class Form {
     document.querySelector(`.opap_${imageObjects[index].preview}_img`).value = "";
     document.querySelector(`.${imageObjects[index].preview}_image`).value = "";
     document.querySelector(`.${imageObjects[index].preview}_image_delete`).style.display = "none";
-    /**
-     * if.
-     *
-     * @param {} index
-     */
+
     if (index === 0) {
       document.querySelector(`.${imageObjects[index].preview}_type_wrap`).style.display = "block";
       this.bgSettingImage.style.display = "block";
