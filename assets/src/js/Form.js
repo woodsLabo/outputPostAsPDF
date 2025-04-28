@@ -1,5 +1,9 @@
+const DB_NAME = "imagesDB";
+const VERSION = "1";
+
 class Form {
   constructor() {
+    this.db = "";
     this.onLoad();
   }
 
@@ -49,28 +53,30 @@ class Form {
       this.resetFormBt = document.querySelector(".js-reset-form-bt");
 
       this.eventListener();
+      // window.indexedDB.deleteDatabase("imagesDB");
     });
   }
 
   /**
    * 各イベントをまとめる
    */
-  eventListener() {
+  async eventListener() {
+    await this.initIndexedDB();
     const nodeObjects = this.createNodeObjects();
     const selectObjects = this.createSelectObjects();
-    const imageObjects = this.createImageObjects();
+    // const imageObjects = this.createImageObjects();
     const sizeRangeObjects = this.createSizeRange();
     const colorArray = this.createColorArray();
     const imageArray = this.createImageArray();
 
-    // init sessionStrage
-    selectObjects.map(e => this.initSessionStorageSelect(e));
-    nodeObjects.map(e => this.initSessionStorageText(e));
-    this.lists.map(e => this.initSessionStorageText(e));
-    imageObjects.map(e => this.initSessionStorageImage(e));
-    sizeRangeObjects.map(e => this.initSessionStorageRange(e));
-    colorArray.map(e => this.initSessionStorageColor(e));
-    imageArray.map(e => this.initSessionStorageBg(e));
+    // return sessionStrage params
+    selectObjects.map(e => this.returnSessionStorageSelect(e));
+    nodeObjects.map(e => this.returnSessionStorageText(e));
+    this.lists.map(e => this.returnSessionStorageText(e));
+    // await imageObjects.map((e, index) => this.returnIndexedDBImages(e, index));
+    sizeRangeObjects.map(e => this.returnSessionStorageRange(e));
+    colorArray.map(e => this.returnSessionStorageColor(e));
+    imageArray.map(e => this.returnSessionStorageBg(e));
 
     // init strage and form
     selectObjects.map(e => this.selectTypes(e));
@@ -82,6 +88,50 @@ class Form {
     // imageArray.map(e => this.initBgImage(e));
 
     this.resetForm();
+  }
+
+  /**
+   * indexedDBの初期設定
+   */
+  async initIndexedDB() {
+    const request = await window.indexedDB.open(DB_NAME, VERSION);
+
+    request.onupgradeneeded = async (event) => {
+      this.db = await event.target.result;
+      this.db.createObjectStore("images", {
+        keyPath: "id"
+      });
+    };
+
+    request.onsuccess = (event) => {
+      this.db = event.target.result;
+
+      const imageObjects = this.createImageObjects();
+      imageObjects.map((e, index) => this.returnIndexedDBImages(e, index));
+    };
+
+    request.onerror = (event) => {
+      console.error(event);
+    };
+  }
+
+  addIndexedDB(index, key, value) {
+    const createReadObjectStore = this.db.transaction(["images"], "readonly").objectStore("images").get(index);
+
+    createReadObjectStore.onsuccess = async () => {
+      const createObjectStore = this.db.transaction("images", "readwrite").objectStore("images");
+      const items = {
+        id: index,
+        key,
+        value
+      };
+
+      if (!createReadObjectStore.result) { // DBにデータが入っていない場合はadd
+        await createObjectStore.add(items);
+      } else { // DEにデータが入っている場合はupdate
+        await createObjectStore.put(items);
+      }
+    };
   }
 
   /**
@@ -290,7 +340,7 @@ class Form {
     this.qrImageDeleteBtn.addEventListener("click", () => this.deleteMedia(imageObjects, 1));
     this.profileImageDeletBtn.addEventListener("click", () => this.deleteMedia(imageObjects, 2));
 
-    imageObjects.forEach(obj => {
+    imageObjects.forEach((obj, index) => {
       obj.ele.addEventListener("change", (e) => {
         const file = e.target.files[0];
         const fileReader = new FileReader();
@@ -315,9 +365,7 @@ class Form {
           }
 
           document.querySelector(`.opap_${obj.preview}_img`).value = e.target.result;
-          // サイズ的にstrageにセットできないのでIndexdDBを使用する
-          this.setSessionStorage(obj.preview, e.target.result);
-          this.setSessionStorage(`${obj.preview}_img`, file.name);
+          this.addIndexedDB(index, obj.preview, e.target.result);
         });
       });
     });
@@ -378,6 +426,9 @@ class Form {
     document.querySelector(`.${imageObjects[index].preview}_image`).value = "";
     document.querySelector(`.${imageObjects[index].preview}_image_delete`).style.display = "none";
 
+    const deleteObjectStore = this.db.transaction(["images"], "readwrite").objectStore("images").delete(index);
+    deleteObjectStore.onsuccess = (e) => console.log(e);
+
     if (index === 0) {
       document.querySelector(`.${imageObjects[index].preview}_type_wrap`).style.display = "block";
       this.bgSettingImage.style.display = "block";
@@ -401,7 +452,7 @@ class Form {
    *
    * @param {Object} obj - 対象のオブジェクト
    */
-  initSessionStorageSelect(obj) {
+  returnSessionStorageSelect(obj) {
     obj.ele.forEach(e => {
       if (e.value === sessionStorage.getItem(`${obj.type}_type`)) {
         e.checked = true;
@@ -415,7 +466,7 @@ class Form {
    *
    * @param {Object} node - 対象のnode
    */
-  initSessionStorageText(node) {
+  returnSessionStorageText(node) {
     document.querySelector(`.${node.name}`).value = sessionStorage.getItem(node.name) !== null ? sessionStorage.getItem(node.name) : "";
     document.querySelector(`.opap_${node.name}`).value = sessionStorage.getItem(node.name) !== null ? sessionStorage.getItem(node.name) : "";
   }
@@ -425,7 +476,7 @@ class Form {
    *
    * @param {Object} obj - 対象のオブジェクト
    */
-  initSessionStorageRange(obj) {
+  returnSessionStorageRange(obj) {
     document.querySelector(`.${obj.ele}`).value = sessionStorage.getItem(obj.type) !== null ? sessionStorage.getItem(obj.type) : "";
     document.querySelector(`.opap_${obj.ele}`).value = sessionStorage.getItem(obj.type) !== null ? sessionStorage.getItem(obj.type) : "";
   }
@@ -435,7 +486,7 @@ class Form {
    *
    * @param {Object} ele - 対象のエレメント
    */
-  initSessionStorageColor(ele) {
+  returnSessionStorageColor(ele) {
     document.querySelector(`.${ele}`).value = sessionStorage.getItem(ele) !== null ? sessionStorage.getItem(ele) : "";
     document.querySelector(`.opap_${ele}`).value = sessionStorage.getItem(ele) !== null ? sessionStorage.getItem(ele) : "";
   }
@@ -445,7 +496,7 @@ class Form {
    *
    * @param {Object} obj - 対象のオブジェクト
    */
-  initSessionStorageBg(ele) {
+  returnSessionStorageBg(ele) {
     if (ele === "seminar_bg" && sessionStorage.getItem(ele) !== null) {
       this.seminarWrap.style.background = "url(" + sessionStorage.getItem(ele) + ") no-repeat";
       this.seminarWrap.style.backgroundSize = "cover";
@@ -457,16 +508,23 @@ class Form {
    * sessionStrageに入っている画像をフォームに返す
    * @param {Object} obj - 画像の設定オブジェクト
    */
-  initSessionStorageImage(obj) {
-    if (sessionStorage.getItem(obj.preview) !== null) {
-      const imgElm = document.createElement("img");
-      imgElm.className = "preview_image";
-      imgElm.src = sessionStorage.getItem(obj.preview);
-      const targetElm = document.querySelector(`.${obj.preview}_preview`);
-      targetElm.appendChild(imgElm);
-      document.querySelector(`.opap_${obj.preview}_img`).value = sessionStorage.getItem(obj.preview);
-      document.querySelector(`.${obj.preview}_image_delete`).style.display = "inline-block";
-    }
+  returnIndexedDBImages(obj, index) {
+    const createObjectStore = this.db.transaction(["images"], "readonly").objectStore("images");
+    const storeIndex = createObjectStore.get(index);
+
+    storeIndex.onsuccess = () => {
+      if (storeIndex.result) {
+        const resultValue = storeIndex.result.value;
+        const imgElm = document.createElement("img");
+        imgElm.className = "preview_image";
+        imgElm.src = resultValue;
+        const targetElm = document.querySelector(`.${obj.preview}_preview`);
+        targetElm.appendChild(imgElm);
+        document.querySelector(`.opap_${obj.preview}_img`).value = resultValue;
+        document.querySelector(`.${obj.preview}_image_delete`).style.display = "inline-block";
+        if (index === 0) document.querySelector(`.${obj.preview}_setting_image`).style.display = "none";
+      }
+    };
   }
 
   /**
@@ -475,6 +533,9 @@ class Form {
   resetForm() {
     this.resetFormBt.addEventListener("click", () => {
       sessionStorage.clear();
+
+      const deleteObjectStore = this.db.transaction(["images"], "readwrite").objectStore("images").clear();
+      deleteObjectStore.onsuccess = (e) => console.log(e);
 
       this.createNodeObjects().map(e => {
         document.querySelector(`.opap_${e.name}`).value = "";
@@ -489,10 +550,13 @@ class Form {
       this.createImageObjects().forEach(obj => {
         document.querySelector(`.opap_${obj.preview}_img`).value = "";
         document.querySelector(`.${obj.preview}_image_delete`).style.display = "none";
+
+        if (obj.preview === "bg") document.querySelector(`.${obj.preview}_setting_image`).style.display = "block";
       });
 
-      if (this.previewImage) {
-        this.previewImage.forEach(ele => ele.remove());
+      const previewImage = document.querySelectorAll(".preview_image");
+      if (previewImage) {
+        previewImage.forEach(ele => ele.remove());
       }
     });
   }
