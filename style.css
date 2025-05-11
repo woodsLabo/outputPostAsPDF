@@ -483,11 +483,12 @@ img {
 
 .profileImg {
   width: 150px;
-  height: 200px;
+  height: auto;
 }
 
 .profileImg img {
   width: 100%;
+  height: 175px;
 }
 
 .profileDetail {
@@ -572,12 +573,12 @@ img {
 
 .contactCompany {
   display: inline-block;
-  width: 26%;
+  margin-right: 15px;
 }
 
 .contactTel {
   display: inline-block;
-  width: 18%;
+  margin-right: 15px;
 }
 
 .contactEmailTitle {
@@ -587,5 +588,4 @@ img {
 
 .contactEmail {
   display: inline-block;
-  width: 28%;
 }

@@ -14,6 +14,7 @@ class Form {
     window.addEventListener("load", () => {
       this.pdfTypes = document.querySelectorAll(".pdf_types");
       this.bgTypesWrap = document.querySelector(".bg_type_wrap");
+      this.bgTypesTitle = document.querySelector(".bg_type_title");
       this.colorTypes = document.querySelectorAll(".color_types");
       this.bgTypes = document.querySelectorAll(".bg_types");
       this.title = document.querySelector(".title");
@@ -60,8 +61,8 @@ class Form {
   /**
    * 各イベントをまとめる
    */
-  async eventListener() {
-    await this.initIndexedDB();
+  eventListener() {
+    this.initIndexedDB();
     const nodeObjects = this.createNodeObjects();
     const selectObjects = this.createSelectObjects();
     // const imageObjects = this.createImageObjects();
@@ -73,7 +74,6 @@ class Form {
     selectObjects.map(e => this.returnSessionStorageSelect(e));
     nodeObjects.map(e => this.returnSessionStorageText(e));
     this.lists.map(e => this.returnSessionStorageText(e));
-    // await imageObjects.map((e, index) => this.returnIndexedDBImages(e, index));
     sizeRangeObjects.map(e => this.returnSessionStorageRange(e));
     colorArray.map(e => this.returnSessionStorageColor(e));
     imageArray.map(e => this.returnSessionStorageBg(e));
@@ -85,7 +85,6 @@ class Form {
     this.initImagePreview();
     sizeRangeObjects.map(e => this.initSizeRange(e));
     colorArray.map(e => this.initThemeColor(e));
-    // imageArray.map(e => this.initBgImage(e));
 
     this.resetForm();
   }
@@ -93,11 +92,11 @@ class Form {
   /**
    * indexedDBの初期設定
    */
-  async initIndexedDB() {
-    const request = await window.indexedDB.open(DB_NAME, VERSION);
+  initIndexedDB() {
+    const request = window.indexedDB.open(DB_NAME, VERSION);
 
-    request.onupgradeneeded = async (event) => {
-      this.db = await event.target.result;
+    request.onupgradeneeded = (event) => {
+      this.db = event.target.result;
       this.db.createObjectStore("images", {
         keyPath: "id"
       });
@@ -118,7 +117,7 @@ class Form {
   addIndexedDB(index, key, value) {
     const createReadObjectStore = this.db.transaction(["images"], "readonly").objectStore("images").get(index);
 
-    createReadObjectStore.onsuccess = async () => {
+    createReadObjectStore.onsuccess = () => {
       const createObjectStore = this.db.transaction("images", "readwrite").objectStore("images");
       const items = {
         id: index,
@@ -127,9 +126,9 @@ class Form {
       };
 
       if (!createReadObjectStore.result) { // DBにデータが入っていない場合はadd
-        await createObjectStore.add(items);
+        createObjectStore.add(items);
       } else { // DEにデータが入っている場合はupdate
-        await createObjectStore.put(items);
+        createObjectStore.put(items);
       }
     };
   }
@@ -361,6 +360,7 @@ class Form {
 
           if (obj.preview === "bg") {
             this.bgTypesWrap.style.display = "none";
+            this.bgTypesTitle.style.display = "none";
             this.bgSettingImage.style.display = "none";
           }
 
@@ -431,6 +431,7 @@ class Form {
 
     if (index === 0) {
       document.querySelector(`.${imageObjects[index].preview}_type_wrap`).style.display = "block";
+      document.querySelector(`.${imageObjects[index].preview}_type_title`).style.display = "block";
       this.bgSettingImage.style.display = "block";
     }
   }
@@ -522,7 +523,11 @@ class Form {
         targetElm.appendChild(imgElm);
         document.querySelector(`.opap_${obj.preview}_img`).value = resultValue;
         document.querySelector(`.${obj.preview}_image_delete`).style.display = "inline-block";
-        if (index === 0) document.querySelector(`.${obj.preview}_setting_image`).style.display = "none";
+        if (index === 0) {
+          document.querySelector(`.${obj.preview}_type_wrap`).style.display = "none";
+          document.querySelector(`.${obj.preview}_type_title`).style.display = "none";
+          document.querySelector(`.${obj.preview}_setting_image`).style.display = "none";
+        }
       }
     };
   }

@@ -36,7 +36,7 @@ function init_post_action($content) {
 		<div class="opap__wrap">
 			<input class="pdf_types" type="hidden" name="pdf_type" id="type1" value="a" checked>
 			<p>テーマカラーを選択</p>
-			<div class="bg_type_wrap">
+			<div class="bg_color_type_wrap">
 				<input class="color_types" type="radio" name="color_type" id="main_color1" value="blue" data-seminar="$seminar_image01" data-footer="$footer_image01" checked><label for="main_color1">カラー1</label>
 				<input class="color_types" type="radio" name="color_type" id="main_color2" value="green" data-seminar="$seminar_image02" data-footer="$footer_image02"><label for="main_color2">カラー2</label>
 				<input class="color_types" type="radio" name="color_type" id="main_color3" value="red" data-seminar="$seminar_image03" data-footer="$footer_image03"><label for="main_color3">カラー3</label>
@@ -45,8 +45,8 @@ function init_post_action($content) {
 				<input class="color_types" type="radio" name="color_type" id="main_color6" value="yellow" data-seminar="$seminar_image06" data-footer="$footer_image06"><label for="main_color6">カラー6</label>
 				<input class="color_types" type="radio" name="color_type" id="main_color7" value="gray" data-seminar="$seminar_image07" data-footer="$footer_image07"><label for="main_color7">カラー7</label>
 			</div>
-			<input type="color" class="main_color" name="main_color">
-			<p>キャッチコピー背景を選択</p>
+			<input type="color" class="main_color" name="main_color" style="display: none">
+			<p class="bg_type_title">キャッチコピー背景を選択</p>
 			<div class="bg_type_wrap">
 				<input class="bg_types" type="radio" name="bg_type" id="bg_type1" value="$bg_image01" checked><label for="bg_type1">タイプ1</label>
 				<input class="bg_types" type="radio" name="bg_type" id="bg_type2" value="$bg_image02"><label for="bg_type2">タイプ2</label>
@@ -114,7 +114,7 @@ function init_post_action($content) {
 			</div>
 			<div class="profile_wrap">
 				<div class="profile_image_wrap">
-					<p>プロフィール画像<span class="label_notice">横幅150px<br>高さ200px推奨</span></p>
+					<p>プロフィール画像<span class="label_notice">横幅150px<br>高さ175px推奨</span></p>
 					<input type="file" accept="image/*" class="profile_image" name="profile_img" style="display: none;"><button class="profile_image_select" type="button">画像を選択</button><button class="profile_image_delete" type="button">削除</button>
 					<div class="profile_preview"></div>
 				</div>
