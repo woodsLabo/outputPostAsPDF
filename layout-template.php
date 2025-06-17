@@ -70,7 +70,7 @@ if (isset($_POST) && $_POST["post_label"] === "pdf_post") :
 
 	if (!empty($sub_catch)) {
 		$sub_catch_ele = <<< EOM
-			<p class="title_sub">$sub_catch</p>
+			<p class="title_sub" style="background: $color_type;">$sub_catch</p>
 		EOM;
 	} else {
 		$sub_catch_ele = "";
@@ -88,6 +88,29 @@ if (isset($_POST) && $_POST["post_label"] === "pdf_post") :
 	}
 
 	$main_media = !empty($up_main_media) ? $up_main_media : "data:image/png;base64," . base64_encode(file_get_contents($main_media));
+
+	$contact = "";
+	$tel = "";
+	$mail = "";
+	if (!empty($contact_company)) {
+		$contact = <<< EOM
+			<span class="contactTitle" style="background: $color_type;"><span>お問い合わせ</span></span>
+			<span class="contactCompany" style="font-size: $contact_company_text_size;">$contact_company</span>
+		EOM;
+	}
+
+	if (!empty($contact_tel)) {
+		$tel = <<< EOM
+			<span class="contactTel">TEL:$contact_tel</span>
+		EOM;
+	}
+
+	if (!empty($contact_mail)) {
+		$mail = <<< EOM
+			<span class="contactEmailTitle">メールアドレス:</span>
+			<span class="contactEmail" style="font-size: $contact_mail_text_size;">$contact_mail</span>
+		EOM;
+	}
 
 $html = <<< EOM
 
@@ -186,11 +209,9 @@ $html = <<< EOM
 		<div class="contact">
 			<div class="contactBg"><img src="$footer_bg"></div>
 			<div class="contactWrap">
-				<span class="contactTitle" style="background: $color_type;"><span>お問い合わせ</span></span>
-				<span class="contactCompany" style="font-size: $contact_company_text_size;">$contact_company</span>
-				<span class="contactTel">TEL:$contact_tel</span>
-				<span class="contactEmailTitle">メールアドレス:</span>
-				<span class="contactEmail" style="font-size: $contact_mail_text_size;">$contact_mail</span>
+				$contact
+				$tel
+				$mail
 			</div>
 		</div>
 	</body>

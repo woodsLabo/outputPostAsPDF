@@ -113,6 +113,19 @@ img {
   overflow: hidden;
 }
 
+.mainImage::after {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  display: block;
+  width: 100%;
+  height: 310px;
+  content: "";
+  background: #000;
+  opacity: 0.2;
+}
+
 .mainImage img {
   width: 794px;
   height: 310px;
@@ -130,6 +143,7 @@ img {
 .title_sub {
   display: inline-block;
   padding: 5px 8px;
+  margin-bottom: 10px;
   font-size: 20px;
   line-height: 0.8;
   background: #003c78;
@@ -138,8 +152,8 @@ img {
 .title_main {
   padding: 0 10px 10px;
   font-size: 43px;
-  line-height: 0.7em;
-  text-shadow: 2px 3px 8px rgba(0 0 0 / 100%);
+  line-height: 0.8em;
+  text-shadow: 2px 3px 8px #000;
 }
 
 .title_notice {
@@ -383,8 +397,8 @@ img {
 
 .application {
   position: relative;
-  height: 72px;
-  padding: 13px 20px 0;
+  height: 69px;
+  padding: 16px 20px 0;
   font-size: 0;
 }
 

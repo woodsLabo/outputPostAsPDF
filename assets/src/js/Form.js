@@ -280,9 +280,7 @@ class Form {
           this.initBgImage("seminar_bg", e.target.dataset.seminar);
           this.initBgImage("footer_bg", e.target.dataset.footer);
           this.title.style.background = e.target.value;
-          this.title.style.color = e.target.value === "yellow" ? "#000" : "#fff";
           this.listTitle.style.background = e.target.value;
-          this.listTitle.style.color = e.target.value === "yellow" ? "#000" : "#fff";
           listWrap.style.borderColor = e.target.value;
           this.seminarWrap.style.background = "url(" + e.target.dataset.seminar + ") no-repeat";
           this.seminarWrap.style.backgroundSize = "cover";
@@ -302,9 +300,7 @@ class Form {
 
     if (object.type === "color") {
       this.title.style.background = opapType.value;
-      this.title.style.color = opapType.value === "yellow" ? "#000" : "#fff";
       this.listTitle.style.background = opapType.value;
-      this.listTitle.style.color = opapType.value === "yellow" ? "#000" : "#fff";
       listWrap.style.borderColor = opapType.value;
     }
   }

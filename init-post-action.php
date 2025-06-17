@@ -18,15 +18,13 @@ function init_post_action($content) {
 	$seminar_image03 = "{$seminar_image_path}red${image_prefix}";
 	$seminar_image04 = "{$seminar_image_path}orange${image_prefix}";
 	$seminar_image05 = "{$seminar_image_path}pink${image_prefix}";
-	$seminar_image06 = "{$seminar_image_path}yellow${image_prefix}";
-	$seminar_image07 = "{$seminar_image_path}gray${image_prefix}";
+	$seminar_image06 = "{$seminar_image_path}gray${image_prefix}";
 	$footer_image01 = "{$footer_image_path}blue${image_prefix}";
 	$footer_image02 = "{$footer_image_path}green${image_prefix}";
 	$footer_image03 = "{$footer_image_path}red${image_prefix}";
 	$footer_image04 = "{$footer_image_path}orange${image_prefix}";
 	$footer_image05 = "{$footer_image_path}pink${image_prefix}";
-	$footer_image06 = "{$footer_image_path}yellow${image_prefix}";
-	$footer_image07 = "{$footer_image_path}gray${image_prefix}";
+	$footer_image06 = "{$footer_image_path}gray${image_prefix}";
 
 	$file_name = "pdf";
 	$post_label = "pdf_post";
@@ -37,13 +35,12 @@ function init_post_action($content) {
 			<input class="pdf_types" type="hidden" name="pdf_type" id="type1" value="a" checked>
 			<p>テーマカラーを選択</p>
 			<div class="bg_color_type_wrap">
-				<input class="color_types" type="radio" name="color_type" id="main_color1" value="blue" data-seminar="$seminar_image01" data-footer="$footer_image01" checked><label for="main_color1">カラー1</label>
-				<input class="color_types" type="radio" name="color_type" id="main_color2" value="green" data-seminar="$seminar_image02" data-footer="$footer_image02"><label for="main_color2">カラー2</label>
-				<input class="color_types" type="radio" name="color_type" id="main_color3" value="red" data-seminar="$seminar_image03" data-footer="$footer_image03"><label for="main_color3">カラー3</label>
-				<input class="color_types" type="radio" name="color_type" id="main_color4" value="orange" data-seminar="$seminar_image04" data-footer="$footer_image04"><label for="main_color4">カラー4</label>
-				<input class="color_types" type="radio" name="color_type" id="main_color5" value="pink" data-seminar="$seminar_image05" data-footer="$footer_image05"><label for="main_color5">カラー5</label>
-				<input class="color_types" type="radio" name="color_type" id="main_color6" value="yellow" data-seminar="$seminar_image06" data-footer="$footer_image06"><label for="main_color6">カラー6</label>
-				<input class="color_types" type="radio" name="color_type" id="main_color7" value="gray" data-seminar="$seminar_image07" data-footer="$footer_image07"><label for="main_color7">カラー7</label>
+				<input class="color_types" type="radio" name="color_type" id="main_color1" value="#003366" data-seminar="$seminar_image01" data-footer="$footer_image01" checked><label for="main_color1">ブルー</label>
+				<input class="color_types" type="radio" name="color_type" id="main_color2" value="green" data-seminar="$seminar_image02" data-footer="$footer_image02"><label for="main_color2">グリーン</label>
+				<input class="color_types" type="radio" name="color_type" id="main_color3" value="#cc0000" data-seminar="$seminar_image03" data-footer="$footer_image03"><label for="main_color3">レッド</label>
+				<input class="color_types" type="radio" name="color_type" id="main_color4" value="#e96e00" data-seminar="$seminar_image04" data-footer="$footer_image04"><label for="main_color4">オレンジ</label>
+				<input class="color_types" type="radio" name="color_type" id="main_color5" value="#e43770" data-seminar="$seminar_image05" data-footer="$footer_image05"><label for="main_color5">ピンク</label>
+				<input class="color_types" type="radio" name="color_type" id="main_color6" value="gray" data-seminar="$seminar_image06" data-footer="$footer_image06"><label for="main_color6">グレー</label>
 			</div>
 			<input type="color" class="main_color" name="main_color" style="display: none">
 			<p class="bg_type_title">キャッチコピー背景を選択</p>
@@ -102,7 +99,7 @@ function init_post_action($content) {
 			<input type="color" class="seminar_arrow_color" name="seminar_arrow_color">
 			<div class="seminar_wrap">
 				<input class="seminar_text" type="text" name="seminar_text" placeholder="セミナー案内のテキスト" value="">
-				<input class="seminar_url" type="text" name="seminar_url" placeholder="セミナーのurl" value="">
+				<input class="seminar_url" type="text" name="seminar_url" placeholder="セミナーのURL" value="">
 				<div class="qr_wrap">
 					<p class="qr_title">QRコード</p>
 					<div class="qr_preview"></div>
@@ -127,10 +124,10 @@ function init_post_action($content) {
 			<div class="contact_wrap">
 				<input class="contact_company" type="text" name="contact_company" placeholder="問い合わせ先名称" value="">
 				<input class="contact_tel" type="tel" name="contact_tel" placeholder="問い合わせTEL" value="">
-				<input class="contact_mail" type="email" name="contact_mail" placeholder="問い合わせmail" value="">
+				<input class="contact_mail" type="email" name="contact_mail" placeholder="問い合わせEmail" value="">
 			</div>
-			<span>問い合わせ先名称ののフォントサイズ</span><input type="range" class="contact_company_text_size" name="contact_company_text_size" min="8" max="13" value="13">
-			<span>問い合わせmailのフォントサイズ</span><input type="range" class="contact_mail_text_size" name="contact_mail_text_size" min="8" max="13" value="13">
+			<span>問い合わせ先名称のフォントサイズ</span><input type="range" class="contact_company_text_size" name="contact_company_text_size" min="8" max="13" value="13">
+			<span>問い合わせEmailのフォントサイズ</span><input type="range" class="contact_mail_text_size" name="contact_mail_text_size" min="8" max="13" value="13">
 			<form action="" target="_blonk" method="post" class="opap_form">
 				<input type="hidden" name="dw" value="true">
 				<input type="hidden" class="opap_main_color" name="main_color" value="">

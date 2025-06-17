@@ -30,7 +30,7 @@ if (!is_admin() && !is_login_page()) {
 		$dompdf->setPaper('A4');
 		$dompdf->render();
 		if ($_POST["dl_type"] === "preview") {
-			$dompdf->stream("{$file_name}.pdf", array("Attachment" => 0));
+			$dompdf->stream("{$file_name}.pdf", array("Attachment" => false));
 		} elseif ($_POST["dl_type"] === "dl") {
 			$dompdf->stream("{$file_name}.pdf");
 			// $insert_dl_log->save_log($post_id);
