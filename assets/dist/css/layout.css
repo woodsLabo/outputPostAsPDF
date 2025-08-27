@@ -1,0 +1,529 @@
+/*!**********************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./assets/src/scss/layout.scss ***!
+  \**********************************************************************************************************************/
+html, body, div, span, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+abbr, address, cite, code,
+del, dfn, em, img, ins, kbd, q, samp,
+small, strong, sub, sup, var,
+b, i,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section, summary,
+time, mark, audio, video {
+  padding: 0;
+  margin: 0;
+  vertical-align: baseline;
+  background: transparent;
+  border: 0;
+  outline: 0;
+}
+
+.opap__wrap {
+  max-width: 900px;
+  margin: 0 auto;
+}
+.opap__wrap table {
+  border-collapse: collapse;
+}
+.opap__wrap img {
+  width: 100%;
+}
+.opap__wrap .header {
+  padding: 10px 0;
+  font-size: 17px;
+  color: #fff;
+  text-align: center;
+  background: #003c78;
+}
+.opap__wrap .contentTop {
+  position: relative;
+  height: 400px;
+}
+.opap__wrap .form_reset,
+.opap__wrap .form_preview,
+.opap__wrap .form_dl {
+  display: inline-block;
+  padding: 1em 2em 0.8em;
+  font-size: 16px;
+  line-height: 1;
+  color: #000;
+  cursor: pointer;
+  background: #fff;
+  border: 1px solid #000;
+  border-radius: 50px;
+  transition: 0.3s;
+}
+.opap__wrap .form_reset:hover,
+.opap__wrap .form_preview:hover,
+.opap__wrap .form_dl:hover {
+  background: #eaeaea;
+}
+.opap__wrap .titleWrap {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  padding: 50px 0;
+  color: #fff;
+}
+.opap__wrap .title_sub {
+  display: inline-block;
+  padding: 8px;
+  font-size: 17px;
+  background: #003c78;
+}
+.opap__wrap .title_main {
+  padding: 10px;
+  font-size: 40px;
+  line-height: 1.4;
+  text-shadow: 2px 3px 8px rgba(0, 0, 0, 0.8);
+}
+.opap__wrap .title_notice {
+  display: table-cell;
+  font-size: 30px;
+  line-height: 30px;
+  color: #fff;
+  text-align: center;
+  vertical-align: middle;
+  background: #f00;
+  border-radius: 50%;
+}
+.opap__wrap .title_noticeWrap {
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+  z-index: 2;
+  display: table;
+  width: 150px;
+  height: 150px;
+}
+.opap__wrap .detailWrap {
+  padding: 10px 0;
+  background: #fff;
+}
+.opap__wrap .detailTable {
+  width: 87%;
+  margin: 0 auto;
+  font-size: 20px;
+}
+.opap__wrap .detailTable tr {
+  padding-bottom: 12px;
+}
+.opap__wrap .detailTable th {
+  width: 10%;
+  padding-right: 10px;
+  font-size: 18px;
+  color: #fff;
+  text-align: center;
+}
+.opap__wrap .detailTable th span {
+  display: block;
+  background: #003c78;
+  border-radius: 30px;
+}
+.opap__wrap .detailTable td {
+  display: inline-block;
+  font-size: 30px;
+  font-weight: bold;
+  color: #000;
+  vertical-align: middle;
+  border: 0;
+}
+.opap__wrap .detailTable td.long {
+  width: 95%;
+}
+.opap__wrap .detailWeek {
+  padding: 2px;
+  margin: 0 10px 0 5px;
+  font-size: 20px;
+  color: #fff;
+  background: #000;
+}
+.opap__wrap .detailTime {
+  font-size: 25px;
+}
+.opap__wrap .detailUnit {
+  margin-left: 5px;
+  font-size: 18px;
+}
+.opap__wrap .listWrap {
+  width: 98%;
+  margin: 0 auto;
+}
+.opap__wrap .listTitle {
+  padding: 5px 0;
+  margin-bottom: 15px;
+  font-size: 25px;
+  font-weight: bold;
+  color: #fff;
+  text-align: center;
+  background: #003c78;
+}
+.opap__wrap .listTable {
+  width: 100%;
+  border: 0;
+}
+.opap__wrap .listTable div {
+  margin-bottom: 10px;
+  font-size: 0;
+}
+.opap__wrap .listTable p {
+  box-sizing: border-box;
+  display: inline-block;
+  width: 49.5%;
+  padding: 10px 5px;
+  font-size: 15px;
+  color: #fff;
+  background: #016fb9;
+  border: 0;
+}
+.opap__wrap .listTable p::before {
+  display: inline-block;
+  width: 15px;
+  height: 15px;
+  margin-right: 5px;
+  vertical-align: middle;
+  content: "";
+  background: #000;
+}
+.opap__wrap .listTable p:first-of-type {
+  margin-right: 1%;
+}
+.opap__wrap .message {
+  padding-bottom: 5px;
+  font-size: 15px;
+  resize: none;
+}
+.opap__wrap .application {
+  padding: 10px 20px;
+  font-size: 0;
+  background: #00f;
+}
+.opap__wrap .applicationText {
+  font-size: 22px;
+}
+.opap__wrap .applicationTextWrap {
+  display: inline-block;
+  width: 90%;
+  font-size: 14px;
+  color: #fff;
+  text-align: center;
+  vertical-align: middle;
+}
+.opap__wrap .applicationUrl {
+  font-size: 20px;
+}
+.opap__wrap .applicationArrow {
+  display: inline-block;
+  width: 3%;
+  height: 20px;
+  font-size: 14px;
+  color: #fff;
+  vertical-align: middle;
+}
+.opap__wrap .applicationImgWrap {
+  display: inline-block;
+  width: 7%;
+  vertical-align: middle;
+}
+.opap__wrap .profileWrap {
+  padding: 10px;
+  background: #808080;
+}
+.opap__wrap .profileImg {
+  width: 15%;
+}
+.opap__wrap .profileDetail {
+  width: 85%;
+  padding: 10px;
+  vertical-align: top;
+}
+.opap__wrap .profileDetailHead {
+  padding-bottom: 5px;
+  font-size: 25px;
+  line-height: 1;
+  color: #003c78;
+  border-bottom: 1px solid #003c78;
+}
+.opap__wrap .profileTitle {
+  display: inline-block;
+  vertical-align: middle;
+}
+.opap__wrap .profileName {
+  display: inline-block;
+  font-size: 40px;
+  vertical-align: middle;
+}
+.opap__wrap .profileText {
+  padding: 5px 0;
+  font-size: 20px;
+  text-align: justify;
+}
+.opap__wrap .contact {
+  padding: 10px;
+  color: #fff;
+  background: #000;
+}
+.opap__wrap .contactWrap {
+  width: 100%;
+  font-size: 20px;
+}
+.opap__wrap .contactTitle {
+  width: 10%;
+  font-size: 15px;
+  vertical-align: middle;
+  background: #003c78;
+  border-radius: 30px;
+}
+.opap__wrap .contactCompany {
+  width: 30%;
+  padding-left: 10px;
+  font-weight: bold;
+}
+.opap__wrap .contactTel {
+  width: 30%;
+  font-weight: bold;
+}
+.opap__wrap .contactEmail {
+  width: 30%;
+  font-weight: bold;
+}
+.opap__wrap p {
+  margin-top: 10px;
+  margin-bottom: 0 !important;
+  font-size: 16px;
+}
+.opap__wrap input[type=text],
+.opap__wrap input[type=tel],
+.opap__wrap input[type=email],
+.opap__wrap textarea {
+  box-sizing: border-box;
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  color: #333;
+  background-color: #f2f4f5;
+  border: none;
+  border-radius: 3px;
+}
+.opap__wrap input[type=number],
+.opap__wrap input[type=date],
+.opap__wrap input[type=time] {
+  box-sizing: border-box;
+  flex-grow: 1;
+  padding: 10px;
+  font-size: 16px;
+  color: #333;
+  background-color: #f2f4f5;
+  border: none;
+  border-radius: 3px;
+}
+.opap__wrap input[type=text].title {
+  color: #fff;
+}
+.opap__wrap input[type=text].title::placeholder {
+  color: #fff;
+}
+
+.title_wrap {
+  margin-top: 10px;
+}
+
+.bg_img_wrap {
+  position: relative;
+  padding: 30px 0 60px;
+  overflow: hidden;
+}
+.bg_preview {
+  position: absolute;
+  top: 0;
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+}
+.bg_preview img {
+  height: 100%;
+  object-fit: cover;
+}
+
+.main_wrap {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+.date_wrap {
+  display: grid;
+  grid-template-rows: 50px 50px;
+  grid-template-columns: 80px 1fr 1fr 10px 1fr 80px 1fr;
+  row-gap: 10px;
+  column-gap: 3px;
+  align-items: center;
+  margin-top: 10px;
+}
+.date_wrap p {
+  margin-top: 0;
+  line-height: 1;
+}
+.date_wrap span {
+  font-size: 12px;
+  color: #f00;
+}
+
+input[type=text].detail_item_place {
+  grid-column: 2/6;
+}
+
+input[type=number].detail_item_capacity, input[type=number].detail_item_price {
+  width: 100%;
+}
+
+input[type=text].title {
+  width: 100%;
+}
+
+input[type=text].sub_catch {
+  width: 85%;
+}
+
+textarea.main_catch {
+  width: 45%;
+  resize: none;
+}
+
+textarea.notice_text {
+  position: absolute;
+  right: 0;
+  bottom: 10px;
+  width: 20%;
+  text-align: center;
+  resize: none;
+}
+
+.list_title {
+  text-align: center;
+  border-radius: 0 !important;
+}
+.list_title::placeholder {
+  color: #e1e1e1;
+}
+.list_wrap {
+  box-sizing: border-box;
+  margin-top: 20px;
+  border: 4px solid #003c78;
+}
+.list_wrap input[type=text] {
+  margin-bottom: 10px;
+}
+.list_text_wrap {
+  padding: 10px;
+}
+
+.message {
+  margin-top: 10px;
+}
+
+.seminar_wrap {
+  display: grid;
+  grid-template-rows: 45px 45px 1fr;
+  grid-template-columns: 85% 1fr;
+  row-gap: 5px;
+  column-gap: 20px;
+  padding: 13px 20px;
+  margin: 10px 0;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+.seminar_wrap input[type=text] {
+  text-align: center;
+  border-radius: 0;
+}
+.seminar_text {
+  margin-top: 10px;
+}
+.seminar_url {
+  margin-bottom: 10px;
+}
+
+.qr_wrap {
+  box-sizing: border-box;
+  grid-row: 1/5;
+  grid-column: 2/3;
+  padding: 0 5px;
+}
+.qr_wrap p {
+  margin-top: 0;
+}
+.qr_title {
+  color: #fff;
+}
+.qr_btn_wrap {
+  display: flex;
+}
+.qr_btn_wrap button {
+  font-size: 11px;
+}
+
+.profile_wrap {
+  display: flex;
+  gap: 10px;
+  align-items: flex-end;
+  margin-bottom: 10px;
+}
+.profile_image_wrap {
+  width: 150px;
+}
+.profile_image_wrap button {
+  font-size: 11px;
+}
+.profile_preview {
+  margin-top: 5px;
+}
+.profile_preview img {
+  width: 100%;
+  height: auto;
+}
+.profile_detail_wrap input[type=text] {
+  width: 45%;
+}
+.profile_text {
+  margin-top: 10px;
+  resize: none;
+}
+
+.bg_image_delete,
+.qr_image_delete,
+.profile_image_delete {
+  display: none;
+  margin-left: 10px;
+}
+
+.contact_wrap {
+  display: flex;
+  gap: 10px;
+}
+
+.opap_form {
+  margin-top: 100px;
+}
+.opap_button_wrap {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  gap: 30px;
+  justify-content: center;
+  width: 100vw;
+  padding: 20px 0;
+  background: #fff;
+  border-top: 1px solid #eaeaea;
+}
+
+.label_notice {
+  display: block;
+  font-size: 12px;
+  color: #f00;
+}
